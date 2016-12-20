@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<!-- 로그인 후 layout -->
+	<definition name="base_layout"
+		template="/WEB-INF/viewtiles/template/after_layout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/viewtiles/template/after_header.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/viewtiles/template/after_footer.jsp" />
+	</definition>
+	<!-- // 로그인 후 layout -->
+	
+	<!-- 로그인 전 layout -->
+	<definition name="layout" template="/WEB-INF/viewtiles/template/layout.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/viewtiles/template/header.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/viewtiles/template/footer.jsp" />
+	</definition>
+	<!-- // 로그인 전 layout -->
+	<!-- 로그인 전 main -->
+	<definition name="main" extends="layout">
+		<put-attribute name="title" value="Trip Plan" />
+		<put-attribute name="body" value="/WEB-INF/view/main/main.jsp" />
+	</definition>
+	<!-- // 로그인 전 main -->
+	
+	<!-- 로그인 전 회원가입 1 -->
+	<definition name="registMemberForm" extends="layout">
+		<put-attribute name="title" value="회원 가입" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/regist/registMemberForm.jsp" />
+	</definition>
+	<!-- // 로그인 전 회원가입 1 -->
+	
+	<!-- 로그인 전 회원가입 2 -->	
+	<definition name="registMemberForm2" extends="layout">
+		<put-attribute name="title" value="회원 가입" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/regist/registMemberForm2.jsp" />
+	</definition>
+	<!-- // 로그인 전 회원가입 2 -->
+	
+	<!-- 로그인 후 마이페이지 -->
+	<definition name="myPage" extends="base_layout">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="body" value="/WEB-INF/view/myPage/myPage.jsp" />
+	</definition>
+	<!-- // 로그인 후 마이페이지 -->
+
+
+
+</tiles-definitions>
