@@ -16,10 +16,12 @@ a, a:hover {
 	background: none;
 	outline: none;
 }
-
+.btn {
+	font-size: 17px;
+}
 .logo-img {
 	position: relative;
-	left: 30%;
+	left: 27%;
 	bottom: 30px;
 }
 /* text 입력 폼 */
@@ -38,7 +40,7 @@ a, a:hover {
 } 
 .contact-form {
 	position: relative;
-	top: 30%;
+	top: 25%;
 	width: 40%;
 	margin: 0 auto;
 }
@@ -235,7 +237,7 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 <div class="contact-form">
 	<!-- 로고 이미지 -->
 	<a class="logo-img" href="main.do"><img
-		src="/tripPlan/assets/images/logo-sm.png"></a>
+		src="/tripPlan/assets/images/logo-middle-gray.png"></a>
 	<!-- input 태그를 감싸는 form -->
 	<form:form action="mypage.do" commandName="memberInfo"
 		enctype="multipart/form-data">
@@ -301,7 +303,7 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 			<!-- // 프로필 이미지 영역 
 			<!-- submit 버튼 영역  -->
 			<div class="send-button">
-				<button type="submit" class="btn btn-send send-msg">가입</button>
+				<button type="submit" class="btn btn-send send-msg"><b>가입</b></button>
 			</div>
 			<!-- // submit 버튼 영역  -->
 			<a href="#" onclick="history.go(-1)"> <!-- font-awesome 아이콘 --> <i

@@ -11,9 +11,11 @@ body {
 	display: inline;
 	width: 70%;
 }
+
 .form-group {
 	margin-bottom: 5%;
 }
+
 .contact-form {
 	position: relative;
 	top: 25%;
@@ -25,9 +27,11 @@ body {
 	position: relative;
 	left: 10%;
 }
+
 #email {
 	margin-top: 7%;
 }
+
 .contact-form .form-control {
 	border: none;
 	background-color: #F3F2F2;
@@ -65,16 +69,16 @@ body {
 .fa {
 	color: #666;
 }
-
+.btn {
+	font-size: 17px;
+}
 a, a:hover {
 	color: #999;
 	text-decoration: none;
 	background: none;
 	outline: none;
 }
-.btn {
-	font-size: 17px;
-}
+
 .error {
 	font-size: 15px;
 	color: #ff9800;
@@ -93,7 +97,6 @@ a, a:hover {
 }
 
 .error-box {
-	color: #fff;
 	font-size: 15px;
 	background-color: #ff9800;
 	color: #fff;
@@ -134,7 +137,7 @@ a, a:hover {
 	<a class="logo-img" href="main.do"><img
 		src="/tripPlan/assets/images/logo-middle-gray.png"></a>
 	<!-- input 태그를 감싸는 form -->
-	<form:form action="regist2.do" commandName="memberInfo">
+	<form:form action="loginPro.do" commandName="memberInfo">
 		<div class="controls">
 			<!-- 유효성 검사 에러시 출력되는 박스 -->
 			<form:errors class="error-box" />
@@ -153,25 +156,19 @@ a, a:hover {
 					class="form-input-text form-control" />
 				<form:errors class="error" path="m_pass" />
 			</div>
-			<div class="form-group">
-				<span><i class="fa fa-lock"></i></span>
-				<form:label path="m_pass2"></form:label>
-				<form:input type="password" path="m_pass2" placeholder="비밀번호 확인"
-					class="form-input-text form-control" />
-				<form:errors class="error" path="m_pass2" />
-			</div>
 
 			<div class="send-button">
-				<button type="submit" class="btn btn-send send-msg"><b>다음</b></button>
+				<button type="submit" class="btn btn-send send-msg"><b>로그인</b></button>
 			</div>
 			<!-- 네이버 아이디로 로그인 -->
 			<div class="naver-login" >
 				<a class="naver-login" href=""><img class="naver-logo" src="/tripPlan/assets/images/logo-naver.png" />
 				<span class="text"><b>네이버</b>&nbsp; <b>아이디로</b>&nbsp; <b>로그인</b></span></a>
 			</div>
-
-			<a href="main.do"> <!-- font-awesome 로그인 아이콘 --> <i
-				class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">돌아가기</span>
+			
+			<!-- 뒤로가기  -->
+			<a href="main.do">  
+				<i class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">돌아가기</span>
 			</a>
 		</div>
 	</form:form>

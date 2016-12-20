@@ -12,6 +12,7 @@
 	<bean class="main.controller.MainController" />
 	<bean class="mypage.controller.MypageController" />
 	<bean class="member.controller.RegistMemberController" />
+	<bean class="login.controller.LoginController" />
 
 
 	<!-- tiles 요청 처리 -->
