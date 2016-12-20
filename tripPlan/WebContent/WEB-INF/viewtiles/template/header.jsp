@@ -12,7 +12,7 @@
 			<div class="navbar-header">
 
 				<!-- 로고 -->
-				<a class="navbar-brand" href="main.do"><img src="/tiles/assets/images/logo-sm.png"></a>
+				<a class="navbar-brand" href="main.do"><img src="/tripPlan/assets/images/logo-sm.png"></a>
 				<!--// 로고 -->
 			</div>
 			<!--// 로고 영역 -->
