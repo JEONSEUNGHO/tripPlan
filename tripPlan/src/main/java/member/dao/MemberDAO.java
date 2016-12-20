@@ -7,7 +7,6 @@ public class MemberDAO extends SqlSessionDaoSupport {
 
 	public int insertFile(MemberInfo memberInfo) {
 
-		System.out.println(memberInfo.getM_profile());
 		
 		
 		int check = getSqlSession().insert("member.regist", memberInfo);
