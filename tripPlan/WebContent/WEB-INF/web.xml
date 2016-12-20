@@ -42,6 +42,17 @@
 		<url-pattern>/tiles/*</url-pattern>
 	</servlet-mapping>
 	<!-- // tiles 요청 처리 -->
+	
+	<!-- do 파일 요청처리 -->
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	<!-- do 파일 요청처리 -->
 
 	<!-- 파일 업로드 처리 -->
 	<filter>
