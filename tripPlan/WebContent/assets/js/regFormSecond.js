@@ -1,6 +1,5 @@
 // preview Image Before Upload
 function previewImageBeforeUpload() {
-	alert("asasdasd");
 	var element = $('.preview-img-upload');
 	var reader;
 
@@ -15,21 +14,21 @@ function previewImageBeforeUpload() {
 		}
 	}
 
-	function removeImage() {
-		element.find('.remove-image').click(
-				function() {
-					$(this).parents('.preview-img-upload')
-							.removeClass('active').find('.preview-img').attr(
-									'src', '');
-					$(this).parents('.preview-img-upload').find('input')
-							.val('');
-				});
-	}
-	removeImage();
-
 	$(document.body).on('change', '.preview-img-upload input', function() {
 		readURL(this, $(this));
 	});
 
 }
 previewImageBeforeUpload();
+
+$(function(){
+	$('.remove-image').click(
+			function() {
+
+				$(this).parents('.preview-img-upload')
+						.removeClass('active').find('.preview-img').attr(
+								'src', '');
+				$(this).parents('.preview-img-upload').find('input')
+						.val('');
+			});
+	});
