@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="letter">
+
+	<select id="getReceiveCount" resultType="int">
+		select count(*) from
+		tl_receivemessage
+	</select>
+	<select id="getReceives" resultType="receive.DAO.ReceiveDatabean"
+		parameterType="Map">
+		select rm_id, rm_title, rm_contents, rm_date, rm_sender, m_email,readcount,r
+		from (select rm_id, rm_title, rm_contents, rm_date, rm_sender, m_email,readcount,rownum r
+		from (select * from tl_receivemessage)) where r &gt;= #{startRow} and r &lt;= #{endRow}
+	</select>
+	<select id="getReceive" resultType="receive.DAO.ReceiveDatabean"
+		parameterType="int">
+		select * from tl_receivemessage where rm_id = #{rm_id}
+	</select>
+	<insert id="insert" parameterType="receive.DAO.ReceiveDatabean">
+		insert into tl_receivemessage(rm_id, rm_title, rm_contents, rm_date, rm_sender, m_email)
+		values(tl_receivemessage_rm_id.NEXTVAL,#{rm_title}#{rm_contents}#{rm_date}#{rm_sender}#{m_email})
+	</insert>
+	<select id="deletecheck" resultType="String"
+		parameterType="receive.DAO.ReceiveDatabean">
+		select passwd from tl_receivemessage where rm_id = #{rm_id}
+	</select>
+	<delete id="rdt" parameterType="receive.DAO.ReceiveDatabean">
+		delete from tl_receivemessage
+		where rm_id=#{rm_id}
+	</delete>
+	<update id="rut" parameterType="receive.DAO.ReceiveDatabean">
+	</update>
+	<select id="getMax" resultType="String" parameterType="receive.DAO.ReceiveDatabean">
+		select
+		max(rm_id) from tl_receivemessage
+	</select>
+	<select id="getMax1" resultType="int" parameterType="receive.DAO.ReceiveDatabean">
+		select
+		max(rm_id) from tl_receivemessage
+	</select>
+	<update id="readcount" parameterType="receive.DAO.ReceiveDatabean">
+		update board set
+		readcount=readcount+1 where rm_id = #{rm_id}
+	</update>
+
+</mapper>

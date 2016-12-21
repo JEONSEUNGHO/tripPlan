@@ -27,7 +27,7 @@ public class ReceiveDAO extends SqlSessionDaoSupport {
 		return getReceive;
 	}
 
-	public int Insert(String string, Map<String, Object> list) {
+	public int insert(String string, Map<String, Object> list) {
 		int check = getSqlSession().insert(string, list);
 		return check;
 	}
@@ -72,19 +72,10 @@ public class ReceiveDAO extends SqlSessionDaoSupport {
 		Map map = new HashMap<String,Object>();	
 		map.put("searchN", n);
 		map.put("searchKeyword", searchKeyword);
-		x = getSqlSession().selectOne("letter.getReceiveCount", Integer.class); // cityMapper		
+		x = getSqlSession().selectOne("letter.getReceiveCount", Integer.class);
 		return x;
 	}
 
-	public List getReceives(int start, int end, int n, String searchKeyword){
-		Map map = new HashMap<String,Object>();
-		map.put("startRow", start);
-		map.put("endRow", end);
-		map.put("searchN", n);
-		map.put("searchKeyword", searchKeyword);
-		
-		List list = getSqlSession().selectList("letter.searchgetReceives",map);
-		return list;
-	}
+	
 
 }

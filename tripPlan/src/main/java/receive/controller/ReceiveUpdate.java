@@ -11,8 +11,7 @@ import receive.Service.ReceiveService;
 @Controller
 public class ReceiveUpdate {
 	@Autowired
-	private ReceiveService service; // CityServiceImpl객체를 받아온다. CityService
-									// interface이므로
+	private ReceiveService service;
 
 	public void setService(ReceiveService service) {
 		this.service = service;

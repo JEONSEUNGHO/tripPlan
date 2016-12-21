@@ -13,17 +13,18 @@ import receive.Service.ReceiveService;
 @Controller
 public class ReceiveWrite {
 	@Autowired
-	private ReceiveService service; // CityServiceImpl객체를 받아온다. CityService
-									// interface이므로
+	private ReceiveService service;
 
 	public void setService(ReceiveService service) {
 		this.service = service;
 	}
+
 	@RequestMapping(value = "/writeForm.do")
 	public String rwt(@ModelAttribute("board") ReceiveDataBean board) throws Throwable {
 
 		return "writeForm";
 	}
+
 	@RequestMapping(value = "/writePro.do")
 	public String rwtp(ReceiveDataBean receive, HttpServletRequest request) throws Throwable {
 		receive.setRm_sender(request.getRemoteAddr());

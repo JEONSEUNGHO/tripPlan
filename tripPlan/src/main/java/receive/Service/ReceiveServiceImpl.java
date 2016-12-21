@@ -13,10 +13,10 @@ import receive.DAO.ReceiveDataBean;
 @Controller
 public class ReceiveServiceImpl implements ReceiveService {
 	@Autowired
-	private ReceiveDAO dao;
+	private ReceiveDAO receivedao;
 
-	public void setDao(ReceiveDAO dao) {
-		this.dao = dao;
+	public void setDao(ReceiveDAO receivedao) {
+		this.receivedao = receivedao;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -24,9 +24,9 @@ public class ReceiveServiceImpl implements ReceiveService {
 		List<Object> list = null;
 
 		if (search == null || search.equals(""))
-			list = dao.getReceives(startRow, endRow);
+			list = receivedao.getReceives(startRow, endRow);
 		else
-			list = dao.getReceives(startRow, endRow, searchn, search);
+			list = receivedao.getReceives(startRow, endRow, searchn, search);
 
 		return list;
 	}
@@ -35,7 +35,7 @@ public class ReceiveServiceImpl implements ReceiveService {
 		ReceiveDataBean list = null;
 
 		try { // city는 mepper파일의 id값에 해당한다.
-			list = dao.getReceive(rm_id);
+			list = receivedao.getReceive(rm_id);
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -47,9 +47,9 @@ public class ReceiveServiceImpl implements ReceiveService {
 	public int getReceiveCount(String search, int searchn) {
 		int count = 0;
 		if (search == null || search.equals(""))
-			count = dao.getReceiveCount();
+			count = receivedao.getReceiveCount();
 		else
-			count = dao.getReceiveCount(searchn, search);
+			count = receivedao.getReceiveCount(searchn, search);
 
 		return count;
 	}
@@ -63,10 +63,10 @@ public class ReceiveServiceImpl implements ReceiveService {
 		String number = null;
 		int number1 = 0;
 
-		number = dao.getMax();
+		number = receivedao.getMax();
 
 		if (number != null)
-			number1 = dao.getMax1();
+			number1 = receivedao.getMax1();
 
 		if (number != null) {
 			number1 += 1;
@@ -79,7 +79,7 @@ public class ReceiveServiceImpl implements ReceiveService {
 			map.put("rm_contents", receive.getRm_contents());
 			map.put("rm_sender", receive.getRm_sender());
 			map.put("m_email", receive.getM_email());
-			check = dao.Insert("letter.insert", map);
+			check = receivedao.insert("letter.insert", map);
 		} catch (Exception e) {
 
 		}
@@ -90,12 +90,12 @@ public class ReceiveServiceImpl implements ReceiveService {
 	public int rdt(int rm_id, String Rm_check) {
 		int list;
 
-		String check = dao.deletecheck(rm_id);
+		String check = receivedao.deletecheck(rm_id);
 
 		if (check.equals(Rm_check)) {
 
 			try {
-				list = dao.rdt(rm_id); // city는 내가 선택한 도시명
+				list = receivedao.rdt(rm_id); // city는 내가 선택한 도시명
 			} catch (Exception e) {
 
 			}
@@ -109,7 +109,7 @@ public class ReceiveServiceImpl implements ReceiveService {
 	public int updateReceive(ReceiveDataBean receive, int rm_check) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		String check = dao.deletecheck(receive.getRm_id());
+		String check = receivedao.deletecheck(receive.getRm_id());
 
 		if (check.equals(receive.getRm_check())) {
 			map.put("rm_id", receive.getRm_id());
@@ -119,7 +119,7 @@ public class ReceiveServiceImpl implements ReceiveService {
 			map.put("rm_sender", receive.getRm_sender());
 			map.put("m_email", receive.getM_email());
 
-			dao.rut(map);
+			receivedao.rut(map);
 
 			return 1;
 		}
@@ -133,7 +133,7 @@ public class ReceiveServiceImpl implements ReceiveService {
 
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("rm_id", rm_id);
-		dao.readcount(rm_id);
+		receivedao.readcount(rm_id);
 	}
 
 }

@@ -54,7 +54,7 @@ public class ReceiveController {
 		model.addAttribute("number", new Integer(number));
 		model.addAttribute("receiveList", receiveList);
 
-		return "view/receive/receive.do";
+		return "receive/receive";
 	}
 
 }

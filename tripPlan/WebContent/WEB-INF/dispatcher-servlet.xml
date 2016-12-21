@@ -57,11 +57,14 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 
-	<bean id="dao" class="receive.DAO.receiveDAO">
+	<bean id="receivedao" class="receive.DAO.ReceiveDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	<bean id="dao" class="receive.DAO.sendDAO">
+	<bean class="receive.Service.ReceiveServiceImpl" p:dao-ref="receivedao" />
+	
+	<bean id="senddao" class="send.DAO.SendDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	<bean class="send.Service.SendServiceImpl" p:dao-ref="senddao" />
 
 </beans>
