@@ -6,7 +6,7 @@ public class ReceiveDataBean {
 	private int rm_id;
 	private String rm_title;
 	private String rm_contents;
-	private Timestamp date;
+	private Timestamp rm_date;
 	private int rm_check;
 	private String rm_sender;
 	private String m_email;
@@ -28,11 +28,11 @@ public class ReceiveDataBean {
 	public void setRm_contents(String rm_contents) {
 		this.rm_contents = rm_contents;
 	}
-	public Timestamp getDate() {
-		return date;
+	public Timestamp getRm_date() {
+		return rm_date;
 	}
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setRm_date(Timestamp rm_date) {
+		this.rm_date = rm_date;
 	}
 	public int getRm_check() {
 		return rm_check;

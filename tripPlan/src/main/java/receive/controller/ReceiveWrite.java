@@ -25,7 +25,7 @@ public class ReceiveWrite {
 		return "writeForm";
 	}
 	@RequestMapping(value = "/writePro.do")
-	public String writePro(ReceiveDataBean receive, HttpServletRequest request) throws Throwable {
+	public String rwtp(ReceiveDataBean receive, HttpServletRequest request) throws Throwable {
 		receive.setRm_sender(request.getRemoteAddr());
 		service.insert(receive);
 		return "writePro";

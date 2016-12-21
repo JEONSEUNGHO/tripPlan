@@ -5,39 +5,39 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import receive.DAO.ReceiveDataBean;
 import send.DAO.SendDataBean;
-import send.Service.sendService;
+import send.Service.SendService;
 
 @Controller
-@RequestMapping("/send/update")
 public class SendUpdate {
 	@Autowired
-	private sendService service;
+	private SendService service;
 
-	public void setService(sendService service) {
+	public void setService(SendService service) {
 		this.service = service;
-
 	}
 
-	@RequestMapping(value = "view/send/updateForm.do")
-	public String update(int sm_id, String pageNum, Model model) throws Throwable {
+	@RequestMapping(value = "/updateForm.do")
+	public String sut(int sm_id, String pageNum, Model model) throws Throwable {
 
 		SendDataBean send = service.getSend(sm_id);
 
+		// 해당 뷰에서 사용할 속성
 		model.addAttribute("pageNum", new Integer(pageNum));
 		model.addAttribute("send", send);
 
-		return "view/send/updateForm";
+		return "updateForm";// 해당뷰
 	}
 
-	@RequestMapping(value = "view/send/updatePro.do")
-	public String updatePro(SendDataBean send, String pageNum, Model model) throws Throwable {
+	@RequestMapping(value = "/updatePro.do")
+	public String sutp(SendDataBean send, String pageNum, Model model) throws Throwable {
 
-		int check = service.updatesend(send);
+		int check = service.updateSend(send, send.getSm_check());
 
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("check", check);
 
-		return "view/send/updatePro";
+		return "updatePro";
 	}
 }

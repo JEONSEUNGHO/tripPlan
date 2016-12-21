@@ -9,21 +9,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import send.Service.sendService;
+import send.Service.SendService;
 
 @Controller
-@RequestMapping("/send/send")
 public class SendController {
 	@Autowired
-	private sendService service;
+	private SendService service;
 
-	public void setService(sendService service) {
+	public void setService(SendService service) {
 		this.service = service;
-		
 	}
-	@RequestMapping(value = "view/send/sendForm.do")
-	public String Letter(String pageNum, String search,@RequestParam(defaultValue="0") int searchn, Model model) throws Throwable {
-		
+
+	@RequestMapping(value = "/list.do")
+	public String scr(String pageNum, String search, @RequestParam(defaultValue = "0") int searchn, Model model)
+			throws Throwable {
+
 		if (pageNum == null) {
 			pageNum = "1";
 		}
@@ -33,19 +33,20 @@ public class SendController {
 		int endRow = currentPage * pageSize;
 		int count = 0;
 		int number = 0;
-		
+
 		List sendList = null;
 
 		count = service.getSendCount(search, searchn);
 
 		if (count > 0) {
-			sendList = service.getSends(startRow, endRow, search, searchn);
+			sendList = service.getSends(startRow, endRow, search, searchn); // 글
+																			// 목록
 		} else {
 			sendList = Collections.EMPTY_LIST;
 		}
 
 		number = count - (currentPage - 1) * pageSize;
-		
+		// 해당 뷰에서 사용할 속성
 		model.addAttribute("currentPage", new Integer(currentPage));
 		model.addAttribute("startRow", new Integer(startRow));
 		model.addAttribute("endRow", new Integer(endRow));
@@ -53,9 +54,8 @@ public class SendController {
 		model.addAttribute("pageSize", new Integer(pageSize));
 		model.addAttribute("number", new Integer(number));
 		model.addAttribute("sendList", sendList);
-		
-		return "view/send/sendForm";
-	}
 
+		return "list";// 해당 뷰
+	}
 
 }
