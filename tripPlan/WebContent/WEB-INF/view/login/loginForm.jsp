@@ -162,7 +162,7 @@ a, a:hover {
 			</div>
 			<!-- 네이버 아이디로 로그인 -->
 			<div class="naver-login" >
-				<a class="naver-login" href=""><img class="naver-logo" src="/tripPlan/assets/images/logo-naver.png" />
+				<a class="naver-login" href="naverLogin.do"><img class="naver-logo" src="/tripPlan/assets/images/logo-naver.png" />
 				<span class="text"><b>네이버</b>&nbsp; <b>아이디로</b>&nbsp; <b>로그인</b></span></a>
 			</div>
 			

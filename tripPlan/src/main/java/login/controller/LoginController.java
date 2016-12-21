@@ -1,7 +1,6 @@
 package login.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,7 @@ public class LoginController {
 		return new MemberInfo();
 	}
 	
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginPro.do", method = RequestMethod.POST)
 	public String submit(@ModelAttribute MemberInfo memberInfo, BindingResult result) {
 		new LoginValidator().validate(memberInfo, result);
 		if (result.hasErrors()) {

@@ -13,6 +13,7 @@
 	<bean class="mypage.controller.MypageController" />
 	<bean class="member.controller.RegistMemberController" />
 	<bean class="login.controller.LoginController" />
+	<bean class="login.controller.naverLoginController" />
 
 
 	<!-- tiles 요청 처리 -->
