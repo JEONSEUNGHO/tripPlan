@@ -20,7 +20,7 @@ public class ReceiveController {
 		this.service = service;
 	}
 
-	@RequestMapping(value = "")
+	@RequestMapping(value = "/receive/receive")
 	public String rcr(String pageNum, String search, @RequestParam(defaultValue = "0") int searchn, Model model)
 			throws Throwable {
 
@@ -54,7 +54,7 @@ public class ReceiveController {
 		model.addAttribute("number", new Integer(number));
 		model.addAttribute("receiveList", receiveList);
 
-		return "list";
+		return "view/receive/receive.do";
 	}
 
 }

@@ -4,6 +4,7 @@
 <head>
 </head>
 <body>
-<% response.sendRedirect("tiles/main.do"); %>
+<%-- <% response.sendRedirect("tiles/main.do"); %> --%>
+<a href="/receive/receive"></a>
 </body>
 </html> 

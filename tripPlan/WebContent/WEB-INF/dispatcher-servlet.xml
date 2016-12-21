@@ -12,11 +12,13 @@
 	<bean id="ReceiveContent" class="receive.controller.ReceiveContent"></bean>
 	<bean id="ReceiveDelete" class="receive.controller.ReceiveDelete"></bean>
 	<bean id="ReceiveUpdate" class="receive.controller.ReceiveUpdate"></bean>
+	<bean id="ReceiveWrite" class="receive.controller.ReceiveWrite"></bean>
 
 	<bean id="SendController" class="send.controller.SendController"></bean>
 	<bean id="SendContent" class="send.controller.SendContent"></bean>
 	<bean id="SendDelete" class="send.controller.SendDelete"></bean>
 	<bean id="SendUpdate" class="send.controller.SendUpdate"></bean>
+	<bean id="SendWrite" class="send.controller.SendWrite"></bean>
 	
 	<bean id="mypageController" class="mypage.controller.MypageController"></bean>
 
