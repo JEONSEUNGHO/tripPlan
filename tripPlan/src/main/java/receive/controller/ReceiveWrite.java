@@ -20,9 +20,9 @@ public class ReceiveWrite {
 
 	}
 	@RequestMapping(value = "/writePro.do")
-	public String writePro(ReceiveDataBean receive, HttpServletRequest request) throws Throwable {
+	public String receivewrite(ReceiveDataBean receive, HttpServletRequest request) throws Throwable {
 		receive.setRm_sender(request.getRemoteAddr());
 		service.insertreceive(receive);
-		return "write";
+		return "view/receive/receivewrite";
 	}
 }
