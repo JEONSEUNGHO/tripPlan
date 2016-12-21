@@ -13,8 +13,6 @@
 	<bean id="ReceiveDelete" class="receive.controller.ReceiveDelete"></bean>
 	<bean id="ReceiveUpdate" class="receive.controller.ReceiveUpdate"></bean>
 	<bean id="ReceiveWrite" class="receive.controller.ReceiveWrite"></bean>
-	
-	
 
 	<bean id="SendController" class="send.controller.SendController"></bean>
 	<bean id="SendContent" class="send.controller.SendContent"></bean>
@@ -60,6 +58,9 @@
 	</bean>
 
 	<bean id="dao" class="receive.DAO.receiveDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="dao" class="receive.DAO.sendDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 
