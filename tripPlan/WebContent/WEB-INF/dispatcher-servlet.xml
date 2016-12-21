@@ -13,6 +13,8 @@
 	<bean id="ReceiveDelete" class="receive.controller.ReceiveDelete"></bean>
 	<bean id="ReceiveUpdate" class="receive.controller.ReceiveUpdate"></bean>
 	<bean id="ReceiveWrite" class="receive.controller.ReceiveWrite"></bean>
+	
+	
 
 	<bean id="SendController" class="send.controller.SendController"></bean>
 	<bean id="SendContent" class="send.controller.SendContent"></bean>
@@ -38,6 +40,25 @@
 			</list>
 		</property>
 	</bean>
+	<!-- 커넥션풀 연결 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
 
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:sql/*.xml" />
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="dao" class="receive.DAO.receiveDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
 
 </beans>
