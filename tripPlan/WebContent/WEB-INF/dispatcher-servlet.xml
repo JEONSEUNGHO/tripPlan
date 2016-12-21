@@ -40,6 +40,8 @@
 			</list>
 		</property>
 	</bean>
+	<!-- properties파일 읽어오기 -->
+	<context:property-placeholder location="classpath:db.properties" />
 	<!-- 커넥션풀 연결 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${jdbc.driver}" />
