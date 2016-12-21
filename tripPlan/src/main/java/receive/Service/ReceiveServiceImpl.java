@@ -77,7 +77,6 @@ public class ReceiveServiceImpl implements ReceiveService {
 		try {
 			map.put("rm_title", receive.getRm_title());
 			map.put("rm_contents", receive.getRm_contents());
-			map.put("rm_date", receive.getDate());
 			map.put("rm_sender", receive.getRm_sender());
 			map.put("m_email", receive.getM_email());
 			check = dao.Insert("letter.insert", map);
@@ -116,7 +115,7 @@ public class ReceiveServiceImpl implements ReceiveService {
 			map.put("rm_id", receive.getRm_id());
 			map.put("rm_title", receive.getRm_title());
 			map.put("rm_contents", receive.getRm_contents());
-			map.put("rm_date", receive.getDate());
+			map.put("rm_date", receive.getRm_date());
 			map.put("rm_sender", receive.getRm_sender());
 			map.put("m_email", receive.getM_email());
 
