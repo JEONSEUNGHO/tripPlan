@@ -9,21 +9,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import receive.Service.receiveService;
+import receive.Service.ReceiveService;
 
 @Controller
-@RequestMapping("/receive/receive")
 public class ReceiveController {
 	@Autowired
-	private receiveService service;
+	private ReceiveService service; // CityServiceImpl객체를 받아온다. CityService
+									// interface이므로
 
-	public void setService(receiveService service) {
+	public void setService(ReceiveService service) {
 		this.service = service;
-		
 	}
-	@RequestMapping(value = "view/receive/receiveForm.do")
-	public String Letter(String pageNum, String search,@RequestParam(defaultValue="0") int searchn, Model model) throws Throwable {
-		
+	@RequestMapping(value = "/list.do")
+	public String rcr(String pageNum, String search,@RequestParam(defaultValue="0") int searchn, Model model) throws Throwable {
+
 		if (pageNum == null) {
 			pageNum = "1";
 		}
@@ -33,19 +32,19 @@ public class ReceiveController {
 		int endRow = currentPage * pageSize;
 		int count = 0;
 		int number = 0;
-		
+
 		List receiveList = null;
 
-		count = service.getReceiveCount(search, searchn);
+		count = service.getReceiveCount(search, searchn );
 
 		if (count > 0) {
-			receiveList = service.getReceives(startRow, endRow, search, searchn);
+			receiveList = service.getReceives(startRow, endRow,search, searchn);// 현재 페이지에 해당하는													// 글 목록
 		} else {
 			receiveList = Collections.EMPTY_LIST;
 		}
 
-		number = count - (currentPage - 1) * pageSize;
-		
+		number = count - (currentPage - 1) * pageSize;// 글목록에 표시할 글번호
+		// 해당 뷰에서 사용할 속성
 		model.addAttribute("currentPage", new Integer(currentPage));
 		model.addAttribute("startRow", new Integer(startRow));
 		model.addAttribute("endRow", new Integer(endRow));
@@ -53,9 +52,9 @@ public class ReceiveController {
 		model.addAttribute("pageSize", new Integer(pageSize));
 		model.addAttribute("number", new Integer(number));
 		model.addAttribute("receiveList", receiveList);
-		
-		return "view/receive/receiveForm";
-	}
 
+		return "list";// 해당 뷰
+	}
+	
 
 }

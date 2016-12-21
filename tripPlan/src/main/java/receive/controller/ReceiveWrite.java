@@ -4,25 +4,30 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import receive.DAO.ReceiveDataBean;
-import receive.Service.receiveService;
+import receive.Service.ReceiveService;
 
 @Controller
-@RequestMapping("/receive/write")
 public class ReceiveWrite {
 	@Autowired
-	private receiveService service;
+	private ReceiveService service; // CityServiceImpl객체를 받아온다. CityService
+									// interface이므로
 
-	public void setService(receiveService service) {
+	public void setService(ReceiveService service) {
 		this.service = service;
+	}
+	@RequestMapping(value = "/writeForm.do")
+	public String rwt(@ModelAttribute("board") ReceiveDataBean board) throws Throwable {
 
+		return "writeForm";
 	}
 	@RequestMapping(value = "/writePro.do")
-	public String receivewrite(ReceiveDataBean receive, HttpServletRequest request) throws Throwable {
+	public String writePro(ReceiveDataBean receive, HttpServletRequest request) throws Throwable {
 		receive.setRm_sender(request.getRemoteAddr());
-		service.insertreceive(receive);
-		return "view/receive/receivewrite";
+		service.insert(receive);
+		return "writePro";
 	}
 }

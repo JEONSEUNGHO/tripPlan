@@ -6,38 +6,38 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import receive.DAO.ReceiveDataBean;
-import receive.Service.receiveService;
+import receive.Service.ReceiveService;
 
 @Controller
-@RequestMapping("/receive/update")
 public class ReceiveUpdate {
 	@Autowired
-	private receiveService service;
+	private ReceiveService service; // CityServiceImpl객체를 받아온다. CityService
+									// interface이므로
 
-	public void setService(receiveService service) {
+	public void setService(ReceiveService service) {
 		this.service = service;
-
 	}
 
-	@RequestMapping(value = "view/receive/updateForm.do")
-	public String update(int rm_id, String pageNum, Model model) throws Throwable {
+	@RequestMapping(value = "/updateForm.do")
+	public String rut(int rm_id, String pageNum, Model model) throws Throwable {
 
 		ReceiveDataBean receive = service.getReceive(rm_id);
 
+		// 해당 뷰에서 사용할 속성
 		model.addAttribute("pageNum", new Integer(pageNum));
 		model.addAttribute("receive", receive);
 
-		return "view/receive/updateForm";
+		return "updateForm";// 해당뷰
 	}
 
-	@RequestMapping(value = "view/receive/updatePro.do")
-	public String updatePro(ReceiveDataBean receive, String pageNum, Model model) throws Throwable {
+	@RequestMapping(value = "/updatePro.do")
+	public String rutp(ReceiveDataBean receive, String pageNum, Model model) throws Throwable {
 
-		int check = service.updatereceive(receive);
+		int check = service.updateReceive(receive, receive.getRm_check());
 
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("check", check);
 
-		return "view/receive/updatePro";
+		return "updatePro";
 	}
 }
