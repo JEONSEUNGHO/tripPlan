@@ -4,7 +4,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page isELIgnored="false"%>
 
-<script src="/tripPlan/assets/js/regFormSecond.js"></script>
+<script src="/tripPlan/assets/js/regFormSecond.js" ></script>
+
 <style>
 body {
 	background-color: #F3F2F2;
