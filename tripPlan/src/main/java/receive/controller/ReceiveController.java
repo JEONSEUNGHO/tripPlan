@@ -14,14 +14,15 @@ import receive.Service.ReceiveService;
 @Controller
 public class ReceiveController {
 	@Autowired
-	private ReceiveService service; // CityServiceImpl객체를 받아온다. CityService
-									// interface이므로
+	private ReceiveService service;
 
 	public void setService(ReceiveService service) {
 		this.service = service;
 	}
-	@RequestMapping(value = "/list.do")
-	public String rcr(String pageNum, String search,@RequestParam(defaultValue="0") int searchn, Model model) throws Throwable {
+
+	@RequestMapping(value = "")
+	public String rcr(String pageNum, String search, @RequestParam(defaultValue = "0") int searchn, Model model)
+			throws Throwable {
 
 		if (pageNum == null) {
 			pageNum = "1";
@@ -35,16 +36,16 @@ public class ReceiveController {
 
 		List receiveList = null;
 
-		count = service.getReceiveCount(search, searchn );
+		count = service.getReceiveCount(search, searchn);
 
 		if (count > 0) {
-			receiveList = service.getReceives(startRow, endRow,search, searchn);// 현재 페이지에 해당하는													// 글 목록
+			receiveList = service.getReceives(startRow, endRow, search, searchn);
 		} else {
 			receiveList = Collections.EMPTY_LIST;
 		}
 
-		number = count - (currentPage - 1) * pageSize;// 글목록에 표시할 글번호
-		// 해당 뷰에서 사용할 속성
+		number = count - (currentPage - 1) * pageSize;
+
 		model.addAttribute("currentPage", new Integer(currentPage));
 		model.addAttribute("startRow", new Integer(startRow));
 		model.addAttribute("endRow", new Integer(endRow));
@@ -53,8 +54,7 @@ public class ReceiveController {
 		model.addAttribute("number", new Integer(number));
 		model.addAttribute("receiveList", receiveList);
 
-		return "list";// 해당 뷰
+		return "list";
 	}
-	
 
 }

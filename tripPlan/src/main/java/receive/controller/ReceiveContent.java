@@ -13,8 +13,7 @@ import receive.Service.ReceiveService;
 @Controller
 public class ReceiveContent {
 	@Autowired
-	private ReceiveService service; // CityServiceImpl객체를 받아온다. CityService
-									// interface이므로
+	private ReceiveService service;
 
 	public void setService(ReceiveService service) {
 		this.service = service;
@@ -25,14 +24,13 @@ public class ReceiveContent {
 
 		ReceiveDataBean receiveList = null;
 		service.readcount(rm_id);
-		receiveList = service.getReceive(rm_id);// 해당 글번호에 대한 해당 레코드
+		receiveList = service.getReceive(rm_id);
 
-		// 해당 뷰에서 사용할 속성
 		model.addAttribute("rm_id", new Integer(rm_id));
 		model.addAttribute("pageNum", new Integer(pageNum));
 		model.addAttribute("receive", receiveList);
 
-		return "content";// 해당 뷰
+		return "content";
 	}
 
 }
