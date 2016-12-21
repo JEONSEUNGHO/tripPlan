@@ -2,8 +2,6 @@ package member.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import member.dao.MemberDAO;
-import member.model.Code;
 import member.model.MemberInfo;
 import member.validator.MemberInfoValidator2;
 
@@ -33,17 +30,6 @@ public class RegistMemberController2 {
 		return new MemberInfo();
 	}
 
-	private void referenceData(Model model) {
-		List<Code> ageCodes = new ArrayList<Code>();
-		ageCodes.add(new Code("10대", "10대"));
-		ageCodes.add(new Code("20대", "20대"));
-		ageCodes.add(new Code("30대", "30대"));
-		ageCodes.add(new Code("40대", "40대"));
-		ageCodes.add(new Code("50대 이상", "50대 이상"));
-
-		model.addAttribute("m_agerange", ageCodes);
-
-	}
 
 	@RequestMapping(value = "/mypage.do", method = RequestMethod.POST)
 	public String submit(@ModelAttribute MemberInfo memberInfo, BindingResult result, Model model,
@@ -54,7 +40,6 @@ public class RegistMemberController2 {
 		if (result.hasErrors()) {
 
 			result.reject("errorInfo");
-			referenceData(model);
 			return "registMemberForm2";
 		}
 

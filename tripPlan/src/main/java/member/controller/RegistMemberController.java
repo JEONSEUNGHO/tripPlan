@@ -1,43 +1,47 @@
 package member.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import member.model.Code;
+import login.controller.NaverLoginBO;
 import member.model.MemberInfo;
 import member.validator.MemberInfoValidator;
 
 @Controller
 public class RegistMemberController {
+	
+    //회원가입 클릭 시 네이버 간편로그인 url 등록
+    private NaverLoginBO naverLoginBO;
 
-	@RequestMapping(value = "/regist.do", method = RequestMethod.GET)
-	public String form() {
-		return "registMemberForm";
-	}
+    @Autowired
+    private void setNaverLoginBO(NaverLoginBO naverLoginBO){
+        this.naverLoginBO = naverLoginBO;
+    }
+
+    @RequestMapping("/regist.do")
+    public ModelAndView login(HttpSession session, MemberInfo memberInfo) {
+        /* 네아로 인증 URL을 생성하기 위하여 getAuthorizationUrl을 호출 */
+        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+        if(memberInfo.getM_email() != null) {
+        	new MemberInfo();
+        }
+        
+        /* 생성한 인증 URL을 View로 전달 */
+        return new ModelAndView("registMemberForm", "url", naverAuthUrl);
+    }
+
 
 	@ModelAttribute
 	protected Object formBackingObject() throws Exception {
 		return new MemberInfo();
-
-	}
-
-	private void referenceData(Model model) {
-		List<Code> ageCodes = new ArrayList<Code>();
-		ageCodes.add(new Code("10대", "10대"));
-		ageCodes.add(new Code("20대", "20대"));
-		ageCodes.add(new Code("30대", "30대"));
-		ageCodes.add(new Code("40대", "40대"));
-		ageCodes.add(new Code("50대 이상", "50대 이상"));
-		
-		model.addAttribute("m_agerange", ageCodes);
-
 
 	}
 
@@ -48,7 +52,6 @@ public class RegistMemberController {
 			result.reject("errorInfo");
 			return "registMemberForm";
 		}
-		referenceData(model);
 		return "registMemberForm2";
 	}
 

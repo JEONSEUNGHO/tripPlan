@@ -72,7 +72,7 @@ body {
 .btn {
 	font-size: 17px;
 }
-a, a:hover {
+a, a:hover, a:focus, a:active {
 	color: #999;
 	text-decoration: none;
 	background: none;
@@ -162,13 +162,13 @@ a, a:hover {
 			</div>
 			<!-- 네이버 아이디로 로그인 -->
 			<div class="naver-login" >
-				<a class="naver-login" href="naverLogin.do"><img class="naver-logo" src="/tripPlan/assets/images/logo-naver.png" />
+				<a class="naver-login" href="${url}"><img class="naver-logo" src="/tripPlan/assets/images/logo-naver.png" />
 				<span class="text"><b>네이버</b>&nbsp; <b>아이디로</b>&nbsp; <b>로그인</b></span></a>
 			</div>
 			
 			<!-- 뒤로가기  -->
 			<a href="main.do">  
-				<i class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">돌아가기</span>
+				<i class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">메인으로</span>
 			</a>
 		</div>
 	</form:form>

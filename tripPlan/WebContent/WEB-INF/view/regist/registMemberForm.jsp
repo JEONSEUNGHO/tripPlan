@@ -142,7 +142,7 @@ a, a:hover {
 			<div class="form-group" id="email">
 				<span><i class="fa fa-envelope"></i></span>
 				<form:label path="m_email"></form:label>
-				<form:input type="email" path="m_email" placeholder="이메일"
+				<form:input type="email" path="m_email" placeholder="이메일" value="${param.m_email}"
 					class="form-input-text form-control" />
 				<form:errors class="error" path="m_email" />
 			</div>
@@ -166,12 +166,12 @@ a, a:hover {
 			</div>
 			<!-- 네이버 아이디로 로그인 -->
 			<div class="naver-login" >
-				<a class="naver-login" href=""><img class="naver-logo" src="/tripPlan/assets/images/logo-naver.png" />
+				<a class="naver-login" href="${url}"><img class="naver-logo" src="/tripPlan/assets/images/logo-naver.png" />
 				<span class="text"><b>네이버</b>&nbsp; <b>아이디로</b>&nbsp; <b>로그인</b></span></a>
 			</div>
 
 			<a href="main.do"> <!-- font-awesome 로그인 아이콘 --> <i
-				class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">돌아가기</span>
+				class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">메인으로</span>
 			</a>
 		</div>
 	</form:form>
