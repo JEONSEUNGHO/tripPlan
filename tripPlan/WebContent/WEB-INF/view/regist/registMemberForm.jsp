@@ -16,7 +16,7 @@ body {
 }
 .contact-form {
 	position: relative;
-	top: 30%;
+	top: 25%;
 	width: 40%;
 	margin: 0 auto;
 }
@@ -72,7 +72,9 @@ a, a:hover {
 	background: none;
 	outline: none;
 }
-
+.btn {
+	font-size: 17px;
+}
 .error {
 	font-size: 15px;
 	color: #ff9800;
@@ -86,7 +88,7 @@ a, a:hover {
 
 .logo-img {
 	position: relative;
-	left: 30%;
+	left: 27%;
 	bottom: 30px;
 }
 
@@ -105,12 +107,32 @@ a, a:hover {
 	margin-top: 25px;
 	margin-bottom: 20px;
 }
+.naver-login {
+	font-size: 17px;
+	background-color: #1ec800;
+	color: #fff;
+	padding-top: 0.5%;
+	padding-bottom: 1%;
+	width: 75%;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 4px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.naver-logo {
+	float: left;
+	margin-left: 15px;
+}
+.text {
+	margin-right: 45px;
+}
 </style>
 
 <div class="contact-form">
 	<!-- 로고 이미지 -->
 	<a class="logo-img" href="main.do"><img
-		src="/tripPlan/assets/images/logo-sm.png"></a>
+		src="/tripPlan/assets/images/logo-middle-gray.png"></a>
 	<!-- input 태그를 감싸는 form -->
 	<form:form action="regist2.do" commandName="memberInfo">
 		<div class="controls">
@@ -120,7 +142,7 @@ a, a:hover {
 			<div class="form-group" id="email">
 				<span><i class="fa fa-envelope"></i></span>
 				<form:label path="m_email"></form:label>
-				<form:input type="email" path="m_email" placeholder="이메일"
+				<form:input type="email" path="m_email" placeholder="이메일" value="${param.m_email}"
 					class="form-input-text form-control" />
 				<form:errors class="error" path="m_email" />
 			</div>
@@ -140,11 +162,16 @@ a, a:hover {
 			</div>
 
 			<div class="send-button">
-				<button type="submit" class="btn btn-send send-msg">다음</button>
+				<button type="submit" class="btn btn-send send-msg"><b>다음</b></button>
+			</div>
+			<!-- 네이버 아이디로 로그인 -->
+			<div class="naver-login" >
+				<a class="naver-login" href="${url}"><img class="naver-logo" src="/tripPlan/assets/images/logo-naver.png" />
+				<span class="text"><b>네이버</b>&nbsp; <b>아이디로</b>&nbsp; <b>로그인</b></span></a>
 			</div>
 
 			<a href="main.do"> <!-- font-awesome 로그인 아이콘 --> <i
-				class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">돌아가기</span>
+				class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">메인으로</span>
 			</a>
 		</div>
 	</form:form>

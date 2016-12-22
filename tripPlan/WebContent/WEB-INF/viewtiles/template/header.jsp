@@ -12,7 +12,7 @@
 			<div class="navbar-header">
 
 				<!-- 로고 -->
-				<a class="navbar-brand" href="main.do"><img src="/tripPlan/assets/images/logo-sm.png"></a>
+				<a class="navbar-brand" href="main.do"><img src="/tripPlan/assets/images/logo-header-gray.png"></a>
 				<!--// 로고 -->
 			</div>
 			<!--// 로고 영역 -->
@@ -28,7 +28,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="/">
+						<a href="login.do">
 							<!-- font-awesome 로그인 아이콘 -->
 							<i class="fa fa-sign-in"></i>
 							&nbsp;&nbsp;<span id="text">로그인</span>

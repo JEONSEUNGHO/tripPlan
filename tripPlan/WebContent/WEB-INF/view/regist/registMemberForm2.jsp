@@ -5,6 +5,7 @@
 <%@ page isELIgnored="false"%>
 
 <script src="/tripPlan/assets/js/regFormSecond.js"></script>
+
 <style>
 body {
 	background-color: #F3F2F2;
@@ -17,9 +18,13 @@ a, a:hover {
 	outline: none;
 }
 
+.btn {
+	font-size: 17px;
+}
+
 .logo-img {
 	position: relative;
-	left: 30%;
+	left: 27%;
 	bottom: 30px;
 }
 /* text 입력 폼 */
@@ -32,13 +37,15 @@ a, a:hover {
 	position: relative;
 	left: 10%;
 }
+
 #nickname {
 	margin-top: 7%;
 	margin-bottom: 5%;
-} 
+}
+
 .contact-form {
 	position: relative;
-	top: 30%;
+	top: 25%;
 	width: 40%;
 	margin: 0 auto;
 }
@@ -235,18 +242,18 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 <div class="contact-form">
 	<!-- 로고 이미지 -->
 	<a class="logo-img" href="main.do"><img
-		src="/tripPlan/assets/images/logo-sm.png"></a>
+		src="/tripPlan/assets/images/logo-middle-gray.png"></a>
 	<!-- input 태그를 감싸는 form -->
-	<form:form action="mypage.do" commandName="memberInfo"
+	<form:form action="mypageload.do" method="post" commandName="memberInfo"
 		enctype="multipart/form-data">
 		<div class="controls">
 			<!-- 유효성 검사 에러시 출력되는 박스 -->
 			<form:errors class="error-box" />
 			<!-- // 유효성 검사 에러시 출력되는 박스 -->
-			
+
 			<!-- 이전 페이지에서 가져온 정보 -->
-			<form:hidden path="m_email" value="${memberInfo.m_email}" />
-			<form:hidden path="m_pass" value="${memberInfo.m_pass}" />
+			<form:hidden path="m_email" value="${param.m_email}" />
+			<form:hidden path="m_pass" value="${param.m_pass}" />
 			<!-- // 이전 페이지에서 가져온 정보 -->
 			<div class="form-group" id="nickname">
 				<span><i class="fa fa-user"></i></span>
@@ -257,36 +264,65 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 			</div>
 
 			<!-- 성별 영역 -->
-			<div class="form-group">
-				<span class="male"> <span><i class="fa fa-male"></i></span> <form:label
-						class="radio-label" path="m_sex" /> <form:radiobutton
-						path="m_sex" value="남" />
-				</span> <span class="female"> <span><i class="fa fa-female"></i></span>
-					<form:label class="radio-label" path="m_sex" /> <form:radiobutton
-						path="m_sex" value="여" /> <form:errors class="error" path="m_sex" />
-				</span>
-			</div>
+			<c:set var="sex" value="${memberInfo.m_sex}" />
+			<c:choose>
+				<c:when test="${sex eq 'M'}">
+					<div class="form-group">
+						<span class="male"> <span><i class="fa fa-male"></i></span>
+							<form:label class="radio-label" path="m_sex" /> <form:radiobutton
+								path="m_sex" value="M" checked="checked" />
+						</span> <span class="female"> <span><i class="fa fa-female"></i></span>
+							<form:label class="radio-label" path="m_sex" /> <form:radiobutton
+								path="m_sex" value="F" /> <form:errors class="error"
+								path="m_sex" />
+						</span>
+					</div>
+				</c:when>
+				<c:when test="${sex eq 'F'}">
+					<div class="form-group">
+						<span class="male"> <span><i class="fa fa-male"></i></span>
+							<form:label class="radio-label" path="m_sex" /> <form:radiobutton
+								path="m_sex" value="M" />
+						</span> <span class="female"> <span><i class="fa fa-female"></i></span>
+							<form:label class="radio-label" path="m_sex" /> <form:radiobutton
+								path="m_sex" value="F" checked="checked" /> <form:errors
+								class="error" path="m_sex" />
+						</span>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="form-group">
+						<span class="male"> <span><i class="fa fa-male"></i></span>
+							<form:label class="radio-label" path="m_sex" /> <form:radiobutton
+								path="m_sex" value="M" />
+						</span> <span class="female"> <span><i class="fa fa-female"></i></span>
+							<form:label class="radio-label" path="m_sex" /> <form:radiobutton
+								path="m_sex" value="F" /> <form:errors class="error"
+								path="m_sex" />
+						</span>
+					</div>
+				</c:otherwise>
+			</c:choose>
 
-
-			<!-- // 성별 영역 -->
 
 			<!-- 나이대 영역  -->
 			<div class="form-group">
 				<span><i class="fa fa-birthday-cake"></i></span>
 				<form:label path="m_agerange" class="select-label" />
-				<form:select path="m_agerange">
-					<option value="">--- 선택하세요 ---</option>
-					<form:options items="${m_agerange}" itemLabel="label"
-						itemValue="code" />
+				<form:select path="m_agerange" value="${memberInfo.m_agerange}">
+					<form:option value="" label="--- 선택하세요 ---" />
+					<form:option value="10" label="10대" />
+					<form:option value="20" label="20대" />
+					<form:option value="30" label="30대" />
+					<form:option value="40" label="40대" />
+					<form:option value="50" label="50대 이상" />
 				</form:select>
 				<form:errors class="error" path="m_agerange" />
 			</div>
 
 
-			<!-- // 나이대 영역 -->
-
 			<!-- 프로필 이미지 영역 -->
- 		 	<div class="upload-image preview-img-upload">
+			<div class="upload-image preview-img-upload">
 				<span class="input-title"></span>
 				<div class="preview-img-holder">
 					<span class="remove-image fa fa-times"></span>
@@ -297,16 +333,25 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 				<label class="input-holder"><span class="icon fa fa-user"></span>
 					<input class="hide" type="file" name="uploadImg" accept="image/*" />
 				</label>
-			</div>  
-			<!-- // 프로필 이미지 영역 
+			</div>
+
 			<!-- submit 버튼 영역  -->
 			<div class="send-button">
-				<button type="submit" class="btn btn-send send-msg">가입</button>
+				<button type="submit" class="btn btn-send send-msg">
+					<b>가입</b>
+				</button>
 			</div>
 			<!-- // submit 버튼 영역  -->
-			<a href="#" onclick="history.go(-1)"> <!-- font-awesome 아이콘 --> <i
-				class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">뒤로</span>
-			</a>
+				<!-- 성별 정보가 없을 시 뒤로가기 버튼 추가  -->
+				<c:if test="${sex eq null}">
+					<a href="regist.do?m_email=${memberInfo.m_email}"> <!-- font-awesome 아이콘 -->
+						<i class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">뒤로가기</span>
+					</a>
+				</c:if>
+				<!-- 네이버 간편 로그인으로 성별 정보가 있을 시  뒤로가기 버튼 삭제  -->
+				<c:if test="${sex ne null}">
+				</c:if>
+
 		</div>
 	</form:form>
 	<!-- // input 태그를 감싸는 form -->

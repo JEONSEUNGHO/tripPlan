@@ -8,11 +8,14 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
+	<context:annotation-config ></context:annotation-config>
 	<!-- bean 객체 등록 -->
 	<bean class="main.controller.MainController" />
 	<bean class="mypage.controller.MypageController" />
 	<bean class="member.controller.RegistMemberController" />
-
+	<bean class="login.controller.LoginController" />
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+ 	<bean id="naverLoginBO" class="login.controller.NaverLoginBO" />
 
 	<!-- tiles 요청 처리 -->
 	<bean id="tilesviewResolver"
