@@ -41,7 +41,7 @@ body {
 	<div class="container">
 		<form>
 			<div class="send">
-				<input type="text" class="form-control" id="send" placeholder="받는 사람">
+				<input type="text" class="form-control" id="send" value="${letter. }" placeholder="받는 사람">
 			</div>
 			<div class="title">
 				<input type="text" class="form-control" id="title" placeholder="제목">

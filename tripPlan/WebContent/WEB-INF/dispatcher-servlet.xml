@@ -9,23 +9,14 @@
        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 	<bean id="ReceiveController" class="receive.controller.ReceiveController"></bean>
-	<bean id="ReceiveContent" class="receive.controller.ReceiveContent"></bean>
-	<bean id="ReceiveDelete" class="receive.controller.ReceiveDelete"></bean>
-	<bean id="ReceiveUpdate" class="receive.controller.ReceiveUpdate"></bean>
-	<bean id="ReceiveWrite" class="receive.controller.ReceiveWrite"></bean>
 
-	<bean id="SendController" class="send.controller.SendController"></bean>
-	<bean id="SendContent" class="send.controller.SendContent"></bean>
-	<bean id="SendDelete" class="send.controller.SendDelete"></bean>
-	<bean id="SendUpdate" class="send.controller.SendUpdate"></bean>
-	<bean id="SendWrite" class="send.controller.SendWrite"></bean>
 	
 	<bean id="mypageController" class="mypage.controller.MypageController"></bean>
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 
-		<property name="prefix" value="/WEB-INF/" />
+		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 
@@ -61,10 +52,6 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	<bean class="receive.Service.ReceiveServiceImpl" p:dao-ref="receivedao" />
-	
-	<bean id="senddao" class="send.DAO.SendDAO">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
-	<bean class="send.Service.SendServiceImpl" p:dao-ref="senddao" />
+
 
 </beans>
