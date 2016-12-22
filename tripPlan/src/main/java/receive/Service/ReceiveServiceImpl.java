@@ -26,7 +26,7 @@ public class ReceiveServiceImpl implements ReceiveService {
 		if (search == null || search.equals(""))
 			list = receivedao.getReceives(startRow, endRow);
 		else
-			list = receivedao.getReceives(startRow, endRow, searchn, search);
+			list = receivedao.getReceives(startRow, endRow);
 
 		return list;
 	}
