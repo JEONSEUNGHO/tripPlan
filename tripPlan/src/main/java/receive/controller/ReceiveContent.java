@@ -17,7 +17,20 @@ public class ReceiveContent {
 
 	public void setService(ReceiveService service) {
 		this.service = service;
+	}
 
+	@RequestMapping(value = "/receive/content", method = RequestMethod.GET)
+	public String rct(@RequestParam("rm_id") int rm_id, String pageNum, Model model) {
+
+		ReceiveDataBean receiveList = null;
+		service.readcount(rm_id);
+		receiveList = service.getReceive(rm_id);
+
+		model.addAttribute("rm_id", new Integer(rm_id));
+		model.addAttribute("pageNum", new Integer(pageNum));
+		model.addAttribute("receive", receiveList);
+
+		return "receive/content";
 	}
 
 }

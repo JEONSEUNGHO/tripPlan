@@ -21,7 +21,7 @@ public class ReceiveController {
 	}
 
 	@RequestMapping(value = "/receive/receive")
-	public String Receive(int Rm_id, String pageNum, Model model)
+	public String rcr(int Rm_id, Model model)
 			throws Throwable {
 
 		if (pageNum == null) {
