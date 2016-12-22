@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page isELIgnored="false"%>
 
-<script src="/tripPlan/assets/js/regFormSecond.js" ></script>
+<script src="/tripPlan/assets/js/regFormSecond.js"></script>
 
 <style>
 body {
@@ -244,7 +244,7 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 	<a class="logo-img" href="main.do"><img
 		src="/tripPlan/assets/images/logo-middle-gray.png"></a>
 	<!-- input 태그를 감싸는 form -->
-	<form:form action="mypage.do" commandName="memberInfo"
+	<form:form action="mypageload.do" method="post" commandName="memberInfo"
 		enctype="multipart/form-data">
 		<div class="controls">
 			<!-- 유효성 검사 에러시 출력되는 박스 -->
@@ -252,8 +252,8 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 			<!-- // 유효성 검사 에러시 출력되는 박스 -->
 
 			<!-- 이전 페이지에서 가져온 정보 -->
-			<form:hidden path="m_email" value="${memberInfo.m_email}" />
-			<form:hidden path="m_pass" value="${memberInfo.m_pass}" />
+			<form:hidden path="m_email" value="${param.m_email}" />
+			<form:hidden path="m_pass" value="${param.m_pass}" />
 			<!-- // 이전 페이지에서 가져온 정보 -->
 			<div class="form-group" id="nickname">
 				<span><i class="fa fa-user"></i></span>
@@ -334,7 +334,7 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 					<input class="hide" type="file" name="uploadImg" accept="image/*" />
 				</label>
 			</div>
-			
+
 			<!-- submit 버튼 영역  -->
 			<div class="send-button">
 				<button type="submit" class="btn btn-send send-msg">
@@ -342,9 +342,16 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 				</button>
 			</div>
 			<!-- // submit 버튼 영역  -->
-			<a href="regist.do?m_email=${memberInfo.m_email}" > <!-- font-awesome 아이콘 --> <i
-				class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">뒤로가기</span>
-			</a>
+				<!-- 성별 정보가 없을 시 뒤로가기 버튼 추가  -->
+				<c:if test="${sex eq null}">
+					<a href="regist.do?m_email=${memberInfo.m_email}"> <!-- font-awesome 아이콘 -->
+						<i class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">뒤로가기</span>
+					</a>
+				</c:if>
+				<!-- 네이버 간편 로그인으로 성별 정보가 있을 시  뒤로가기 버튼 삭제  -->
+				<c:if test="${sex ne null}">
+				</c:if>
+
 		</div>
 	</form:form>
 	<!-- // input 태그를 감싸는 form -->

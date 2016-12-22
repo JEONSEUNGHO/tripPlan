@@ -3,6 +3,9 @@ package member.controller;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,21 +34,30 @@ public class RegistMemberController2 {
 	}
 
 
-	@RequestMapping(value = "/mypage.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/mypageload.do", method = RequestMethod.POST)
 	public String submit(@ModelAttribute MemberInfo memberInfo, BindingResult result, Model model,
-			@RequestParam("uploadImg") MultipartFile uploadImg) {
+			@RequestParam("uploadImg") MultipartFile uploadImg, HttpServletRequest request, HttpServletResponse response) {
 		new MemberInfoValidator2().validate(memberInfo, result);
 
 		// 오류 발생 시 에러 메세지 처리
 		if (result.hasErrors()) {
 
 			result.reject("errorInfo");
+			
 			return "registMemberForm2";
 		}
 
 		upload(uploadImg, memberInfo);
-
-		return "myPage";
+		try {
+			request.getSession().setAttribute("m_email", memberInfo.getM_email());
+			request.getSession().setAttribute("m_profile", memberInfo.getM_profile());
+			response.sendRedirect("mypage.do");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "mypage";
 	}
 
 	void upload(MultipartFile uploadImg, MemberInfo memberInfo) {

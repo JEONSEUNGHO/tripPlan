@@ -46,14 +46,17 @@
 		<put-attribute name="title" value="로그인" />
 		<put-attribute name="body" value="/WEB-INF/view/login/loginForm.jsp" />
 	</definition>
-
 	
-	<!-- 로그인 후 마이페이지 -->
-	<definition name="myPage" extends="base_layout">
+	<!-- 마이페이지 -->
+	<definition name="mypage" extends="base_layout">
 		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="body" value="/WEB-INF/view/myPage/myPage.jsp" />
 	</definition>
-
-
+	
+		<!-- 마이페이지 -->
+	<definition name="mypageload" extends="base_layout">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="body" value="/WEB-INF/view/myPage/myPageLoad.jsp" />
+	</definition>
 
 </tiles-definitions>
