@@ -19,7 +19,7 @@ public class ReceiveWrite {
 		this.service = service;
 	}
 
-	@RequestMapping(value = "/writeForm.do")
+	@RequestMapping(value = "/receive/writeForm")
 	public String rwt(@ModelAttribute("board") ReceiveDataBean board) throws Throwable {
 
 		return "writeForm";
@@ -29,6 +29,6 @@ public class ReceiveWrite {
 	public String rwtp(ReceiveDataBean receive, HttpServletRequest request) throws Throwable {
 		receive.setRm_sender(request.getRemoteAddr());
 		service.insert(receive);
-		return "writePro";
+		return "receive/writePro";
 	}
 }

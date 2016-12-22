@@ -21,7 +21,7 @@ public class ReceiveController {
 	}
 
 	@RequestMapping(value = "/receive/receive")
-	public String rcr(String pageNum, String search, @RequestParam(defaultValue = "0") int searchn, Model model)
+	public String Receive(int Rm_id, String pageNum, Model model)
 			throws Throwable {
 
 		if (pageNum == null) {
@@ -36,10 +36,8 @@ public class ReceiveController {
 
 		List receiveList = null;
 
-		count = service.getReceiveCount(search, searchn);
-
 		if (count > 0) {
-			receiveList = service.getReceives(startRow, endRow, search, searchn);
+			receiveList = service.getReceives(startRow, endRow);
 		} else {
 			receiveList = Collections.EMPTY_LIST;
 		}

@@ -7,4 +7,4 @@
 <%-- <% response.sendRedirect("tiles/main.do"); %> --%>
 <a href="receive/receive.do">실행</a>
 </body>
-</html> 
+</html>

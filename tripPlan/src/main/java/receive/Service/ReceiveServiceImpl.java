@@ -20,10 +20,10 @@ public class ReceiveServiceImpl implements ReceiveService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Object> getReceives(int startRow, int endRow, String search, int searchn) {
+	public List<Object> getReceives(int startRow, int endRow) {
 		List<Object> list = null;
 
-		if (search == null || search.equals(""))
+		if
 			list = receivedao.getReceives(startRow, endRow);
 		else
 			list = receivedao.getReceives(startRow, endRow);

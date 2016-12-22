@@ -17,7 +17,7 @@ public class ReceiveUpdate {
 		this.service = service;
 	}
 
-	@RequestMapping(value = "/updateForm.do")
+	@RequestMapping(value = "/receive/updateForm")
 	public String rut(int rm_id, String pageNum, Model model) throws Throwable {
 
 		ReceiveDataBean receive = service.getReceive(rm_id);
@@ -37,6 +37,6 @@ public class ReceiveUpdate {
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("check", check);
 
-		return "updatePro";
+		return "receive/updatePro";
 	}
 }
