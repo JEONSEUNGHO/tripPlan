@@ -21,7 +21,7 @@
 
 </head>
 <style>
-.preview-img-upload .preview-img-holder .remove-image {
+.userImg {
 	width: 20px;
 	height: 20px;
 	position: absolute;
@@ -34,6 +34,7 @@
 	padding: 5px 0;
 	box-sizing: border-box;
 }
+
 </style>
 <body>
 

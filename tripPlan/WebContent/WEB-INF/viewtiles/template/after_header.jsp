@@ -8,18 +8,14 @@
 <link href="/tripPlan/assets/css/after_search.css" rel="stylesheet">
 <link href="/tripPlan/assets/css/after_header.css" rel="stylesheet">
 
-<style>
-span {
-	display: block;
-}
-</style>
+
 <title>header</title>
 </head>
 <body>
 	<div id="header">
 		<div class="inhead">
 			<h1 class="logo">
-				<a href="#"> <img src="/tripPlan/assets/images/sample.png"
+				<a href="main.do"> <img src="/tripPlan/assets/images/sample.png"
 					alt="TripPlan">
 				</a>
 			</h1>
@@ -37,7 +33,7 @@ span {
 				</form>
 
 				<div class="dropdown">
-						<img src="/tripPlan/assets/images/default-user-image.png"
+						<img class="userImg" src="/tripPlan/assets/images/default-user-image.png"
 							class="dropdown-toggle" id="menu1" data-toggle="dropdown">					
 						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 							<li role="presentation"><a role="menuitem" tabindex="-1"
