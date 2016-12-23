@@ -47,16 +47,24 @@
 		<put-attribute name="body" value="/WEB-INF/view/login/loginForm.jsp" />
 	</definition>
 	
-	<!-- 마이페이지 -->
+	<!-- 마이페이지 이동 전  -->
+	<definition name="mypageload" extends="base_layout">
+		<put-attribute name="title" value="처리중" />
+		<put-attribute name="body" value="/WEB-INF/view/myPage/myPageLoad.jsp" />
+	</definition>
+	
+	<!-- 마이페이지 (인증대기) -->
+	<definition name="mypagewait" extends="layout">
+		<put-attribute name="title" value="인증대기" />
+		<put-attribute name="body" value="/WEB-INF/view/myPage/myPageWait.jsp" />
+	</definition>
+	
+	<!-- 마이페이지 (인증완료) -->
 	<definition name="mypage" extends="base_layout">
 		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="body" value="/WEB-INF/view/myPage/myPage.jsp" />
 	</definition>
 	
-		<!-- 마이페이지 -->
-	<definition name="mypageload" extends="base_layout">
-		<put-attribute name="title" value="처리중" />
-		<put-attribute name="body" value="/WEB-INF/view/myPage/myPageLoad.jsp" />
-	</definition>
+
 
 </tiles-definitions>

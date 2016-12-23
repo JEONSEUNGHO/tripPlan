@@ -2,6 +2,7 @@ package login.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -80,6 +81,7 @@ public class LoginController {
 		memberInfo.setM_pass(m_pass);
 		memberInfo.setM_sex(m_sex);
 		memberInfo.setM_agerange(m_agerange);
+		memberInfo.setM_identified(1);
 		
 		
 		return new ModelAndView("registMemberForm2", "memberInfo", memberInfo);
@@ -91,7 +93,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/loginPro.do", method = RequestMethod.POST)
-	public String submit(@ModelAttribute MemberInfo memberInfo, BindingResult result, Model model, HttpSession session) {
+	public String submit(@ModelAttribute MemberInfo memberInfo, BindingResult result, Model model, HttpSession session, HttpServletResponse response) {
 		new LoginValidator().validate(memberInfo, result);
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		if (result.hasErrors()) {
@@ -99,12 +101,9 @@ public class LoginController {
 			model.addAttribute("url",naverAuthUrl);
 			return "loginForm";
 		}
-		System.out.println("이메일"+memberInfo.getM_email());
-		System.out.println("비밀번호"+memberInfo.getM_pass());
 		
 		// 로그인 DB 연동 
 		int checkResult = dao.login(memberInfo);
-		System.out.println("로그인 결과"+checkResult);
 		if(checkResult == 0) {
 			result.reject("idNotFound");
 			return "loginForm";
@@ -114,6 +113,12 @@ public class LoginController {
 		}
 		
 		session.setAttribute("m_email", memberInfo.getM_email());
+		try {
+			response.sendRedirect("mypage.do");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "mypage";
 	}
 

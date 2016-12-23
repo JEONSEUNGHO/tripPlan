@@ -1,8 +1,6 @@
-/db.properties
 /login/
 /main/
-/member/
 /message/
-/mypage/
 /sql/
-/logout/
+/member/
+/mypage/

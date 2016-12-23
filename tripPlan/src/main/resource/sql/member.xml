@@ -18,4 +18,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="login" parameterType="member.model.MemberInfo" resultType="String">
 	select m_pass from tl_member where m_email = #{m_email}
 </select>	
+
+<select id="identified" parameterType="String" resultType="member.model.MemberInfo">
+	select m_email, m_profile, m_identified from tl_member where m_email = #{m_email}
+</select>
 </mapper>

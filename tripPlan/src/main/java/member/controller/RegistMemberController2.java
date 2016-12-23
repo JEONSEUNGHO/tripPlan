@@ -32,7 +32,7 @@ public class RegistMemberController2 {
 	protected Object formBackingObject() throws Exception {
 		return new MemberInfo();
 	}
-
+	// 회원가입 2 에서 가입 버튼 클릭 시 
 	@RequestMapping(value = "/mypageload.do", method = RequestMethod.POST)
 	public String submit(@ModelAttribute MemberInfo memberInfo, BindingResult result, Model model,
 			@RequestParam("uploadImg") MultipartFile uploadImg, HttpServletRequest request, HttpServletResponse response) {
@@ -51,6 +51,7 @@ public class RegistMemberController2 {
 		}
 
 		upload(uploadImg, memberInfo);
+		request.getSession().setAttribute("m_email", memberInfo.getM_email());
 		try {
 			response.sendRedirect("mypage.do");
 		} catch (IOException e) {

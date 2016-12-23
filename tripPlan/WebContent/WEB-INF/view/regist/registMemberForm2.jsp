@@ -253,6 +253,7 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 			<!-- 이전 페이지에서 가져온 정보 -->
 			<form:hidden path="m_email" value="${mamberInfo.m_email}" />
 			<form:hidden path="m_pass" value="${memberInfo.m_pass}" />
+			<form:hidden path="m_identified" value="${memberInfo.m_identified}" />
 			<!-- // 이전 페이지에서 가져온 정보 -->
 			<div class="form-group" id="nickname">
 				<span><i class="fa fa-user"></i></span>
