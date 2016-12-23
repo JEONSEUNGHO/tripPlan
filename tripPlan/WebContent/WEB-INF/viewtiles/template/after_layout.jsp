@@ -3,6 +3,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <head>
+<title><tiles:getAsString name="title" /></title>
 <!-- favicon 설정 -->
 <link rel="shortcut icon" href="/tripPlan/assets/ico/favicon.ico"
 	type="image/x-icon" />
@@ -21,19 +22,38 @@
 
 </head>
 <style>
-.userImg {
-	width: 20px;
-	height: 20px;
+.dropdown {
+	width: 60px;
+	height: 60px;
 	position: absolute;
-	top: 0;
+	top: 20;
 	right: 0;
-	background-color: red;
+	background-color: transparent;
 	color: #fff;
 	border-radius: 50%;
+	border: none;
 	font-size: 11px;
 	padding: 5px 0;
 	box-sizing: border-box;
+	disply: block;
 }
+
+.userImg {
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	top: 10;
+	right: 4;
+	background-color: transparent;
+	color: #fff;
+	border-radius: 50%;
+	border: none;
+	font-size: 11px;
+	padding: 5px 0;
+	box-sizing: border-box;
+	disply: block;
+}
+
 
 </style>
 <body>

@@ -244,22 +244,21 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 	<a class="logo-img" href="main.do"><img
 		src="/tripPlan/assets/images/logo-middle-gray.png"></a>
 	<!-- input 태그를 감싸는 form -->
-	<form:form action="mypageload.do" method="post" commandName="memberInfo"
-		enctype="multipart/form-data">
-		<div class="controls">
+	<form:form action="mypageload.do" method="post" commandName="memberInfo" enctype="multipart/form-data">
+			<div class="controls">
 			<!-- 유효성 검사 에러시 출력되는 박스 -->
 			<form:errors class="error-box" />
 			<!-- // 유효성 검사 에러시 출력되는 박스 -->
 
 			<!-- 이전 페이지에서 가져온 정보 -->
-			<form:hidden path="m_email" value="${param.m_email}" />
-			<form:hidden path="m_pass" value="${param.m_pass}" />
+			<form:hidden path="m_email" value="${mamberInfo.m_email}" />
+			<form:hidden path="m_pass" value="${memberInfo.m_pass}" />
 			<!-- // 이전 페이지에서 가져온 정보 -->
 			<div class="form-group" id="nickname">
 				<span><i class="fa fa-user"></i></span>
 				<form:label path="m_nickname"></form:label>
 				<form:input path="m_nickname" placeholder="닉네임"
-					class="form-input-text form-control" />
+					class="form-input-text form-control" value="${memberInfo.m_nickname}" />
 				<form:errors class="error" path="m_nickname" />
 			</div>
 
@@ -354,7 +353,6 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 
 		</div>
 	</form:form>
-	<!-- // input 태그를 감싸는 form -->
 </div>
 
 

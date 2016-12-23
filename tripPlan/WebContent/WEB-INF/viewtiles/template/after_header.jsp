@@ -15,7 +15,7 @@
 	<div id="header">
 		<div class="inhead">
 			<h1 class="logo">
-				<a href="main.do"> <img src="/tripPlan/assets/images/sample.png"
+				<a href="mypage.do"> <img src="/tripPlan/assets/images/sample.png"
 					alt="TripPlan">
 				</a>
 			</h1>
@@ -33,18 +33,19 @@
 				</form>
 
 				<div class="dropdown">
-						<img class="userImg" src="/tripPlan/assets/images/default-user-image.png"
-							class="dropdown-toggle" id="menu1" data-toggle="dropdown">					
-						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="#">마이페이지</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="#">로그아웃</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1"
-								href="#">회원탈퇴</a></li>
-						</ul>
-					</div>
-
+					<button class="btn btn-default dropdown-toggle" type="button"
+						id="menu1" data-toggle="dropdown">
+						<img class="userImg" src="/tripPlan/assets/images/default-user-image.png">
+					</button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="#">마이페이지</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="logout.do">로그아웃</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="#">회원탈퇴</a></li>
+						
+					</ul>
 				</div>
 
 			</div>

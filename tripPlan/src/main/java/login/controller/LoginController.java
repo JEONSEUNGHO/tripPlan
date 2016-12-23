@@ -4,12 +4,12 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.parser.ParseException;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
+import login.dao.LoginDAO;
 import login.validator.LoginValidator;
 import member.model.MemberInfo;
 
@@ -27,6 +28,12 @@ public class LoginController {
 
 	// 로그인 클릭 시 네이버 간편로그인 url 등록
 	private NaverLoginBO naverLoginBO;
+	
+	LoginDAO dao;
+
+	public void setDao(LoginDAO dao) {
+		this.dao = dao;
+	}
 
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -84,13 +91,30 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/loginPro.do", method = RequestMethod.POST)
-	public String submit(@ModelAttribute MemberInfo memberInfo, BindingResult result) {
+	public String submit(@ModelAttribute MemberInfo memberInfo, BindingResult result, Model model, HttpSession session) {
 		new LoginValidator().validate(memberInfo, result);
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 		if (result.hasErrors()) {
 			result.reject("errorInfo");
+			model.addAttribute("url",naverAuthUrl);
 			return "loginForm";
 		}
-		return "myPage";
+		System.out.println("이메일"+memberInfo.getM_email());
+		System.out.println("비밀번호"+memberInfo.getM_pass());
+		
+		// 로그인 DB 연동 
+		int checkResult = dao.login(memberInfo);
+		System.out.println("로그인 결과"+checkResult);
+		if(checkResult == 0) {
+			result.reject("idNotFound");
+			return "loginForm";
+		} else if (checkResult == -1) {
+			result.reject("passwdNotMatch");	
+			return "loginForm";
+		}
+		
+		session.setAttribute("m_email", memberInfo.getM_email());
+		return "mypage";
 	}
 
 }

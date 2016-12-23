@@ -12,12 +12,18 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		String beforeEncryp = memberInfo.getM_pass();
 		
 		// 위 비밀번호의 BCrypt 알고리즘 해쉬 생성, passwordHashed 변수는 실제 데이터베이스에 저장될 60바이트의 문자열이 된다.
-		String afterEncryp = BCrypt.hashpw(beforeEncryp, BCrypt.gensalt());
+		String afterEncryp = BCrypt.hashpw(beforeEncryp, BCrypt.gensalt(10));
 
 		//  암호화된 비밀번호를 DB에 들어갈 변수에 저장 
 		memberInfo.setM_pass(afterEncryp);
 		
 		int check = getSqlSession().insert("member.regist", memberInfo);
+		return check;
+	}
+	
+	public String duplicationCheck(MemberInfo memberInfo) {
+		
+		String check = getSqlSession().selectOne("member.duplicheck", memberInfo);
 		return check;
 	}
 }

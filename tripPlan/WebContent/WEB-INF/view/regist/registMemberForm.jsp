@@ -93,7 +93,6 @@ a, a:hover {
 }
 
 .error-box {
-	color: #fff;
 	font-size: 15px;
 	background-color: #ff9800;
 	color: #fff;
@@ -134,7 +133,7 @@ a, a:hover {
 	<a class="logo-img" href="main.do"><img
 		src="/tripPlan/assets/images/logo-middle-gray.png"></a>
 	<!-- input 태그를 감싸는 form -->
-	<form:form action="regist2.do" commandName="memberInfo">
+	<form:form action="regist.do" method="post" commandName="memberInfo">
 		<div class="controls">
 			<!-- 유효성 검사 에러시 출력되는 박스 -->
 			<form:errors class="error-box" />

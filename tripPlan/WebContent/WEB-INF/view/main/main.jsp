@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 </head>
 <style>
 #container {
@@ -15,7 +16,7 @@ a, a:hover, a:active, a:focus {
 /* 메인 배경 이미지 */
 .bg-container {
 	width: 100%;
-	height: 800px;
+	height: 100%;
 	margin: 0 auto;
 	position: relative;
 	background-position: center;
@@ -64,8 +65,14 @@ address {
 }
 
 </style>
+<script>
+	history.pushState(null, null, location.href);
+	window.onpopstate = function(event) {
+		history.go(1);
+	}
+</script>
 <body>
-<!-- 헤더 -->
+
 <header class="navbar-wrapper">
 	<div class="container">
 		<!-- 헤더 메뉴바 -->
@@ -106,7 +113,6 @@ address {
 	</div>
 
 </header>
-<!-- //헤더 -->
 	<div id="container">
 		<!-- 그룹페이지 메인화면 상단 container -->
 		<div class="bg-container"

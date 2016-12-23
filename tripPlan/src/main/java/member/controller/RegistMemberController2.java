@@ -33,24 +33,25 @@ public class RegistMemberController2 {
 		return new MemberInfo();
 	}
 
-
 	@RequestMapping(value = "/mypageload.do", method = RequestMethod.POST)
 	public String submit(@ModelAttribute MemberInfo memberInfo, BindingResult result, Model model,
 			@RequestParam("uploadImg") MultipartFile uploadImg, HttpServletRequest request, HttpServletResponse response) {
 		new MemberInfoValidator2().validate(memberInfo, result);
-
-		// 오류 발생 시 에러 메세지 처리
+		// 에러 발생 시
 		if (result.hasErrors()) {
-
+			// 에러 메세지 처리
 			result.reject("errorInfo");
-			
+
 			return "registMemberForm2";
+		}
+
+		String check = dao.duplicationCheck(memberInfo);
+		if(check != null) {
+			return "mypage";
 		}
 
 		upload(uploadImg, memberInfo);
 		try {
-			request.getSession().setAttribute("m_email", memberInfo.getM_email());
-			request.getSession().setAttribute("m_profile", memberInfo.getM_profile());
 			response.sendRedirect("mypage.do");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

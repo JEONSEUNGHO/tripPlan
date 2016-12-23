@@ -6,13 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import member.model.MemberInfo;
+
 @Controller
 public class MypageController {
 
 	@RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
-	public String form(HttpServletRequest request) {
-		request.getSession().getAttribute("m_email");
-		request.getSession().getAttribute("m_profile");
+	public String form(MemberInfo memberInfo, HttpServletRequest request) {
+		request.getSession().setAttribute("m_email", memberInfo.getM_email());
 		
 		return "mypage";
 	}

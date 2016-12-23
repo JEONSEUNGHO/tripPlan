@@ -1,14 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<link href="/tripPlan/assets/css/after_body.css" rel="stylesheet">
-<body>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<head>
+</head>
 
-	${m_email }
-	${m_profile}
-	
-	
-	
-</body>
-</html>
+<link href="/tripPlan/assets/css/after_body.css" rel="stylesheet">
+<script>
+	history.pushState(null, null, location.href);
+	window.onpopstate = function(event) {
+		history.go(1);
+	}
+</script>
+<div id="body">
+
+	<p>여기에 기능 만들어서 넣으시면 됩니다.</p>
+
+</div>
+
+
+
+
