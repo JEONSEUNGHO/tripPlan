@@ -12,5 +12,9 @@ public class MypageDAO extends SqlSessionDaoSupport {
 		return identified;
 	}
 	
+	public void verifySuccess(String m_email) {
+		getSqlSession().update("member.verify", m_email);
+		
+	}
 	
 }

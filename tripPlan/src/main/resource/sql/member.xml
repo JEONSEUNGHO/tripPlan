@@ -22,4 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="identified" parameterType="String" resultType="member.model.MemberInfo">
 	select m_email, m_profile, m_identified from tl_member where m_email = #{m_email}
 </select>
+
+<update id="verify" parameterType="String">
+	update tl_member set m_identified = 1 where m_email = #{m_email}
+</update>
 </mapper>

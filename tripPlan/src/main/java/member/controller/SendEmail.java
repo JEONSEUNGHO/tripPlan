@@ -43,7 +43,7 @@ public class SendEmail {
 		generateMailMessage.setSubject("triP plan 회원가입 인증메일 입니다.");
 		String emailBody = "Please click on the link below for verification " + 
 		"<br><br> <a href=http://localhost:8088/tripPlan/tiles/mypage.do?authkey=1>verify</a>";
-		generateMailMessage.setContent(emailBody, "text/html;cherset=euc-kr");
+		generateMailMessage.setContent(emailBody, "text/html");
 		System.out.println("메일 session 생성 성공!!");
  
 		System.out.println("session을 받고 메일을 보내는 중...");

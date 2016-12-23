@@ -39,7 +39,7 @@
 					</button>
 					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 						<li role="presentation"><a role="menuitem" tabindex="-1"
-							href="#">마이페이지</a></li>
+							href="mypage.do">마이페이지</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1"
 							href="logout.do">로그아웃</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1"

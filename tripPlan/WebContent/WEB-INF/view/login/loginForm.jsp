@@ -87,7 +87,7 @@ a, a:hover, a:focus, a:active {
 }
 
 #back {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .logo-img {
@@ -130,6 +130,10 @@ a, a:hover, a:focus, a:active {
 .text {
 	margin-right: 45px;
 }
+.findpw {
+	float: right;
+	margin-right: 160;
+}
 </style>
 
 <div class="contact-form">
@@ -168,8 +172,13 @@ a, a:hover, a:focus, a:active {
 			
 			<!-- 뒤로가기  -->
 			<a href="main.do">  
-				<i class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">메인으로</span>
+				<i class="fa fa-chevron-left"></i> &nbsp;<span id="back">메인으로</span>
 			</a>
+			<!--  PW 찾기 -->
+			<a class="findpw" href="findpass.do">
+				<i class="fa fa-key"></i>&nbsp;<span id="findpw">비밀번호 찾기</span>
+			</a>
+			
 		</div>
 	</form:form>
 </div>

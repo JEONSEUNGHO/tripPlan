@@ -44,9 +44,15 @@ public class RegistMemberController2 {
 
 			return "registMemberForm2";
 		}
-
+		// DB에 해당 이메일이 존재할 시 
 		String check = dao.duplicationCheck(memberInfo);
 		if(check != null) {
+			try {
+				response.sendRedirect("mypage.do");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return "mypage";
 		}
 

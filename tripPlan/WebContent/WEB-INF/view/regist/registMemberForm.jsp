@@ -83,7 +83,7 @@ a, a:hover {
 }
 
 #back {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .logo-img {

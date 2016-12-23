@@ -211,7 +211,7 @@ form .upload-image .input-holder .icon, form .upload-image .preview-img-holder .
 }
 
 #back {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .error {
