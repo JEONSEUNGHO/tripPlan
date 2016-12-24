@@ -16,16 +16,20 @@
 	<!--  로그인 후 마이페이지 -->
 	<bean class="mypage.controller.MypageController" p:dao-ref="mypageDAO" />
 	<!--  회원가입 페이지1 -->
-	<bean class="member.controller.RegistMemberController" />
+	<bean class="member.controller.RegistMemberController" p:dao-ref="memberDAO" />
 	<!--  회원가입 페이지2 -->
 	<bean class="member.controller.RegistMemberController2" p:dao-ref="memberDAO" />
 	<!-- 로그인  -->
-	<bean class="login.controller.LoginController" p:dao-ref="loginDAO"/>
+	<bean class="login.controller.LoginController" p:dao-ref="loginDAO" />
 	<!-- 네이버 간편 로그인 -->
  	<bean id="naverLoginBO" class="login.controller.NaverLoginBO" />
  	<!-- 로그아웃  -->
  	<bean class="logout.controller.LogoutController" />
+ 	<!-- email 발송 -->
  	<bean id="sendmail" class="member.controller.SendEmail" />
+ 	<!-- 비밀번호 찾기 -->
+ 	<bean id="findpw" class="member.controller.FindpwController" p:dao-ref="memberDAO"/>
+
 
 	<!-- tiles 요청 처리 -->
 	<bean id="tilesviewResolver"

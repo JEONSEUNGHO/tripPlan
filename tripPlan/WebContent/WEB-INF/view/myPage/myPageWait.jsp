@@ -256,7 +256,7 @@
 			<div class="cover"></div>
 			<div class="paper">
 				<img class="img-in-letter" src="/tripPlan/assets/images/logo-header-gray.png">
-				<div class="text-in-letter"> 이메일 인증을 해주세요</div>
+				<div class="text-in-letter"> 이메일을 확인 해주세요</div>
 			</div>
 		</div>
 	</div>

@@ -65,6 +65,17 @@
 		<put-attribute name="body" value="/WEB-INF/view/myPage/myPage.jsp" />
 	</definition>
 	
+	<!-- 비밀번호 찾기 -->
+	<definition name="findpw" extends="layout">
+		<put-attribute name="title" value="비밀번호 찾기" />
+		<put-attribute name="body" value="/WEB-INF/view/findpw/findpw.jsp" />
+	</definition>
+	
+	<!-- 실시간 아이디 중복검사 -->
+	<definition name="idchk" extends="layout">
+		<put-attribute name="title" value="실시간 아이디찾기" />
+		<put-attribute name="body" value="/WEB-INF/view/regist/idchk.jsp" />
+	</definition>
 
 
 </tiles-definitions>

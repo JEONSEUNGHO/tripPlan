@@ -46,7 +46,9 @@ public class RegistMemberController2 {
 		}
 		// DB에 해당 이메일이 존재할 시 
 		String check = dao.duplicationCheck(memberInfo);
-		if(check != null) {
+		if(check == null) {
+			check = "";
+		} else if(check != null) {
 			try {
 				response.sendRedirect("mypage.do");
 			} catch (IOException e) {
@@ -54,8 +56,8 @@ public class RegistMemberController2 {
 				e.printStackTrace();
 			}
 			return "mypage";
-		}
-
+		} 
+		
 		upload(uploadImg, memberInfo);
 		request.getSession().setAttribute("m_email", memberInfo.getM_email());
 		try {
@@ -98,4 +100,5 @@ public class RegistMemberController2 {
 				System.out.println("업로드 실패");
 		}
 	}
+	
 }

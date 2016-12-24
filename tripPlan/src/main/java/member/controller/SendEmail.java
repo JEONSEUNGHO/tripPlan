@@ -25,7 +25,7 @@ public class SendEmail {
 	static Session getMailSession;
 	static MimeMessage generateMailMessage;
  
-	public void generateAndSendEmail(MemberInfo memberInfo) throws AddressException, MessagingException {
+	public void generateAndSendEmail(MemberInfo memberInfo,String subject, String content) throws AddressException, MessagingException {
  
 		System.out.println("메일 서버 정보 등록중...");
 		mailServerProperties = System.getProperties();
@@ -40,9 +40,8 @@ public class SendEmail {
 		System.out.println(memberInfo.getM_email());
 		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(memberInfo.getM_email()));
 		generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress(memberInfo.getM_email()));
-		generateMailMessage.setSubject("triP plan 회원가입 인증메일 입니다.");
-		String emailBody = "Please click on the link below for verification " + 
-		"<br><br> <a href=http://localhost:8088/tripPlan/tiles/mypage.do?authkey=1>verify</a>";
+		generateMailMessage.setSubject(subject);
+		String emailBody = content;
 		generateMailMessage.setContent(emailBody, "text/html");
 		System.out.println("메일 session 생성 성공!!");
  

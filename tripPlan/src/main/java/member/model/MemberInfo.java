@@ -15,8 +15,8 @@ public class MemberInfo {
 	private String m_profile;
 	private MultipartFile uploadImg;
 	private int m_identified;
+	private String tempPW;
 	
-
 	public String getM_pass() {
 		return m_pass;
 	}
@@ -77,7 +77,12 @@ public class MemberInfo {
 	public void setM_identified(int m_identified) {
 		this.m_identified = m_identified;
 	}
-
+	public String getTempPW() {
+		return tempPW;
+	}
+	public void setTempPW(String tempPW) {
+		this.tempPW = tempPW;
+	}
 
 
 }

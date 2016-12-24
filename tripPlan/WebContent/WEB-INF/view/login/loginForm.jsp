@@ -132,7 +132,7 @@ a, a:hover, a:focus, a:active {
 }
 .findpw {
 	float: right;
-	margin-right: 160;
+	margin-right: 25%;
 }
 </style>
 
@@ -175,7 +175,7 @@ a, a:hover, a:focus, a:active {
 				<i class="fa fa-chevron-left"></i> &nbsp;<span id="back">메인으로</span>
 			</a>
 			<!--  PW 찾기 -->
-			<a class="findpw" href="findpass.do">
+			<a class="findpw" href="findpw.do">
 				<i class="fa fa-key"></i>&nbsp;<span id="findpw">비밀번호 찾기</span>
 			</a>
 			

@@ -23,4 +23,10 @@ public class LoginDAO extends SqlSessionDaoSupport {
 		checkResult = 1;
 		return checkResult;
 	}
+	
+	public String duplicationCheck(MemberInfo memberInfo) {
+		
+		String check = getSqlSession().selectOne("member.duplicheck", memberInfo);
+		return check;
+	}
 }

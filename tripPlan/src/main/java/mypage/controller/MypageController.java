@@ -54,7 +54,11 @@ public class MypageController {
 			// 사용자가 가입대기중이면
 			if (m_identified == 0) {
 				try {
-					sendemail.generateAndSendEmail(memberInfo);
+					String subject = "triP plan 회원가입 인증메일 입니다.";
+					String content = "Please click on the link below for verification " + 
+							"<br><br> <a href=http://localhost:8088/tripPlan/tiles/mypage.do?authkey=1>verify</a>";
+					
+					sendemail.generateAndSendEmail(memberInfo, subject, content);
 				} catch (AddressException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

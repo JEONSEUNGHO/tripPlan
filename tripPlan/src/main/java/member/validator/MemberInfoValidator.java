@@ -39,7 +39,7 @@ public class MemberInfoValidator implements Validator {
 		// // 비밀번호 불일치 
 		
 		// 비밀번호 유효성 검사
-		Pattern p = Pattern.compile("^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$");
+		Pattern p = Pattern.compile("^(?=.*[a-zA-Z])(?=.*[!@#$%^&*()`\"'+-./])(?=.*[0-9]).{8,16}$");
 		Matcher m = p.matcher(memberInfo.getM_pass());
 		passValid:
 		if (!(m.find())) {

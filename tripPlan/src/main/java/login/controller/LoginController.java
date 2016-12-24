@@ -76,13 +76,21 @@ public class LoginController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
 		memberInfo.setM_email(m_email);
 		memberInfo.setM_pass(m_pass);
 		memberInfo.setM_sex(m_sex);
 		memberInfo.setM_agerange(m_agerange);
 		memberInfo.setM_identified(1);
 		
+		// 간편로그인 시 기존회원인지 확인
+		System.out.println(memberInfo.getM_email());
+		String check = dao.duplicationCheck(memberInfo);
+		if(check == null) {
+			check = "";
+		} else if(check != null) {
+			session.setAttribute("m_email", memberInfo.getM_email());
+			return new ModelAndView("mypage");
+		}
 		
 		return new ModelAndView("registMemberForm2", "memberInfo", memberInfo);
 	}
@@ -106,9 +114,11 @@ public class LoginController {
 		int checkResult = dao.login(memberInfo);
 		if(checkResult == 0) {
 			result.reject("idNotFound");
+			model.addAttribute("url",naverAuthUrl);
 			return "loginForm";
 		} else if (checkResult == -1) {
-			result.reject("passwdNotMatch");	
+			result.reject("passwdNotMatch");
+			model.addAttribute("url",naverAuthUrl);
 			return "loginForm";
 		}
 		

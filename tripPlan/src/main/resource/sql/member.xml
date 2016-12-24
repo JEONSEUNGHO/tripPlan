@@ -26,4 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="verify" parameterType="String">
 	update tl_member set m_identified = 1 where m_email = #{m_email}
 </update>
+
+<update id="updatepw" parameterType="member.model.MemberInfo">
+	update tl_member set m_pass = #{tempPW} where m_email = #{m_email}
+</update>
+
+<select id="realtimeidchk" parameterType="String" resultType="String">
+	select m_email from tl_member where m_email = #{m_email}
+</select>
 </mapper>

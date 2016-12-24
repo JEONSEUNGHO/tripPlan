@@ -129,7 +129,7 @@ address {
 				<div class="sub-title">서브 타이틀 텍스트 등록(관리자 DB에서 정보 가져옴)</div>
 				<!-- 시작하기 버튼  -->
 				<div id="btn-container" class="col-xs-2 text-right">
-					<a class="btn btn-lg btn-outline btn-clock" href=""><b>시작하기</b></a>
+					<a class="btn btn-lg btn-outline btn-clock" href="login.do"><b>시작하기</b></a>
 				</div>
 
 			</div>
