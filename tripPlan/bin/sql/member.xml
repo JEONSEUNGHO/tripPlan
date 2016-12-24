@@ -9,6 +9,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="regist" parameterType="member.model.MemberInfo">
 	insert into tl_member (m_email, m_pass, m_nickname, m_regiterdate, m_sex, m_agerange, m_profile, m_identified)
   values(#{m_email},#{m_pass},#{m_nickname},sysdate,#{m_sex},#{m_agerange},#{m_profile},#{m_identified})
-</insert>	
-	
+</insert>
+
+<select id="duplicheck" parameterType="member.model.MemberInfo" resultType="String">
+	select m_email, m_identified from tl_member where m_email = #{m_email}
+</select>	
+
+<select id="login" parameterType="member.model.MemberInfo" resultType="String">
+	select m_pass from tl_member where m_email = #{m_email}
+</select>	
+
+<select id="identified" parameterType="String" resultType="member.model.MemberInfo">
+	select m_email, m_profile, m_identified from tl_member where m_email = #{m_email}
+</select>
+
+<update id="verify" parameterType="String">
+	update tl_member set m_identified = 1 where m_email = #{m_email}
+</update>
+
+<update id="updatepw" parameterType="member.model.MemberInfo">
+	update tl_member set m_pass = #{tempPW} where m_email = #{m_email}
+</update>
+
+<select id="realtimeidchk" parameterType="String" resultType="String">
+	select m_email from tl_member where m_email = #{m_email}
+</select>
 </mapper>
