@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 
 <select id="duplicheck" parameterType="member.model.MemberInfo" resultType="String">
-	select m_email from tl_member where m_email = #{m_email}
+	select m_email, m_identified from tl_member where m_email = #{m_email}
 </select>	
 
 <select id="login" parameterType="member.model.MemberInfo" resultType="String">

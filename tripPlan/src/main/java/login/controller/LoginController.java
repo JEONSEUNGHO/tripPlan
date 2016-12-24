@@ -53,7 +53,7 @@ public class LoginController {
 	// 로그인 또는 회원가입 페이지에서 네이버 간편로그인 사용 시 회원정보를 보여주는 페이지
 	@RequestMapping("/callback.do")
 	public ModelAndView callback(@RequestParam String code, @RequestParam String state, HttpSession session,
-			MemberInfo memberInfo) throws IOException {
+			MemberInfo memberInfo, HttpServletResponse resp) throws IOException {
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
 		String apiResult = naverLoginBO.getUserProfile(oauthToken);
 		String m_email = "";
@@ -83,13 +83,12 @@ public class LoginController {
 		memberInfo.setM_identified(1);
 		
 		// 간편로그인 시 기존회원인지 확인
-		System.out.println(memberInfo.getM_email());
 		String check = dao.duplicationCheck(memberInfo);
 		if(check == null) {
 			check = "";
 		} else if(check != null) {
 			session.setAttribute("m_email", memberInfo.getM_email());
-			return new ModelAndView("mypage");
+			resp.sendRedirect("mypage.do");
 		}
 		
 		return new ModelAndView("registMemberForm2", "memberInfo", memberInfo);
