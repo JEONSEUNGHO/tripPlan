@@ -1,9 +1,7 @@
 @CHARSET "UTF-8";
 
 * {
-	color: #000 !important;
 	text-shadow: none !important;
-
 }
 
 /*----------------------------------------------------------- Initialize ----------------------------------------------------------------*/
@@ -17,44 +15,28 @@ html, body, div, span, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6,
 
 h1, h2, h3, h4, h5, h6 {
 	font-size: 100%;
-	font-weight: normal
+	font-weight: normal;
+	color: #666;
 }
-
-
 
 ul, ol {
-	list-style-type: none
+	list-style-type: none;
 }
 
-
-
-a:link, a:hover, a:visited, a:active {
-	text-decoration: none
-}
-
-a:hover, a:focus {
-	text-decoration: underline;
+a:link, a:hover, a:visited, a:active, a:focus {
+	text-decoration: none;
 }
 
 a {
-	color: #333;
-	text-decoration: none
+	font-size: 15px;
+	color: #666;
+	text-decoration: none;
 }
-
-a:active, a:hover {
-	text-decoration: underline
-}
-
-
 
 /*----------------------------------------------------------- Layout ----------------------------------------------------------------*/
 /*Wrap*/
 html {
-	overflow-y: scroll
-}
-
-html{
-	height: 100%
+	overflow-y: scroll height: 100%
 }
 
 html.ovf_hdn, body.ovf_hdn {
@@ -62,23 +44,30 @@ html.ovf_hdn, body.ovf_hdn {
 }
 
 body {
-	font-size: 14px;
+	font-size: 15px;
 	line-height: 1;
-	color: #444;
-	font-family: Arial, '나눔고딕', NanumGothic, 'NG', 'NG-S'
+	color: #666;
 }
-
+.nav-header {
+	margin-top: 0.5%;
+}
+#input-site-search {
+	border: none;
+	width: 500px;
+	margin-top: 5;
+}
 /*Header*/
 #header {
+	box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
 	position: fixed;
 	left: 0;
 	top: 0;
 	width: 100%;
-	min-height: 16%;
+	height: 120;
+	min-height: 10%;
 	border-bottom: 0;
-	z-index: 203; 
-	background-color:#fff;
-
+	z-index: 203;
+	background-color: #fff;
 }
 
 #header.fixed {
@@ -96,7 +85,6 @@ body {
 	margin: 0 auto;
 	z-index: 10
 }
-
 
 .ilan { /*background-position:0 0*/
 	width: auto !important;
@@ -212,38 +200,41 @@ body {
 	height: 100%;
 	text-indent: 0;
 	font-size: 14px;
-	line-height: 35px
+	line-height: 35px;
 }
 
 .t_ctr .sel_login {
-	left: -112px
+	left: -112px;
 }
 
 /*Header > global navigation*/
 .gnb {
-	position: absolute;
+	border-top: solid 1px #ccc; position : absolute;
 	left: 0;
-	top: 57px;
+	bottom: 2%;
 	width: 100%;
 	margin-right: 0;
 	float: none;
 	font-size: 14px;
-	z-index: 1
+	z-index: 1;
+	position: absolute;
 }
 
 .ingnb {
 	position: relative;
-	margin: 0 15px
+	margin: 0 20%;
 }
 
 .gnb_01 {
 	display: inline-block;
-	width: 100%
+	width: 100%;
 }
 
 .gnb_01>li {
+	
 	overflow: hidden;
-	float: left; /*margin-left:70px;*/
+	float: left; 
+	margin-left:70px;
 	font-size: 16px;
 	padding: 0;
 	line-height: 20px;
@@ -272,11 +263,39 @@ body {
 	color: #0079cf
 }
 
+.btn-default {
+	margin-left: 10;
+}
 
+/* 프로필 이미지 */
+.dropdown {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	left: 25;
+	background-color: transparent;
+	color: #fff;
+	border-radius: 50%;
+	border: none;
+	font-size: 11px;
+	padding: 5px 0;
+	box-sizing: border-box;
+}
 
-
-
-
+.userImg {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	top: -6;
+	right: 3;
+	background-color: transparent;
+	color: #fff;
+	border-radius: 50%;
+	border: none;
+	font-size: 11px;
+	padding: 5px 0;
+	box-sizing: border-box;
+}
 
 .sch_box {
 	position: absolute;
@@ -290,7 +309,6 @@ body {
 	position: relative
 }
 
-
 /* 지우면 안됨 */
 .sel_lan, .sel_login {
 	display: none;
@@ -300,23 +318,51 @@ body {
 }
 /*여기까지*/
 
-
-
-
 /* 지우면 안됨*/
 
-
-
 /* 지우면 안됨 */
-@media screen and (max-width:1010px) {
-	.menu_cap, .menu {
-		display: none !important
+.container {
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: 15px;
+	padding-right: 15px
+}
+
+@media ( min-width :768px) {
+	.container {
+		margin-top: 10px;
+		width: 750px
 	}
-	.gnb_01>li {
-		margin-left: 4%;
+}
+@media ( min-width :992px) {
+	.container {
+		margin-top: 10px;
+		width: 970px
 	}
+}
+
+@media ( min-width :1200px) {
+	.container {
+		margin-top: 10px;
+		width: 1170px
+	}
+}
+@media ( min-width :768px) {
+	.ingnb {
+		width: 750px
+		
+	}
+}
+@media ( min-width :992px) {
+	.ingnb {
+		width: 970px
+		
+	}
+}
+@media ( min-width :1200px) {
+	.ingnb {
+		width: 1170px
+		
+	}
+}
 /* 여기 */
-
-
-	
-

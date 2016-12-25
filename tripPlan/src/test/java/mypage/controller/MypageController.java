@@ -33,6 +33,10 @@ public class MypageController {
 	public String form(MemberInfo memberInfo, HttpServletRequest request) {
 		// 해당 페이지의 session값 받아오기
 		String m_email = (String) request.getSession().getAttribute("m_email");
+		// session을 가져오지 못할 경우 ex) 페이지 정보 삭제
+		if(m_email==null) {
+			return "main";
+		}
 		// 이메일 인증 후 authkey값 리턴 받아오기
 		String authkey = request.getParameter("authkey");
 		if (authkey==null) {

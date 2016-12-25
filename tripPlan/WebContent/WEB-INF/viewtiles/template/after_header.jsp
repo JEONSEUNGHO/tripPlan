@@ -2,85 +2,66 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page isELIgnored="false"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
 <link href="/tripPlan/assets/css/after_search.css" rel="stylesheet">
 <link href="/tripPlan/assets/css/after_header.css" rel="stylesheet">
 
-
 <title>header</title>
-</head>
-<body>
-	<div id="header">
-		<div class="inhead">
-			<h1 class="logo">
-				<a href="mypage.do"> <img src="/tripPlan/assets/images/sample.png"
-					alt="TripPlan">
-				</a>
-			</h1>
-			<div class="top_navi">
-				<form id="memberModify" name="memberModify">
-					<ul class="t_link">
-						<li><a href="#" target="_blank" title="경로생성">경로생성</a></li>
-						<li><a href="#">쪽지</a></li>
-
-					</ul>
-					<ul class="t_ctr">
-						<li><a href="#" id="language" class="ico ilan">Language ▼</a>
-						</li>
-					</ul>
-				</form>
-
-				<div class="dropdown">
-					<button class="btn btn-default dropdown-toggle" type="button"
-						id="menu1" data-toggle="dropdown">
-						<img class="userImg" src="/tripPlan/assets/images/default-user-image.png">
-					</button>
-					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-						<li role="presentation"><a role="menuitem" tabindex="-1"
-							href="mypage.do">마이페이지</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1"
-							href="logout.do">로그아웃</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1"
-							href="#">회원탈퇴</a></li>
-						
-					</ul>
-				</div>
-
-			</div>
+<nav id="header" class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar"></button>
+			<a class="navbar-brand" href="mypage.do"><img
+				src="/tripPlan/assets/images/logo-header-gray.png"
+				 alt="triPplan"></a>
 		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<form class="navbar-form navbar-left" role="search" >
+				<div id="form-search" class="form-group">
+					<input id="input-site-search" type="search"
+						class="form-control typeahead" name="keywordsearch" value=""
+						placeholder="검색어를 입력하세요">
+					<!--<span id="input-site-search-clear"><i class="fa fa-times"></i></span>-->
+					<a id="navbar-search-submit" href="#"><i class="fa fa-search"></i></a>
+				</div>
+			</form>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/create/"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;경로생성</a>
+				</li>
+				<li><a href="" onClick="window.open('mypage.do','mypage','width=600,height=350'); return false;">
+					<i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;쪽지</a>
+				</li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false"
+					style="padding-bottom: 17px; padding-top: 17px; background-color: transparent;"><img
+						class="userImg"
+						src="/tripPlan/assets/images/default-user-image.png"></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="mypage.do">마이페이지</a></li>
+						<li><a href="logout.do">로그아웃</a></li>
+						<li><a href="/sign_out/">회원탈퇴</a></li>
+					</ul></li>
+			</ul>
 
-		<!-- //Top Navigation -->
-
+		</div>
 		<div class="gnb">
 			<div class="ingnb">
 				<ul class="gnb_01">
-					<li><a href="#"><span>통합검색</span></a></li>
 
-					<li><a href="#"><span>여행계획</span></a></li>
+					<li><a href="#">통합검색</a></li>
 
-					<li><a href="#"><span>그룹여행</span></a></li>
+					<li><a href="#">여행계획</a></li>
 
-					<li><a href="#"><span>여행후기</span></a></li>
+					<li><a href="#">그룹여행</a></li>
 
-					<li><a href="#"><span>여행제휴</span></a></li>
+					<li><a href="#">여행후기</a></li>
+
+					<li><a href="#">여행제휴</a></li>
 
 				</ul>
 			</div>
 		</div>
-
-
-		<div class="sch_box">
-			<div class="insch">
-				<form id="searchForm" class="searchform cf">
-					<input type="text" placeholder="is it me you're looking for?">
-					<button type="submit">Search</button>
-				</form>
-			</div>
-		</div>
+		<!--/.nav-collapse -->
 	</div>
-	</div>
-
-</body>
-</html>
+</nav>
