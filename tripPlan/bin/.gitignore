@@ -1,6 +1,10 @@
-/receive/
-/send/
-/sql/
+/db.properties
+/login/
+/logout/
+/main/
 /member/
 /message/
 /mypage/
+/receive/
+/send/
+/sql/
