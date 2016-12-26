@@ -50,7 +50,7 @@
 
 	<bean id="senddao" class="send.dao.SendDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
+	</bean> 
 	<bean class="send.service.SendServiceImpl" p:dao-ref="senddao" />
 
 
