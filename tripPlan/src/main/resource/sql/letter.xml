@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="letter">
 
-	<select id="getReceiveCount" resultType="int">
+	<!-- <select id="getReceiveCount" resultType="int">
 		select count(*) from
 		tl_receivemessage
 	</select>
@@ -19,12 +19,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getReceive" resultType="receive.DAO.ReceiveDataBean"
 		parameterType="int">
 		select * from tl_receivemessage where rm_id = #{rm_id}
-	</select>
-	<insert id="insert" parameterType="receive.DAO.ReceiveDataBean">
-		insert into tl_receivemessage(rm_id, rm_title, rm_contents, rm_date, rm_sender, m_email)
-		values(tl_receivemessage_rm_id.NEXTVAL,#{rm_title}#{rm_contents}#{rm_date}#{rm_sender}#{m_email})
+	</select> -->
+	<insert id="insert" parameterType="send.dao.SendDataBean">
+		insert all 
+		into tl_receivemessage values (rm_id, rm_title, rm_contents, rm_date, rm_sender, m_email)
+		into tl_sendmessage (sm_id, sm_title, sm_contents, sm_date, sm_receiver, m_email)
+ 	    values(m_email,sm_id, sm_title, sm_contents, sm_date, sm_receiver, m_email)
+		select '13' as sm_id,'12' as sm_title,'31' as sm_contents,'13' as sm_date,
+		'13' as sm_receiver,
+		'13' as rm_id,'12' as rm_title,'13' as rm_contents,'13' as rm_date,
+		'13' as rm_sender,'12' as m_email
+		from dual;
 	</insert>
-	<select id="deletecheck" resultType="String"
+	<!-- <select id="deletecheck" resultType="String"
 		parameterType="receive.DAO.ReceiveDataBean">
 		select passwd from tl_receivemessage where rm_id = #{rm_id}
 	</select>
@@ -45,6 +52,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="readcount" parameterType="receive.DAO.ReceiveDataBean">
 		update board set
 		readcount=readcount+1 where rm_id = #{rm_id}
-	</update>
+	</update> -->
 
 </mapper>

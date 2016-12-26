@@ -8,7 +8,7 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
-	<bean id="ReceiveController" class="receive.controller.ReceiveController"></bean>
+	<bean id="SendController" class="send.controller.SendController"></bean>
 
 	
 	<bean id="mypageController" class="mypage.controller.MypageController"></bean>
@@ -48,10 +48,10 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 
-	<bean id="receivedao" class="receive.DAO.ReceiveDAO">
+	<bean id="senddao" class="send.dao.SendDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	<bean class="receive.Service.ReceiveServiceImpl" p:dao-ref="receivedao" />
+	<bean class="send.service.SendServiceImpl" p:dao-ref="senddao" />
 
 
 </beans>

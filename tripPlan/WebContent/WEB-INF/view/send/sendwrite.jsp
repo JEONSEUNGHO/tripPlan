@@ -41,13 +41,13 @@ body {
 	<div class="container">
 		<form>
 			<div class="send">
-				<input type="text" class="form-control" id="send" value="${letter. }" placeholder="받는 사람">
+				<input type="text" class="form-control" id="send" value="${letter.sm_id}" placeholder="받는 사람">
 			</div>
 			<div class="title">
-				<input type="text" class="form-control" id="title" placeholder="제목">
+				<input type="text" class="form-control" id="title" value="${letter.sm_title}" placeholder="제목">
 			</div>
 			<div class="comment">
-  				<textarea class="form-control" rows="10" id="comment" placeholder="내용"></textarea>
+  				<textarea class="form-control" rows="10" id="comment" value="${letter.sm_contents}" placeholder="내용"></textarea>
 			</div>
 			<div class="bttn">
 				<input type="submit" class="btn btn-info" value="보내기">
