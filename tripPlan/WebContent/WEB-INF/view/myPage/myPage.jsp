@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<head>
-</head>
+
 
 <link href="/tripPlan/assets/css/after_body.css" rel="stylesheet">
 <script>

@@ -29,7 +29,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/create/"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;경로생성</a>
 				</li>
-				<li><a href="" onClick="window.open('mypage.do','mypage','width=600,height=350'); return false;">
+				<li><a href="" onClick="window.open('/tripPlan/letter/receive.do','mypage','width=600,height=350'); return false;">
 					<i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;쪽지</a>
 				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"

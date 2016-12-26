@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="letter">
+
+<!-- 쪽지 보내기 요청 받으면 DB 2개에 저장  -->
+<insert id="insert" parameterType="send.dao.SendDataBean">
+      insert all
+      into tl_sendmessage values (#{sm_id},#{sm_title},#{sm_contents}, sysdate,#{sm_check},#{sm_receive},#{m_email})
+      into tl_receivemessage values (#{sm_id},#{sm_title},#{sm_contents}, sysdate,#{sm_check},#{m_email},#{sm_receive})
+      select * from dual;
+   </insert>
+
+</mapper>

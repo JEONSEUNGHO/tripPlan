@@ -37,7 +37,7 @@ public class SendEmail {
 		System.out.println("메일 session을 생성중...");
 		getMailSession = Session.getDefaultInstance(mailServerProperties, null);
 		generateMailMessage = new MimeMessage(getMailSession);
-		System.out.println(memberInfo.getM_email());
+		System.out.println("수신자: "+memberInfo.getM_email());
 		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(memberInfo.getM_email()));
 		generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress(memberInfo.getM_email()));
 		generateMailMessage.setSubject(subject);

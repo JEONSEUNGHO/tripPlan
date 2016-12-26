@@ -29,18 +29,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	<!-- 일반 요청 처리 -->
-	<servlet>
-		<servlet-name>dispatcher</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-	</servlet>
 
-	<servlet-mapping>
-		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/naver/*</url-pattern>
-	</servlet-mapping>
-	
 	<!-- tiles 요청 처리 -->
 	<servlet>
 		<servlet-name>dispatcherTiles</servlet-name>
@@ -50,6 +39,17 @@
 	<servlet-mapping>
 		<servlet-name>dispatcherTiles</servlet-name>
 		<url-pattern>/tiles/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- 일반 요청 처리 -->
+ 	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/letter/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- 파일 업로드 처리 -->

@@ -1,5 +1,9 @@
-/mypage/
 /member/
-/login/
-/logout/
-/main/
+/sql/
+/receive/
+/send/
+/controller/
+/dao/
+/model/
+/service/
+/validator/
