@@ -58,7 +58,7 @@ public class LoginController {
 		String apiResult = naverLoginBO.getUserProfile(oauthToken);
 		String m_email = "";
 		String m_pass = "";
-		String m_sex = "";
+		String m_sex = "";	
 		String m_agerange = "";
 		try {
 			JSONParser jsonParser = new JSONParser();
