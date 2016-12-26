@@ -8,10 +8,27 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
+	<context:annotation-config />
 	<!-- bean 객체 등록 -->
+	
+	<!-- 로그인 전 메인 -->
 	<bean class="main.controller.MainController" />
-	<bean class="mypage.controller.MypageController" />
-	<bean class="member.controller.RegistMemberController" />
+	<!--  로그인 후 마이페이지 -->
+	<bean class="mypage.controller.MypageController" p:dao-ref="mypageDAO" />
+	<!--  회원가입 페이지1 -->
+	<bean class="member.controller.RegistMemberController" p:dao-ref="memberDAO" />
+	<!--  회원가입 페이지2 -->
+	<bean class="member.controller.RegistMemberController2" p:dao-ref="memberDAO" />
+	<!-- 로그인  -->
+	<bean class="login.controller.LoginController" p:dao-ref="loginDAO" />
+	<!-- 네이버 간편 로그인 -->
+ 	<bean id="naverLoginBO" class="login.controller.NaverLoginBO" />
+ 	<!-- 로그아웃  -->
+ 	<bean class="logout.controller.LogoutController" />
+ 	<!-- email 발송 -->
+ 	<bean id="sendmail" class="member.controller.SendEmail" />
+ 	<!-- 비밀번호 찾기 -->
+ 	<bean id="findpw" class="member.controller.FindpwController" p:dao-ref="memberDAO"/>
 
 
 	<!-- tiles 요청 처리 -->
@@ -62,10 +79,20 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 
-	<bean id="dao" class="member.dao.MemberDAO">
+	<bean id="memberDAO" class="member.dao.MemberDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	<bean class="member.controller.RegistMemberController2" p:dao-ref="dao" />
+	
+	<bean id="loginDAO" class="login.dao.LoginDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="mypageDAO" class="mypage.dao.MypageDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	
+
 
 
 </beans>

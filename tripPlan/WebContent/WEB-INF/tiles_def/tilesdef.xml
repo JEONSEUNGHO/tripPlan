@@ -13,8 +13,7 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/viewtiles/template/after_footer.jsp" />
 	</definition>
-	<!-- // 로그인 후 layout -->
-	
+
 	<!-- 로그인 전 layout -->
 	<definition name="layout" template="/WEB-INF/viewtiles/template/layout.jsp">
 		<put-attribute name="header"
@@ -22,37 +21,61 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/viewtiles/template/footer.jsp" />
 	</definition>
-	<!-- // 로그인 전 layout -->
 	<!-- 로그인 전 main -->
 	<definition name="main" extends="layout">
-		<put-attribute name="title" value="Trip Plan" />
+		<put-attribute name="title" value="triP plan" />
 		<put-attribute name="body" value="/WEB-INF/view/main/main.jsp" />
 	</definition>
-	<!-- // 로그인 전 main -->
-	
-	<!-- 로그인 전 회원가입 1 -->
+
+	<!-- 회원가입 1 -->
 	<definition name="registMemberForm" extends="layout">
-		<put-attribute name="title" value="회원 가입" />
+		<put-attribute name="title" value="회원가입" />
 		<put-attribute name="body"
 			value="/WEB-INF/view/regist/registMemberForm.jsp" />
 	</definition>
-	<!-- // 로그인 전 회원가입 1 -->
-	
-	<!-- 로그인 전 회원가입 2 -->	
+
+	<!-- 회원가입 2 -->
 	<definition name="registMemberForm2" extends="layout">
-		<put-attribute name="title" value="회원 가입" />
+		<put-attribute name="title" value="회원가입" />
 		<put-attribute name="body"
 			value="/WEB-INF/view/regist/registMemberForm2.jsp" />
 	</definition>
-	<!-- // 로그인 전 회원가입 2 -->
+
+	<!-- 로그인 페이지 -->
+	<definition name="loginForm" extends="layout">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="body" value="/WEB-INF/view/login/loginForm.jsp" />
+	</definition>
 	
-	<!-- 로그인 후 마이페이지 -->
-	<definition name="myPage" extends="base_layout">
+	<!-- 마이페이지 이동 전  -->
+	<definition name="mypageload" extends="base_layout">
+		<put-attribute name="title" value="처리중" />
+		<put-attribute name="body" value="/WEB-INF/view/myPage/myPageLoad.jsp" />
+	</definition>
+	
+	<!-- 마이페이지 (인증대기) -->
+	<definition name="mypagewait" extends="layout">
+		<put-attribute name="title" value="인증대기" />
+		<put-attribute name="body" value="/WEB-INF/view/myPage/myPageWait.jsp" />
+	</definition>
+	
+	<!-- 마이페이지 (인증완료) -->
+	<definition name="mypage" extends="base_layout">
 		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="body" value="/WEB-INF/view/myPage/myPage.jsp" />
 	</definition>
-	<!-- // 로그인 후 마이페이지 -->
-
+	
+	<!-- 비밀번호 찾기 -->
+	<definition name="findpw" extends="layout">
+		<put-attribute name="title" value="비밀번호 찾기" />
+		<put-attribute name="body" value="/WEB-INF/view/findpw/findpw.jsp" />
+	</definition>
+	
+	<!-- 실시간 아이디 중복검사 -->
+	<definition name="idchk" extends="layout">
+		<put-attribute name="title" value="실시간 아이디찾기" />
+		<put-attribute name="body" value="/WEB-INF/view/regist/idchk.jsp" />
+	</definition>
 
 
 </tiles-definitions>

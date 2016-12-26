@@ -11,12 +11,14 @@ body {
 	display: inline;
 	width: 70%;
 }
+
 .form-group {
 	margin-bottom: 5%;
 }
+
 .contact-form {
 	position: relative;
-	top: 30%;
+	top: 25%;
 	width: 40%;
 	margin: 0 auto;
 }
@@ -25,9 +27,11 @@ body {
 	position: relative;
 	left: 10%;
 }
+
 #email {
 	margin-top: 7%;
 }
+
 .contact-form .form-control {
 	border: none;
 	background-color: #F3F2F2;
@@ -73,6 +77,10 @@ a, a:hover {
 	outline: none;
 }
 
+.btn {
+	font-size: 17px;
+}
+
 .error {
 	font-size: 15px;
 	color: #ff9800;
@@ -81,17 +89,16 @@ a, a:hover {
 }
 
 #back {
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .logo-img {
 	position: relative;
-	left: 30%;
+	left: 27%;
 	bottom: 30px;
 }
 
 .error-box {
-	color: #fff;
 	font-size: 15px;
 	background-color: #ff9800;
 	color: #fff;
@@ -105,14 +112,67 @@ a, a:hover {
 	margin-top: 25px;
 	margin-bottom: 20px;
 }
+
+.naver-login {
+	font-size: 17px;
+	background-color: #1ec800;
+	color: #fff;
+	padding-top: 0.5%;
+	padding-bottom: 1%;
+	width: 75%;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 4px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.naver-logo {
+	float: left;
+	margin-left: 15px;
+}
+
+.text {
+	margin-right: 45px;
+}
 </style>
+<script>
+$(function(){
+    $('#m_email').blur(function(){
+        $.ajax({
+            type:"POST"
+            ,url:"/tripPlan/tiles/idchk.do"
+            ,data:"m_email="+ $('#m_email').val()
+            ,dataType:"json"
+            ,success:function(args){
+                if(args.data == "YES"){
+                    $('#idchk').html('<b style="font-size:15px;color:#1ec800">사용가능한 이메일입니다.</b>');
+                    $('.btn-send').attr('disabled',false);
+                }else if(args.data == "NO"){
+                    $('#idchk').html('<b style="font-size:15px;color:#fb5948">등록된 이메일입니다.</b>');
+                    $('.btn-send').attr('disabled',true);
+                    $('#m_email').focus();
+                } else if(args.data == "ERROR"){
+                	$('#idchk').html('<b style="font-size:15px;color:#ff9800">입력오류입니다.</b>');
+                	$('.btn-send').attr('disabled',true);
+                	$('#m_email').focus();
+                }
+            }
+    	    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
+    	    	alert(e.responseText);
+    	    }
+        });    
+    });
+});
+
+</script>
 
 <div class="contact-form">
 	<!-- 로고 이미지 -->
 	<a class="logo-img" href="main.do"><img
-		src="/tripPlan/assets/images/logo-sm.png"></a>
+		src="/tripPlan/assets/images/logo-middle-gray.png"></a>
 	<!-- input 태그를 감싸는 form -->
-	<form:form action="regist2.do" commandName="memberInfo">
+	<form:form action="regist.do" method="post" commandName="memberInfo">
 		<div class="controls">
 			<!-- 유효성 검사 에러시 출력되는 박스 -->
 			<form:errors class="error-box" />
@@ -121,7 +181,8 @@ a, a:hover {
 				<span><i class="fa fa-envelope"></i></span>
 				<form:label path="m_email"></form:label>
 				<form:input type="email" path="m_email" placeholder="이메일"
-					class="form-input-text form-control" />
+					value="${param.m_email}" class="form-input-text form-control" />
+				<span id="idchk"></span>
 				<form:errors class="error" path="m_email" />
 			</div>
 			<div class="form-group">
@@ -140,11 +201,19 @@ a, a:hover {
 			</div>
 
 			<div class="send-button">
-				<button type="submit" class="btn btn-send send-msg">다음</button>
+				<button type="submit" class="btn btn-send send-msg">
+					<b>다음</b>
+				</button>
+			</div>
+			<!-- 네이버 아이디로 로그인 -->
+			<div class="naver-login">
+				<a class="naver-login" href="${url}"><img class="naver-logo"
+					src="/tripPlan/assets/images/logo-naver.png" /> <span class="text"><b>네이버</b>&nbsp;
+						<b>아이디로</b>&nbsp; <b>로그인</b></span></a>
 			</div>
 
 			<a href="main.do"> <!-- font-awesome 로그인 아이콘 --> <i
-				class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">돌아가기</span>
+				class="fa fa-chevron-left"></i> &nbsp;&nbsp;<span id="back">메인으로</span>
 			</a>
 		</div>
 	</form:form>

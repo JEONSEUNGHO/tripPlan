@@ -29,7 +29,7 @@ html, body {
 }
 /* anchar태그 색상 */
 a, a:hover, a:active, a:focus {
-	color: #FFFFFF;
+	color: #999;
 }
 
 /* 헤더 navbar */
@@ -45,7 +45,7 @@ a, a:hover, a:active, a:focus {
 }
 /* 로고 */
 .navbar-brand {
-	margin-top: -10;
+	margin-top: -5;
 }
 
 .navbar-wrapper .nav>li>a:focus, .navbar-wrapper .nav>li>a:hover,
@@ -69,13 +69,13 @@ footer {
 
 footer, footer a, footer a:hover, footer a:active, footer a:visited,
 	footer a:focus {
-	color: #fff;
+	color: #999;
 	text-decoration: none;
 }
 
 address {
 	clear: both;
-	color: #fff;
+	color: #999;
 	font-size: 0.85em;
 	line-height: 1;
 }
