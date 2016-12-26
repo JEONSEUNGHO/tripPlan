@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="member">
 <insert id="regist" parameterType="member.model.MemberInfo">
-	insert into tl_member (m_email, m_pass, m_nickname, m_regiterdate, m_sex, m_agerange, m_profile, m_identified)
-  values(#{m_email},#{m_pass},#{m_nickname},sysdate,#{m_sex},#{m_agerange},#{m_profile},#{m_identified})
+	insert into tl_member (num, m_email, m_pass, m_nickname, m_registerdate, m_sex, m_agerange, m_profile, m_identified)
+  values(m_seq.nextval,#{m_email},#{m_pass},#{m_nickname},sysdate,#{m_sex},#{m_agerange},#{m_profile},#{m_identified})
 </insert>
 
 <select id="duplicheck" parameterType="member.model.MemberInfo" resultType="String">
