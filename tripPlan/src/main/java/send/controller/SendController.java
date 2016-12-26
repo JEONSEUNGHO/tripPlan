@@ -18,12 +18,12 @@ public class SendController {
 	public void setService(SendService service) {
 		this.service = service;
 	}
-	@RequestMapping(value = "send/sendwrite")
+	@RequestMapping(value = "sendwrite")
 	public String sendwrite(@ModelAttribute("send")SendDataBean send) throws Throwable {
 		
 		return "send/sendwrite";
 	}
-	@RequestMapping(value = "send/sendwritePro")
+	@RequestMapping(value = "sendwritePro")
 	public String writePro(SendDataBean send, HttpServletRequest request) throws Throwable {
 		send.setM_email(request.getRemoteAddr());
 		service.insert(send);

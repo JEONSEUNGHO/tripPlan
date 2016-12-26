@@ -37,11 +37,10 @@ body {
 
 </head>
 <body>
-
 	<div class="container">
-		<form>
+		<form action="sendwritePro.do">
 			<div class="send">
-				<input type="text" class="form-control" id="send" value="${letter.sm_id}" placeholder="받는 사람">
+				<input type="text" class="form-control" id="send" value="${letter.sm_receive}" placeholder="받는 사람">
 			</div>
 			<div class="title">
 				<input type="text" class="form-control" id="title" value="${letter.sm_title}" placeholder="제목">
@@ -55,6 +54,5 @@ body {
 			</div>
 		</form>
 	</div>
-
 </body>
 </html>

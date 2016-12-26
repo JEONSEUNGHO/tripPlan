@@ -50,7 +50,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>*.do</url-pattern>
+		<url-pattern>/letter/*</url-pattern>
 	</servlet-mapping>
 	<!-- do 파일 요청처리 -->
 

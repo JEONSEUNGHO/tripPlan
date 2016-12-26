@@ -5,6 +5,6 @@
 </head>
 <body>
 <%-- <% response.sendRedirect("tiles/main.do"); %> --%>
-<a href="send/sendwrite.do">실행</a>
+<a href="letter/sendwrite.do">실행</a>
 </body>
 </html> 

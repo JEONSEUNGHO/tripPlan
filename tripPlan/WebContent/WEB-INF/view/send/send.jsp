@@ -65,9 +65,9 @@ body {
 						</tr>
 						<c:forEach var="send" items="${sendList}">
 							<th><input type="checkbox" name="chk"
-								value="${send.sm_receiver}" /></th>
+								value="${send.sm_id}" /></th>
 							<th>${send.sm_title}</th>
-							<th>${send.sm_id}</th>
+							<th>${send.sm_receive}</th>
 							<th>${send.sm_date}</th>
 							<th>${send.sm_check}</th>
 							<c:if test="${send.sm_check ==0}">
