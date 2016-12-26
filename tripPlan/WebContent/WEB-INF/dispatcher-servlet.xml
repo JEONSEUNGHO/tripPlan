@@ -8,11 +8,11 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
+	<!-- bean 등록 -->
 	<bean id="SendController" class="send.controller.SendController"></bean>
-
-	
 	<bean id="mypageController" class="mypage.controller.MypageController"></bean>
-
+	<bean class="receive.controller.ReceiveController"/>
+	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 
