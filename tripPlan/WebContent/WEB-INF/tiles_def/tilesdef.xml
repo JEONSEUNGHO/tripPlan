@@ -77,5 +77,15 @@
 		<put-attribute name="body" value="/WEB-INF/view/regist/idchk.jsp" />
 	</definition>
 
-
+	<!-- 경로 생성 -->
+	<definition name="path" extends="layout">
+		<put-attribute name="title" value="경로생성"/>
+		<put-attribute name="body" value="/WEB-INF/view/path/search.jsp"/>
+	</definition>
+	
+	<!-- 경로 게시판 -->
+	<definition name="pathList" extends="layout">
+		<put-attribute name="title" value="경로 게시판"/>
+		<put-attribute name="body" value="/WEB-INF/view/path/path.jsp"/>
+	</definition>
 </tiles-definitions>

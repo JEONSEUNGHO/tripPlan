@@ -9,6 +9,7 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>WebContent/WEB-INF/dispatcherTiles-servlet.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
