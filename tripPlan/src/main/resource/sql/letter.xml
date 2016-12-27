@@ -17,8 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert all
 		into tl_sendmessage values (#{sm_id},#{sm_title},#{sm_contents}, sysdate,#{sm_check},#{sm_receive},#{m_email})
 		into tl_receivemessage values (#{sm_id},#{sm_title},#{sm_contents}, sysdate,#{sm_check},#{m_email},#{sm_receive})
-		select * from dual;
+		select * from dual
 	</insert>
+	<select id="getsendCount" resultType="int">
+		select count(*) from tl_sendmessage
+	</select>
 	<!-- <select id="deletecheck" resultType="String" parameterType="receive.DAO.ReceiveDataBean"> 
 		select passwd from tl_receivemessage where rm_id = #{rm_id} </select> <delete 
 		id="rdt" parameterType="receive.DAO.ReceiveDataBean"> delete from tl_receivemessage 

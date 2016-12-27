@@ -37,6 +37,13 @@ body {
 
 </head>
 <body>
+<div class="container">
+  <div class="btn-group">
+    <a href="letter/sendwrite" class="btn btn-info" role="button">새쪽지</a>
+    <a href="letter/receive" class="btn btn-info" role="button">받은 쪽지</a>
+    <a href="letter/send" class="btn btn-info" role="button">보낸 쪽지</a>
+  </div>
+</div>
 	<div class="container">
 		<form action="sendwritePro.do">
 			<div class="send">
