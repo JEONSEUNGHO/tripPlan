@@ -7,12 +7,15 @@
        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
-
+	
+	<!-- annotation 쓰기위해서 -->
+	<context:annotation-config/>
+	
 	<!-- bean 객체 등록 -->
 	<bean class="main.controller.MainController" />
 	<bean class="mypage.controller.MypageController" />
 	<bean class="member.controller.RegistMemberController" />
-
+	
 
 	<!-- tiles 요청 처리 -->
 	<bean id="tilesviewResolver"
@@ -66,8 +69,12 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	<bean class="member.controller.RegistMemberController2" p:dao-ref="dao" />
-
-
+	
+	<!-- board부분 -->
+	<bean id="boardDao" class="board.model.BoardDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean class="board.controller.BoardController"/>
 </beans>
 
 

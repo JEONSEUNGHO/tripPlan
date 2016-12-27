@@ -52,7 +52,24 @@
 		<put-attribute name="body" value="/WEB-INF/view/myPage/myPage.jsp" />
 	</definition>
 	<!-- // 로그인 후 마이페이지 -->
-
-
+	
+	<!-- 경로 생성 페이지 -->
+	<definition name="createBoard" extends="base_layout">
+		<put-attribute name="title" value="경로생성" />
+		<put-attribute name="body" value="/WEB-INF/view/board/createBoard.jsp" />
+	</definition>
+	
+	<!-- 경로 생성 서브 페이지 -->
+	<definition name="createSubBoard" extends="base_layout">
+		<put-attribute name="title" value="경로생성" />
+		<put-attribute name="body" value="/WEB-INF/view/board/createSubBoard.jsp" />
+	</definition>
+	
+	<!-- 경로 생성 체크 페이지-->
+	<definition name="isCreateBoard" extends="base_layout">
+		<put-attribute name="title" value="경로생성" />
+		<put-attribute name="body" value="/WEB-INF/view/board/isCreateBoard.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

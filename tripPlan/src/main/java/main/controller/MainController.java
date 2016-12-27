@@ -13,5 +13,10 @@ public class MainController {
 	public String form2() {
 		return "main";
 	}
+	
+	@RequestMapping(value ="/mainIndex.do", method = RequestMethod.GET)
+	public String main(){
+		return "myPage";
+	}
 
 }

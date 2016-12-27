@@ -20,7 +20,7 @@
 			<div class="top_navi">
 				<form id="memberModify" name="memberModify">
 					<ul class="t_link">
-						<li><a href="#" target="_blank" title="경로생성">경로생성</a></li>
+						<li><a href="createBoard.do" title="경로생성">경로생성</a></li>
 						<li><a href="#">쪽지</a></li>
 
 					</ul>
