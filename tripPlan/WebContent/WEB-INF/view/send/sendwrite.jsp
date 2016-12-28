@@ -2,7 +2,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page isELIgnored="false"%>
-<link href="/assets/css/note.css" rel="stylesheet" >
 <html>
 <head>
 <style>
@@ -10,11 +9,7 @@ body {
   text-align: center;
   
 }
-#receiver {
-	margin-top: 50px;
-	margin-bottom: 10px;
-	
-}
+
 #title {
 	margin-bottom: 10px;
 	
@@ -25,36 +20,7 @@ body {
 }
 
 </style>
-<script>
-$(function(){
-    $('#m_email').blur(function(){
-        $.ajax({
-            type:"POST"
-            ,url:"/tripPlan/tiles/idchk.do"
-            ,data:"m_email="+ $('#m_email').val()
-            ,dataType:"json"
-            ,success:function(args){
-                if(args.data == "YES"){
-                    $('#idchk').html('<b style="font-size:15px;color:#1ec800">이메일이 확인되었습니다.</b>');
-                    $('.btn-send').attr('disabled',false);
-                }else if(args.data == "NO"){
-                    $('#idchk').html('<b style="font-size:15px;color:#fb5948">이메일이 없습니다. 다시 확인해주세요.</b>');
-                    $('.btn-send').attr('disabled',true);
-                    $('#sm_title').focus();
-                } else if(args.data == "ERROR"){
-                	$('#idchk').html('<b style="font-size:15px;color:#ff9800">입력오류입니다.</b>');
-                	$('.btn-send').attr('disabled',true);
-                	$('#sm_contents').focus();
-                }
-            }
-    	    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
-    	    	alert(e.responseText);
-    	    }
-        });    
-    });
-});
 
-</script>
 <title>쪽지</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -66,18 +32,59 @@ $(function(){
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
+<script>
+/* $(function(){
+    $('#sm_receiver').blur(function(){
+    	$.ajax({
+            type:"POST"
+            ,url:"/tripPlan/letter/idchk.do"
+            ,data:"sm_receiver="+ $('#sm_receiver').val()
+            ,dataType:"json"
+            ,success:function(args){
+                if(args.data == "YES"){
+                    $('#idchk').html('<b style="font-size:15px;color:#1ec800">확인</b>');
+                    $('#send').attr('disabled',false);
+                }else if(args.data == "NO"){
+                    $('#idchk').html('<b style="font-size:15px;color:#fb5948">사용자가 없습니다.</b>');
+                    $('#send').attr('disabled',true);
+                    $('#sm_receiver').focus();
+                } else if(args.data == "ERROR"){
+                	$('#idchk').html('<b style="font-size:15px;color:#ff9800">필수항목입니다.</b>');
+                	$('#send').attr('disabled',true);
+                	$('#sm_receiver').focus();
+                }
+            }
+    	    ,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
+    	    	alert(e.responseText);
+    	    }
+        });    
+    });
+}); */
+$(function(){
+	$( "#autocompleteText" ).autocomplete({
+		source:  [
+	    			"개발로짜",
+	    			"roqkffhwk",
+	    			"tistory",
+	    			"gksql",
+	    			"안녕하세요"
+	    		 ]
+	});
+})
+</script>
 <body>
 <div class="container">
-  <div class="btn-group">
-    <a href="letter/sendwrite" class="btn btn-info" role="button">새쪽지</a>
-    <a href="letter/receive" class="btn btn-info" role="button">받은 쪽지</a>
-    <a href="letter/send" class="btn btn-info" role="button">보낸 쪽지</a>
+  <div class="btn-group" style="margin: 10 0 10 0;">
+    <a href="sendwrite.do" class="btn btn-info" role="button">쪽지 쓰기</a>
+    <a href="receive.do" class="btn btn-info" role="button">받은 쪽지</a>
+    <a href="send.do" class="btn btn-info" role="button">보낸 쪽지</a>
   </div>
 </div>
+<input id="autocompleteText" type="text" />
 	<div class="container">
 		<form:form action="sendwritePro.do" method="post" commandName="sendDataBean">
 			<div class="send">
-				<input type="text" class="form-control" name="sm_receiver" id="send" value="${letter.sm_receiver}" placeholder="받는 사람">
+				<input type="text" class="form-control" name="sm_receiver" id="sm_receiver" value="${letter.sm_receiver}" placeholder="받는 사람">
 				<span id="idchk"></span>
 			</div>
 			<div class="title">
@@ -87,12 +94,12 @@ $(function(){
 			</div>
 			<div class="comment">
 				<form:label path="sm_contents" />
-  				<form:textarea class="form-control" rows="10" path="sm_contents" placeholder="내용"/>
+  				<form:textarea class="form-control" rows="10" path="sm_contents" style="resize: none;" placeholder="내용"/>
 				<form:errors path="sm_contents" />
 			</div>
-			<div class="bttn">
-				<input type="submit" class="btn btn-info" value="보내기">
-				<a href="letter/receive" class="btn btn-info" role="button">취소</a>
+			<div class="bttn" style="margin-top: 10;">
+				<input type="submit" class="btn btn-info" id="send" value="보내기">
+				<a href="receive.do" class="btn btn-info" role="button">취소</a>
 			</div>
 		</form:form>
 	</div>

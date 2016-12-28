@@ -9,29 +9,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
 body {
-	margin-top: 50px;
-	text-align: center;
+   margin-top: 50px;
+   text-align: center;
 }
 </style>
 <script type="text/javascript">
-	function check() {
-		cbox = deleteform.chk;
-		if (cbox.length) {
-			for (var i = 0; i < cbox.length; i++) {
-				cbox[i].checked = deleteform.allcheck.checked;
-			}
-		} else {
-			cbox.checked = deleteform.allcheck.checked;
-		}
-	}
+   function check() {
+      cbox = deleteform.chk;
+      if (cbox.length) { // 여러 개일 경우
+         for (var i = 0; i < cbox.length; i++) {
+            cbox[i].checked = deleteform.allcheck.checked;
+         }
+      } else { // 한 개일 경우
+         cbox.checked = deleteform.allcheck.checked;
+      }
+   }
 </script>
 <body>
 	<div class="container">
@@ -45,8 +45,9 @@ body {
 				<tr height="30">
 					<td align="center" style="position: absolute; left:10;"><input type="checkbox" value="rm_check" onclick="check()"></td>
 					<td align="center" style="position: absolute; left:170;">제목</td>
-					<td align="center" style="position: absolute; right:200;">보낸이</td>
-					<td align="center" style="position: absolute; right:50;">날짜</td>
+					<td align="center" style="position: absolute; right:290;">받는이</td>
+					<td align="center" style="position: absolute; right:130;">날짜</td>
+					<td align="center" style="position: absolute; right:20;">수신확인</td>
 				</tr>
 			</thead>
 
@@ -55,20 +56,26 @@ body {
 				<c:if test="${count == 0}">
 					<table>
 						<tr height="30" class="danger">
-							<td style="position: absolute; left: 40%;">받은 쪽지가 없습니다.</td>
+							<td style="position: absolute; left: 40%;">보낸 쪽지가 없습니다.</td>
 						</tr>
 					</table>
 				</c:if>
 
 				<c:if test="${count > 0}">
 					<table style="width:100%; font-size:13px;">
-						<c:forEach var="receive" items="${receiveList}">
+						<c:forEach var="send" items="${sendList}">
 							<tr height="30">
-								<td align="center" style="position: absolute; left:18;"><input type="checkbox" name="rm_check" /></td>
-								<td align="center" style="position: absolute; left: 8%;"><a href="content.do?rm_id=${receive.rm_id}&pageNum=${currentPage}">
-								${receive.rm_title}</a></td>
-								<td align="center" style="text-align:center; position: absolute; right:170;">${receive.rm_sender}</td>
-								<td align="center" style="text-align:center; position: absolute; right:13;">${receive.rm_date}</td>
+								<td align="center" style="position: absolute; left:18;"><input type="checkbox" name="sm_check" /></td>
+								<td align="center" style="position: absolute; left: 8%;"><a href="sendcontent.do?sm_id=${send.sm_id}&pageNum=${currentPage}">
+								${send.sm_title}</a></td>
+								<td align="center" style="text-align:center; position: absolute; right:260;">${send.sm_receiver}</td>
+								<td align="center" style="text-align:center; position: absolute; right:90;">${send.sm_date}</td>
+								<c:if test="${send.sm_check == 0}">
+									<th style="text-align:center; position: absolute; right:40;">미확인</th>
+								</c:if>
+								<c:if test="${send.sm_check == 1}">
+									<th style="text-align:center; position: absolute; right:40;">확인</th>
+								</c:if>
 							</tr>
 						</c:forEach>
 					</table>
@@ -90,14 +97,14 @@ body {
 								</c:if>
 
 								<c:if test="${startPage > 5}">
-									<a href="receive.do?pageNum=${startPage - 5 }">[이전]</a>
+									<a href="send.do?pageNum=${startPage - 5 }">[이전]</a>
 								</c:if>
 								<c:forEach var="i" begin="${startPage}" end="${endPage}">
-									<a href="receive.do?pageNum=${i}">[${i}]</a>
+									<a href="send.do?pageNum=${i}">[${i}]</a>
 								</c:forEach>
 
 								<c:if test="${endPage < pageCount}">
-									<a href="receive.do?pageNum=${startPage + 5}">[다음]</a>
+									<a href="send.do?pageNum=${startPage + 5}">[다음]</a>
 								</c:if>
 							</tr>
 						</table>

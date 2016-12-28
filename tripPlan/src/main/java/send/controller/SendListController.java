@@ -1,12 +1,15 @@
 package send.controller;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import send.dao.SendDataBean;
 import send.service.SendService;
@@ -19,29 +22,44 @@ public class SendListController {
 	public void setService(SendService service) {
 		this.service = service;
 	}
-	@RequestMapping(value = "/send.do")
-	public String view(String pageNum, Model model)  throws Throwable {
-		if (pageNum == null) {
-			pageNum = "1";
+	// receive list화면 요청
+		@RequestMapping(value = "/send.do", method = RequestMethod.GET)
+		public String view(String pageNum, Model model, HttpServletRequest request) {
+
+			if (pageNum == null) {
+				pageNum = "1";
+			}
+			// 한 페이지의 글의 개수
+			int pageSize = 5;
+			// 현재 페이지
+			int currentPage = Integer.parseInt(pageNum);
+			// 한 페이지의 시작글 번호
+			int startRow = (currentPage - 1) * pageSize + 1;
+			// 한 페이지의 마지막 글번호
+			int endRow = currentPage * pageSize;
+			// 페이지에 있는 글 개수
+			int count = 0;
+			String m_email = (String) request.getSession().getAttribute("m_email");
+
+			// list객체 선언
+			List<Object> sendList; 
+
+			count = service.getSendCount(m_email);
+			if (count > 0) {
+				// 현재 페이지에 해당하는 쪽지 수를 리스트에 저장
+				sendList = service.getSends(startRow, endRow, m_email);
+			} else {
+				sendList = Collections.emptyList();
+			}
+			// 해당 뷰에서 사용할 속성을 모두 model에 저장한다
+			model.addAttribute("currentPage", new Integer(currentPage));
+			model.addAttribute("startRow", new Integer(startRow));
+			model.addAttribute("endRow", new Integer(endRow));
+			model.addAttribute("count", new Integer(count));
+			model.addAttribute("pageSize", new Integer(pageSize));
+			model.addAttribute("sendList", sendList);
+
+			return "send/send";// 해당 뷰
 		}
-		int pageSize = 5;
-		int currentPage = Integer.parseInt(pageNum);
-		int startRow = (currentPage - 1) * pageSize + 1;
-		int endRow = currentPage * pageSize;
-		int count = 0;
-		int number = 0;
-		List<SendDataBean> sendList = new ArrayList<>();
-		System.out.println("??");
-		sendList = service.getSends(startRow, endRow);
-		
-		model.addAttribute("currentPage", new Integer(currentPage));
-		model.addAttribute("startRow", new Integer(startRow));
-		model.addAttribute("endRow", new Integer(endRow));
-		model.addAttribute("count", new Integer(count));
-		model.addAttribute("pageSize", new Integer(pageSize));
-		model.addAttribute("sendList", sendList);
-		
-		return "send/send";
-	}
 
 }
