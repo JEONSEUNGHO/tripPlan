@@ -17,13 +17,14 @@
 				 alt="triPplan"></a>
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
-			<form class="navbar-form navbar-left" role="search" >
+			<form class="navbar-form navbar-left" role="search" action="search" >
 				<div id="form-search" class="form-group">
 					<input id="input-site-search" type="search"
 						class="form-control typeahead" name="keywordsearch" 
 						placeholder="검색어를 입력하세요">
 					<!--<span id="input-site-search-clear"><i class="fa fa-times"></i></span>-->
-					<a id="navbar-search-submit" href="#"><i class="fa fa-search"></i></a>
+					<input type="submit" value="검색">
+					<a id="navbar-search-submit" href="search"><i class="fa fa-search"></i></a>
 				</div>
 			</form>
 			<ul class="nav navbar-nav navbar-right">

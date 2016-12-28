@@ -8,9 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	select * from tp_mainboard order by b_id desc
 </select>
-<select id="mainSearch" resultType="board.model.BoardDTO" parameterType="integer">
+<select id="mainSearch" resultType="board.model.BoardDTO" parameterType="String">
 	
-	select * from tp_mainboard where b_title= #{b_title}
+	select b_id, b_title,b_mainphoto,b_identified,b_totalspendtime ,instr(b_title,#{value})from tp_mainboard where instr(b_title,#{value})>=1
 
 </select>
 <!-- MainBoard Query -->

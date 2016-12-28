@@ -10,6 +10,13 @@ public class BoardDAO extends SqlSessionDaoSupport{
 	/* 
 	 * MainBoard method
 	 * */
+	public List<BoardDTO> searchBoard(String search){
+		List<BoardDTO> board = new ArrayList<BoardDTO>();
+		board = getSqlSession().selectList("board.mainSearch",search);
+		
+		return board;
+		
+	}
 	public List<BoardDTO> selectAllBoard() {
 		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
 		boardList = getSqlSession().selectList("board.list");
@@ -60,4 +67,6 @@ public class BoardDAO extends SqlSessionDaoSupport{
 			return check;
 		}
 		//삭제는 mainBoard를 삭제하면 subBoard도 같이 삭제 되기 때문에 만들지 않음
+		
+		
 	}

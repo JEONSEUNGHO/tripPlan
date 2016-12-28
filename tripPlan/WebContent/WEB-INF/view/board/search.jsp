@@ -124,8 +124,12 @@
     </ul>
   </div>
 </aside>
-				<c:if test="${List>0 }">
- 					<c:forEach var="list" items="${member}">
+				<c:if test="${searchList==0 }">
+				
+				  	</c:if>
+				  
+				<c:if test="${searchList>0 }">
+ 					<c:forEach var="list" items="${search}">
  					<li class="result_item">
 						<a href="#" class="item">
 							<figure>
@@ -147,7 +151,7 @@
 										<span class="item_introduce"> ${list.b_title }</span>
 									</p>
 									<p>
-										<span class="item_host">최순실</span> | <span class="item_date">${list.b_registertime }</span>
+										<span class="item_host">최순실</span> | <span class="item_date">2016.10.17</span>
 									</p>
 								</figcaption>
 								<div class="item_entry">
@@ -159,8 +163,7 @@
  					
  					</c:forEach>
  				</c:if>
-
-	
+				
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
 <script src="/tripPlan/assets/js/boardNavigation.js"></script>

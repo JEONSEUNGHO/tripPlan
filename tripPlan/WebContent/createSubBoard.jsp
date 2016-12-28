@@ -15,7 +15,7 @@
 <body>
 <div id="body">
 <div id="map"></div>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDenhlxS0ffAWJ13dfpLxLoqcz94fUAL3o&libraries=places&callback=initMap"async defer></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDenhlxS0ffAWJ13dfpLxLoqcz94fUAL3o&libraries&places&callback=initMap"async defer></script>
 	<form action="createSubBoard.do" method="post">
 		<article class="page">
 	 		 <ul class="timeline">

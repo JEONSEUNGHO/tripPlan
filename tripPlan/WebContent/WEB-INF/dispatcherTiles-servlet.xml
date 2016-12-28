@@ -33,7 +33,9 @@
  	<bean id="board" class="board.controller.BoardController"/>
 	<!-- 경로 게시판 -->
 	<bean id="pathList" class="board.controller.PathList" p:dao-ref="pathDAO"/>
-
+	<!-- 검색 -->
+	<bean id="search" class="board.controller.SearchController"/>
+	
 	<!-- tiles 요청 처리 -->
 	<bean id="tilesviewResolver"
 		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
