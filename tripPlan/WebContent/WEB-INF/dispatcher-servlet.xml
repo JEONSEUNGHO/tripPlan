@@ -8,10 +8,12 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
-	<bean id="SendController" class="send.controller.SendController"></bean>
 
+	<context:annotation-config/>
+	<bean id="SendController" class="send.controller.SendController"></bean>
 	
-	<bean id="mypageController" class="mypage.controller.MypageController"></bean>
+	<bean id="SendListController" class="send.controller.SendListController"></bean>
+
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -52,6 +54,12 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean> 
 	<bean class="send.service.SendServiceImpl" p:dao-ref="senddao" />
+	<!-- bean 등록 -->
+	<bean id="receivedao" class="receive.dao.ReceiveDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean class="receive.service.ReceiveServiceImpl" p:dao-ref="receivedao"/>
+	<bean class="receive.controller.ReceiveController" />
 
 
 </beans>

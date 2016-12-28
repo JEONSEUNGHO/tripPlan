@@ -11,7 +11,9 @@
 </script>
 <div id="body">
 
-	<p>여기에 기능 만들어서 넣으시면 됩니다.</p>
+	<p><li><a href="" onClick="window.open('/tripPlan/letter/sendwrite.do','mypage','width=600,height=350'); return false;">
+					<i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;쪽지</a>
+				</li></p>
 	${m_email}
 	
 </div>

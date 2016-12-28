@@ -35,69 +35,75 @@ body {
 </script>
 <body>
 	<div class="container">
+
 		<table class="table">
 			<thead>
-				<tr>
-					<th><label><input type="checkbox" value=""></label></th>
-					<th>제목</th>
-					<th>보낸이</th>
-					<th>날짜</th>
+				<tr height="30">
+					<td align="center"><input type="checkbox" value="rm_check" onclick="check()"></td>
+					<td align="center">제목</td>
+					<td align="center">보낸이</td>
+					<td align="center">날짜</td>
+					<td align="center">수신확인</td>
 				</tr>
 			</thead>
+
 			<tbody>
+
 				<c:if test="${count == 0}">
 					<table>
-						<tr class="danger">
+						<tr height="30" class="danger">
 							<td align="center">게시판에 저장된 글이 없습니다.</td>
 						</tr>
 					</table>
 				</c:if>
+
 				<c:if test="${count > 0}">
 					<table>
-						<tr>
-							<th><label><input type="checkbox" name="allcheck"
-									onclick="check()"></label></th>
-							<th>제목</th>
-							<th>보낸이</th>
-							<th>날짜</th>
-						</tr>
 						<c:forEach var="receive" items="${receiveList}">
-							<th><input type="checkbox" name="chk"
-								value="${receive.rm_sender}" /></th>
-							<th>${receive.rm_title}</th>
-							<th>${receive.rm_sender}</th>
-							<th>${receive.rm_date}</th>
-							<c:if test="${receive.rm_check ==0}">
-								<th>미확인</th>
-							</c:if>
-							<c:if test="${receive.rm_check ==1}">
-								<th>확인</th>
-							</c:if>
+							<tr height="30">
+								<td align="center"><input type="checkbox" name="rm_check" /></td>
+								<td align="center"><a href="content.do?num=${receive.rm_id}&pageNum=${currentPage}">
+								${receive.rm_title}</a></td>
+								<td align="center">${receive.rm_sender}</td>
+								<td align="center">${receive.rm_date}</td>
+								<c:if test="${receive.rm_check == 0}">
+									<th>미확인</th>
+								</c:if>
+								<c:if test="${receive.rm_check == 1}">
+									<th>확인</th>
+								</c:if>
+							</tr>
 						</c:forEach>
 					</table>
+
+					<!-- 목록 아래 페이지 처리  -->
 					<c:if test="${count > 0}">
-						<c:set var="pageCount"
-							value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}" />
-						<c:set var="pageBlock" value="${10}" />
-						<fmt:parseNumber var="result" value="${currentPage / 10}"
-							integerOnly="true" />
-						<c:set var="startPage" value="${result * 10 + 1}" />
-						<c:set var="endPage" value="${startPage + pageBlock-1}" />
-						<c:if test="${endPage > pageCount}">
-							<c:set var="endPage" value="${pageCount}" />
-						</c:if>
+						<table>
+							<tr height="30">
 
-						<c:if test="${startPage > 10}">
-							<a href="list.do?pageNum=${startPage - 10 }">[이전]</a>
-						</c:if>
+								<c:set var="pageCount"
+									value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}" />
+								<c:set var="pageBlock" value="${5}" />
+								<fmt:parseNumber var="result" value="${currentPage / 5}"
+									integerOnly="true" />
+								<c:set var="startPage" value="${result * 5 + 1}" />
+								<c:set var="endPage" value="${startPage + pageBlock-1}" />
+								<c:if test="${endPage > pageCount}">
+									<c:set var="endPage" value="${pageCount}" />
+								</c:if>
 
-						<c:forEach var="i" begin="${startPage}" end="${endPage}">
-							<a href="list.do?pageNum=${i}">[${i}]</a>
-						</c:forEach>
+								<c:if test="${startPage > 5}">
+									<a href="receive.do?pageNum=${startPage - 5 }">[이전]</a>
+								</c:if>
+								<c:forEach var="i" begin="${startPage}" end="${endPage}">
+									<a href="receive.do?pageNum=${i}">[${i}]</a>
+								</c:forEach>
 
-						<c:if test="${endPage < pageCount}">
-							<a href="list.do?pageNum=${startPage + 10}">[다음]</a>
-						</c:if>
+								<c:if test="${endPage < pageCount}">
+									<a href="receive.do?pageNum=${startPage + 5}">[다음]</a>
+								</c:if>
+							</tr>
+						</table>
 					</c:if>
 				</c:if>
 			</tbody>

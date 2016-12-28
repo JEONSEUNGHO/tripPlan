@@ -8,7 +8,7 @@ public class SendDataBean {
 	private String sm_contents;
 	private Timestamp sm_date;
 	private int sm_check;
-	private int sm_receiver;
+	private String sm_receiver;
 	private String m_email;
 	
 	public int getSm_id() {
@@ -41,10 +41,10 @@ public class SendDataBean {
 	public void setSm_check(int sm_check) {
 		this.sm_check = sm_check;
 	}
-	public int getSm_receiver() {
+	public String getSm_receiver() {
 		return sm_receiver;
 	}
-	public void setSm_receiver(int sm_receiver) {
+	public void setSm_receiver(String sm_receiver) {
 		this.sm_receiver = sm_receiver;
 	}
 	public String getM_email() {
