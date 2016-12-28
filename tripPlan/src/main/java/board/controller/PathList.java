@@ -1,4 +1,4 @@
-package path.controller;
+package board.controller;
 
 import java.util.List;
 

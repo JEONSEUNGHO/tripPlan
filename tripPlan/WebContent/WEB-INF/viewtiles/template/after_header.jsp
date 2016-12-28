@@ -20,14 +20,14 @@
 			<form class="navbar-form navbar-left" role="search" >
 				<div id="form-search" class="form-group">
 					<input id="input-site-search" type="search"
-						class="form-control typeahead" name="keywordsearch" value=""
+						class="form-control typeahead" name="keywordsearch" 
 						placeholder="검색어를 입력하세요">
 					<!--<span id="input-site-search-clear"><i class="fa fa-times"></i></span>-->
 					<a id="navbar-search-submit" href="#"><i class="fa fa-search"></i></a>
 				</div>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/create/"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;경로생성</a>
+				<li><a href="createBoard.do"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;경로생성</a>
 				</li>
 				<li><a href="" onClick="window.open('/tripPlan/letter/receive.do','mypage','width=600,height=350'); return false;">
 					<i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;쪽지</a>
@@ -49,7 +49,7 @@
 			<div class="ingnb">
 				<ul class="gnb_01">
 
-					<li><a href="#">통합검색</a></li>
+					<li><a href="pathList">통합검색</a></li>
 
 					<li><a href="#">여행계획</a></li>
 

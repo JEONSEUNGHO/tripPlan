@@ -30,9 +30,9 @@
  	<!-- 비밀번호 찾기 -->
  	<bean id="findpw" class="member.controller.FindpwController" p:dao-ref="memberDAO"/>
 	<!-- 경로생성 -->
- 	<bean id="path" class="path.controller.PathController"/>
+ 	<bean id="board" class="board.controller.BoardController"/>
 	<!-- 경로 게시판 -->
-	<bean id="pathList" class="path.controller.PathList" p:dao-ref="pathDAO"/>
+	<bean id="pathList" class="board.controller.PathList" p:dao-ref="pathDAO"/>
 
 	<!-- tiles 요청 처리 -->
 	<bean id="tilesviewResolver"

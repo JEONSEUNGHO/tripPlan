@@ -96,8 +96,11 @@
 }
 
 .result_item {
+	list-style-type:none;
 	position:relative;
 	margin-bottom:10px;
+	margin-left:500px;
+	width :500px;
 }
 .result_item .item_category {
 	position:absolute;
@@ -150,6 +153,11 @@
 	font-size:1.2em;
 }
 .my-image {
-    width: 500px;
-    height: 100px;
+	/* margin-top : 50px; */
+    width: 300px;
+    height: 300px;
+}
+#figure {
+	display: inline;
+	width: 300px;
 }

@@ -4,8 +4,7 @@
 <title>Place Autocomplete</title>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 <meta charset="utf-8">
-<link rel='stylesheet prefetch'
-	href='http://netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css'>
+<link rel='stylesheet prefetch' href='http://netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css'>
 <link href="/tripPlan/assets/css/path.css" rel="stylesheet">
 <script	src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <link href="/tripPlan/assets/css/after_body.css" rel="stylesheet">

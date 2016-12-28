@@ -1,5 +1,6 @@
 package board.model;
 
+import java.sql.Timestamp;
 
 public class BoardDTO {
 	private int b_id;
@@ -7,14 +8,29 @@ public class BoardDTO {
 	private String b_maincontents;
 	private String b_mainphoto;
 	private int b_favorcount;
+	private String b_registertime;
 	private int b_totalprice;
-	private int b_totalspendtime;
+	private String b_totalspendtime;
 	private int b_identified;
 	private String m_email;
 	
 	public BoardDTO(){}
+	
+	public BoardDTO(String b_title, String b_maincontents, String b_mainphoto, int b_favorcount, String b_registertime,
+			int b_totalprice, String b_totalspendtime, int b_identified, String m_email) {
+		this.b_title = b_title;
+		this.b_maincontents = b_maincontents;
+		this.b_mainphoto = b_mainphoto;
+		this.b_favorcount = b_favorcount;
+		this.b_registertime = b_registertime;
+		this.b_totalprice = b_totalprice;
+		this.b_totalspendtime = b_totalspendtime;
+		this.b_identified = b_identified;
+		this.m_email = m_email;
+	}
+
 	public BoardDTO(int b_id, String b_title, String b_maincontents, String b_mainphoto, int b_favorcount,
-			int b_totalprice, int b_totalspendtime, int b_identified, String m_email) {
+			int b_totalprice, String b_totalspendtime, int b_identified, String m_email) {
 		this.b_id = b_id;
 		this.b_title = b_title;
 		this.b_maincontents = b_maincontents;
@@ -62,10 +78,10 @@ public class BoardDTO {
 	public void setB_totalprice(int b_totalprice) {
 		this.b_totalprice = b_totalprice;
 	}
-	public int getB_totalspendtime() {
+	public String getB_totalspendtime() {
 		return b_totalspendtime;
 	}
-	public void setB_totalspendtime(int b_totalspendtime) {
+	public void setB_totalspendtime(String b_totalspendtime) {
 		this.b_totalspendtime = b_totalspendtime;
 	}
 	public int getB_identified() {
@@ -81,5 +97,17 @@ public class BoardDTO {
 		this.m_email = m_email;
 	}
 	
-	
+	public String getB_registertime() {
+		return b_registertime;
+	}
+
+	public void setB_registertime(String b_registertime) {
+		this.b_registertime = b_registertime;
+	}
+
+	@Override
+	public String toString() {
+		return "b_title : "+b_title+" b_maincontents : "+b_maincontents+" b_mainphoto : "+b_mainphoto+" b_favorcount : "+b_favorcount
+				+" b_totalprice : "+b_totalprice+" b_totalspendtime : "+b_totalspendtime+" b_identified : "+b_identified+" m_email : "+m_email;
+	}
 }

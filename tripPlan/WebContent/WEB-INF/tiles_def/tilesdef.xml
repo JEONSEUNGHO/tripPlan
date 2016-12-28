@@ -78,14 +78,14 @@
 	</definition>
 
 	<!-- 경로 생성 -->
-	<definition name="path" extends="layout">
+	<definition name="createBoard" extends="base_layout">
 		<put-attribute name="title" value="경로생성"/>
-		<put-attribute name="body" value="/WEB-INF/view/path/search.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/createBoard.jsp"/>
 	</definition>
 	
 	<!-- 경로 게시판 -->
-	<definition name="pathList" extends="layout">
+	<definition name="pathList" extends="base_layout">
 		<put-attribute name="title" value="경로 게시판"/>
-		<put-attribute name="body" value="/WEB-INF/view/path/path.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/path.jsp"/>
 	</definition>
 </tiles-definitions>
