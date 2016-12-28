@@ -23,8 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 읽지않은 쪽지 -->
-	<select id="unCheck" resultType="int" >
-		select count(rm_check) from tl_receivemessage where rm_check=0;
+	<select id="unCheck" parameterType="String" resultType="int" >
+		select count(rm_check) from tl_receivemessage where m_email = #{m_email} and rm_check=0;
 	</select>
 	
 	<!-- 선택 쪽지 삭제 -->
@@ -50,6 +50,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateCheck" parameterType="int"> 
 		update tl_sendmessage set sm_check=1 where sm_date = (select rm_date from tl_receivemessage where rm_id = #{rm_id})
 	</update>
+	<!-- 수신확인2 -->
+	<update id="updateCheck2" parameterType="int"> 
+		update tl_receivemessage set rm_check=1 where rm_id = #{rm_id}
+	</update>
 	
 	<!-- 보낸 전체 쪽지 개수 -->
 	<select id="getSendCount" parameterType="String" resultType="int">
@@ -62,7 +66,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="realtimeidchk" resultType="String">
-		select m_email from tl_member 
+		select m_nickname ||chr(32)||chr(40)|| m_email ||chr(41) as m_email from tl_member	
+	</select>
+	<select id="realtimeidchk2" parameterType="String" resultType="String">
+		select m_email from tl_member where m_email = #{sm_receiver}
 	</select>
 
 </mapper>

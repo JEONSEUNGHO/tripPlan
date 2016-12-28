@@ -32,9 +32,14 @@ public class ReceiveDAO extends SqlSessionDaoSupport {
 		ReceiveDataBean getReceive = getSqlSession().selectOne("letter.getReceive", rm_id);
 		return getReceive;
 	}
-	// 쪽지 상세 내용 
+	// 수신확인
 	public void updateCheck(int rm_id) {
 		getSqlSession().update("letter.updateCheck", rm_id);
+		
+	}
+	// 수신확인2
+	public void updateCheck2(int rm_id) {
+		getSqlSession().update("letter.updateCheck2", rm_id);
 	}
 	
 	// 읽지않은 쪽지 수 출력 

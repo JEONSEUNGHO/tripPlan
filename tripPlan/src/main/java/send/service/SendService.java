@@ -16,4 +16,7 @@ public interface SendService {
 	public SendDataBean getSend(int sm_id);
 	//  실시간 아이디 체크
 	public List<String> realTimeIdchk();
+	//  실시간 아이디 체크2
+	public int realTimeIdchk2(String sm_receiver);
+	
 }

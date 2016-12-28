@@ -42,6 +42,7 @@ public class ReceiveServiceImpl implements ReceiveService {
 		try { // city는 mepper파일의 id값에 해당한다.
 			list = dao.getReceive(rm_id);
 			dao.updateCheck(rm_id);
+			dao.updateCheck2(rm_id);
 		} catch (Exception e) {
 
 			e.printStackTrace();

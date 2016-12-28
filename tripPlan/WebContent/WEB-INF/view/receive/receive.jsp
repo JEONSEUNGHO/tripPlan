@@ -17,10 +17,31 @@
 </head>
 <style>
 body {
-	margin-top: 50px;
+	margin-top: 10px;
 	text-align: center;
 }
 </style>
+<script type="text/javascript">
+   $(document).ready(function() {
+      //최상단 체크박스 클릭
+      $("#checkall").click(function() {
+         //클릭되었으면
+         if ($("#checkall").prop("checked")) {
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[id=chk]").prop("checked", true);
+            //클릭이 안되있으면
+         } else {
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+            $("input[id=chk]").prop("checked", false);
+         }
+      })
+   })
+   function del(){
+      if($("input:checkbox[id=chk]").is(":checked") == true){
+         $('input:checkbox:checked').val();﻿
+      }
+   }
+</script>
 <script type="text/javascript">
 	function check() {
 		cbox = deleteform.chk;
@@ -43,17 +64,17 @@ body {
 		<table class="table">
 			<thead>
 				<tr height="30">
-					<td align="center" style="position: absolute; left:10;"><input type="checkbox" value="rm_check" onclick="check()"></td>
+					<td align="center" style="position: absolute; left:10;"><input type="checkbox" id="checkall" value="rm_check"></td>
 					<td align="center" style="position: absolute; left:170;">제목</td>
 					<td align="center" style="position: absolute; right:200;">보낸이</td>
 					<td align="center" style="position: absolute; right:50;">날짜</td>
 				</tr>
 			</thead>
-
 			<tbody>
 
 				<c:if test="${count == 0}">
 					<table>
+					<hr>
 						<tr height="30" class="danger">
 							<td style="position: absolute; left: 40%;">받은 쪽지가 없습니다.</td>
 						</tr>
@@ -62,9 +83,10 @@ body {
 
 				<c:if test="${count > 0}">
 					<table style="width:100%; font-size:13px;">
+					<hr>
 						<c:forEach var="receive" items="${receiveList}">
 							<tr height="30">
-								<td align="center" style="position: absolute; left:18;"><input type="checkbox" name="rm_check" /></td>
+								<td align="center" style="position: absolute; left:18;"><input type="checkbox" id="chk" name="rm_check" /></td>
 								<td align="center" style="position: absolute; left: 8%;"><a href="content.do?rm_id=${receive.rm_id}&pageNum=${currentPage}">
 								${receive.rm_title}</a></td>
 								<td align="center" style="text-align:center; position: absolute; right:170;">${receive.rm_sender}</td>

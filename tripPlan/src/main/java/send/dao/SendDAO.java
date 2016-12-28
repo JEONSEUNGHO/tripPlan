@@ -34,10 +34,21 @@ public class SendDAO extends SqlSessionDaoSupport {
 	}
 	
 	// 쪽지쓰기 실시간 아이디 체크
-	public List<String> realTimeIdchk() {
+	public List<String> realTimeIdchk( ) {
 
-		List<String> resultList =  getSqlSession().selectList("letter.realtimeidchk");
+		List<String> resultList =   getSqlSession().selectList("letter.realtimeidchk");
 		
 		return resultList;
+	}
+	// 쪽지쓰기 실시간 아이디 체크2
+	public int realTimeIdchk2(String sm_receiver) {
+
+		String check = getSqlSession().selectOne("letter.realtimeidchk2", sm_receiver);
+		int result=1;
+		if(check==null) {
+			// 해당 아아디 업음
+			result = 0;
+		}
+		return result;
 	}
 }

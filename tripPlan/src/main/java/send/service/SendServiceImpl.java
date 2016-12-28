@@ -64,5 +64,13 @@ public class SendServiceImpl implements SendService {
 		List<String> resultList = senddao.realTimeIdchk();
 		return resultList;
 	}
+	
+	// 실시간 아이디 체크2
+	@Override
+	public int realTimeIdchk2(String sm_receiver) {
+		 
+		int check = senddao.realTimeIdchk2(sm_receiver);
+		return check;
+	}
 
 }
