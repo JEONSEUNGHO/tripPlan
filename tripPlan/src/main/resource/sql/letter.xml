@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper
@@ -34,4 +35,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from tl_receivemessage where rm_id = #{rm_id} 
 	</delete>
 	
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="letter">
+
+	<insert id="insert" parameterType="send.dao.SendDataBean">
+		insert all
+		into tl_sendmessage values ((sm_seq.nextval),#{sm_title},#{sm_contents}, sysdate,#{sm_check},#{sm_receiver},#{m_email})
+		into tl_receivemessage values ((sm_seq.nextval),#{sm_title},#{sm_contents}, sysdate,#{sm_check},#{m_email},#{sm_receiver})
+		select * from dual
+	</insert>
+	<update id="check" parameterType="send.dao.SendDataBean">
+		update tl_receivemessage set rm_check=1 where sm_id = #{sm_id}
+	</update>
+
+	<!-- 받은 쪽지 목록  -->
+	<select id="getList" parameterType="Map" resultType="receive.model.ReceiveDataBean">
+	    select rm_id, rm_title, rm_contents, rm_date, rm_check, rm_sender, m_email, r      
+        from (select rm_id, rm_title, rm_contents, rm_date, rm_check, rm_sender, m_email, rownum r
+        from (select * from tl_receivemessage order by rm_date desc) order by rm_date desc) where r &gt;= #{startRow} and r &lt;= #{endRow} 
+        and m_email = #{m_email}	
+	</select>
+	<!-- 받은 전체 쪽지 목록 -->
+	<select id="getReceiveCount" parameterType="String" resultType="int">
+		select count(*) from tl_receivemessage where m_email = #{m_email}
+	</select>
+	<!-- 쪽지 상세 내용 -->
+	<select id="getReceive" resultType="receive.model.ReceiveDataBean" parameterType="int" >
+		select * from tl_receivemessage where rm_id = #{rm_id}
+	</select>
+	
+	<!-- 읽지않은 쪽지 -->
+	<select id="unCheck" resultType="int" >
+		select count(rm_check) from tl_receivemessage where rm_check=0;
+	</select>
+	
+	<!-- 선택 쪽지 삭제 -->
+	<delete id="delete" parameterType="int[]" >
+		delete from tl_receivemessage where rm_id = #{rm_id} 
+	</delete>
+	
+
+>>>>>>> refs/heads/dohun
 </mapper>
