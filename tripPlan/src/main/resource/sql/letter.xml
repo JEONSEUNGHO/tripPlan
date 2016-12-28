@@ -5,28 +5,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="letter">
-	<!-- <select id="getReceiveCount" resultType="int"> select count(*) from 
-		tl_receivemessage </select> <select id="getReceives" resultType="receive.DAO.ReceiveDataBean" 
-		parameterType="Map"> select rm_id, rm_title, rm_contents, rm_date, rm_sender, 
-		m_email,readcount,r from (select rm_id, rm_title, rm_contents, rm_date, rm_sender, 
-		m_email,readcount,rownum r from (select * from tl_receivemessage)) where 
-		r &gt;= #{startRow} and r &lt;= #{endRow} </select> <select id="getReceive" 
-		resultType="receive.DAO.ReceiveDataBean" parameterType="int"> select * from 
-		tl_receivemessage where rm_id = #{rm_id} </select> -->
-	<insert id="insert" parameterType="send.dao.SendDataBean">
-		insert all
-		into tl_sendmessage values (#{sm_id},#{sm_title},#{sm_contents}, sysdate,#{sm_check},#{sm_receive},#{m_email})
-		into tl_receivemessage values (#{sm_id},#{sm_title},#{sm_contents}, sysdate,#{sm_check},#{m_email},#{sm_receive})
-		select * from dual;
-	</insert>
-	<!-- <select id="deletecheck" resultType="String" parameterType="receive.DAO.ReceiveDataBean"> 
-		select passwd from tl_receivemessage where rm_id = #{rm_id} </select> <delete 
-		id="rdt" parameterType="receive.DAO.ReceiveDataBean"> delete from tl_receivemessage 
-		where rm_id=#{rm_id} </delete> <update id="rut" parameterType="receive.DAO.ReceiveDataBean"> 
-		</update> <select id="getMax" resultType="String" parameterType="receive.DAO.ReceiveDataBean"> 
-		select max(rm_id) from tl_receivemessage </select> <select id="getMax1" resultType="int" 
-		parameterType="receive.DAO.ReceiveDataBean"> select max(rm_id) from tl_receivemessage 
-		</select> <update id="readcount" parameterType="receive.DAO.ReceiveDataBean"> 
-		update board set readcount=readcount+1 where rm_id = #{rm_id} </update> -->
 
+
+
+	<!-- 받은 쪽지 목록  -->
+	<select id="getList" parameterType="Map" resultType="receive.model.ReceiveDataBean">
+	    select rm_id, rm_title, rm_contents, rm_date, rm_check, rm_sender, m_email, r      
+        from (select rm_id, rm_title, rm_contents, rm_date, rm_check, rm_sender, m_email, rownum r
+        from (select * from tl_receivemessage order by rm_date desc) order by rm_date desc) where r &gt;= #{startRow} and r &lt;= #{endRow} 
+        and m_email = #{m_email}	
+	</select>
+	<!-- 받은 전체 쪽지 목록 -->
+	<select id="getReceiveCount" parameterType="String" resultType="int">
+		select count(*) from tl_receivemessage where m_email = #{m_email}
+	</select>
+	<!-- 쪽지 상세 내용 -->
+	<select id="getReceive" resultType="receive.model.ReceiveDataBean" parameterType="int" >
+		select * from tl_receivemessage where rm_id = #{rm_id}
+	</select>
+	
+	<!-- 읽지않은 쪽지 -->
+	<select id="unCheck" resultType="int" >
+		select count(rm_check) from tl_receivemessage where rm_check=0;
+	</select>
+	
+	<!-- 선택 쪽지 삭제 -->
+	<delete id="delete" parameterType="int[]" >
+		delete from tl_receivemessage where rm_id = #{rm_id} 
+	</delete>
+	
 </mapper>
