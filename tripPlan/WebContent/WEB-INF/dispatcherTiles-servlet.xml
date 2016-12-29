@@ -85,7 +85,7 @@
 	
 	<bean id="loginDAO" class="login.dao.LoginDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean>
+	</bean> 
 	
 	<bean id="mypageDAO" class="mypage.dao.MypageDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
