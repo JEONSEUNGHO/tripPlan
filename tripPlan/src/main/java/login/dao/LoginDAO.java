@@ -29,4 +29,8 @@ public class LoginDAO extends SqlSessionDaoSupport {
 		String check = getSqlSession().selectOne("member.duplicheck", memberInfo);
 		return check;
 	}
+	
+	public void changeMemberInfo(MemberInfo memberInfo) {
+		getSqlSession().update("member.changeMemberInfo",memberInfo);
+	}
 }

@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getSends" parameterType="Map" resultType="send.dao.SendDataBean">
 	    select sm_id, sm_title, sm_contents, sm_date, sm_check, sm_receiver, m_email, r      
         from (select sm_id, sm_title, sm_contents, sm_date, sm_check, sm_receiver, m_email, rownum r
-        from (select * from tl_sendmessage order by sm_date desc, rm_id asc) order by sm_date desc, rm_id asc) where r &gt;= #{startRow} and r &lt;= #{endRow} 
+        from (select * from tl_sendmessage order by sm_date desc, sm_id asc) order by sm_date desc, sm_id asc) where r &gt;= #{startRow} and r &lt;= #{endRow} 
         and m_email = #{m_email}	
 	</select>
 	<!-- 쪽지 쓰기 -->

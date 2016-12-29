@@ -7,6 +7,7 @@ import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import member.controller.SendEmail;
 import member.model.MemberInfo;
 import mypage.dao.MypageDAO;
-import net.sf.json.JSONObject;
+
 
 @Controller
 public class MypageController {
@@ -75,13 +76,17 @@ public class MypageController {
 				// 사용자가 인증완료면
 			} else if (m_identified == 1) {
 				return "mypage";
-				// 사용자가 정지회면이면
+				// 사용자가 네이버 인증회원이면
 			} else if (m_identified == 2) {
+				return "mypage";
+		   // 사용자가 정지회원이면
+			} else if (m_identified == 3) {
 				return "mypageblock";
-			} // 사용자가 관리자라면
+			} // 사용자가 관리자이면 
 			return "admin";
 		}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/realtimeCount.do", method = RequestMethod.GET)
 	public void form1(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 세션에 저장된 이메일을 가져온다 

@@ -61,6 +61,7 @@ public class RegistMemberController2 {
 		upload(uploadImg, memberInfo);
 		request.getSession().setAttribute("m_email", memberInfo.getM_email());
 		try {
+			
 			response.sendRedirect("mypage.do");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

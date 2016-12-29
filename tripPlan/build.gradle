@@ -42,5 +42,5 @@ dependencies {
 	// AWS »ç¿ë
 	compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.73'
 	
-    testCompile 'junit:junit:4.12'
+
 }
