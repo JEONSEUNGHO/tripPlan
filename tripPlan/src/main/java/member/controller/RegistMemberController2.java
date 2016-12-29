@@ -15,6 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+
 import member.dao.MemberDAO;
 import member.model.MemberInfo;
 import member.validator.MemberInfoValidator2;
@@ -75,8 +82,9 @@ public class RegistMemberController2 {
 		// 파일사이즈가 0일 경우 (업로드를 하지 않았을 경우) image폴더에 임시파일을 생성하지 않음
 		if (uploadImg.getSize() != 0.0) {
 
-			File uploadFile = new File(
-					"c://images//" + System.currentTimeMillis() + "-" + uploadImg.getOriginalFilename());
+			File uploadFile = new File("c:\\images\\"+System.currentTimeMillis()+uploadImg.getOriginalFilename());
+			String m_profile = "http://s3.amazonaws.com/tripplan2017/profileImg/"+uploadFile.getName();
+			memberInfo.setM_profile(m_profile);
 			try {
 				uploadImg.transferTo(uploadFile);
 			} catch (IllegalStateException e) {
@@ -86,9 +94,12 @@ public class RegistMemberController2 {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			memberInfo.setM_profile(uploadFile.getPath());
-			
+			try {
+				uploadAWS(uploadFile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			int check = dao.insertFile(memberInfo);
 			if (check == 0)
 				System.out.println("업로드 실패");
@@ -100,6 +111,27 @@ public class RegistMemberController2 {
 			if (check == 0)
 				System.out.println("업로드 실패");
 		}
+		
+	}
+	
+	// AmazonWebServer에 이미지 upload
+	public void uploadAWS(File file) throws IOException {
+        String bucketName = "tripplan2017/profileImg";
+        // 여기서, accessKey와 secretKey를 설정하고 있음
+        AWSCredentials credentials = null;
+        try {
+            credentials = new ProfileCredentialsProvider().getCredentials();
+        } catch (Exception e) {
+            throw new AmazonClientException(
+                    "Cannot load the credentials from the credential profiles file. " +
+                    "Please make sure that your credentials file is at the correct " +
+                    "location (~/.aws/credentials), and is in valid format.",
+                    e);
+        }
+
+        AmazonS3 s3 = new AmazonS3Client(credentials);
+        s3.putObject(new PutObjectRequest(bucketName, file.getName(), file));
+        System.out.println("AWS upload OK");
 	}
 	
 }

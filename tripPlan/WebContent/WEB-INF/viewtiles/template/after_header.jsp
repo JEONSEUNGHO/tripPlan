@@ -47,9 +47,15 @@
 				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false"
-					style="padding-bottom: 17px; padding-top: 17px; background-color: transparent;"><img
-						class="userImg"
-						src="/tripPlan/assets/images/default-user-image.png"></a>
+					style="padding-bottom: 17px; padding-top: 17px; background-color: transparent;">
+					<c:if test="${m_profile == null}">
+					<img class="userImg" src="/tripPlan/assets/images/default-user-image.png">
+					</c:if>
+					<c:if test="${m_profile != null}">
+					<img class="userImg" src="${m_profile}">
+					</c:if>
+					</a>
+					
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="mypage.do">마이페이지</a></li>
 						<li><a href="logout.do">로그아웃</a></li>

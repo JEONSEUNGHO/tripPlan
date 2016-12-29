@@ -47,7 +47,6 @@ public class MypageController {
 			// m_identified 0 > 1로 변경
 			dao.verifySuccess(m_email);
 			System.out.println("이메일 인증 완료!!");
-			
 		}
 
 			// DB에서 가져올 mypage화면에 필요한 정보 m_email, m_profile, m_identified
@@ -55,7 +54,6 @@ public class MypageController {
 
 			// DB에서 가져온 정보 m_profile, m_identified
 			int m_identified = memberInfo.getM_identified();
-
 			// 사용자가 가입대기중이면
 			if (m_identified == 0) {
 				try {
@@ -75,9 +73,11 @@ public class MypageController {
 				return "mypagewait";
 				// 사용자가 인증완료면
 			} else if (m_identified == 1) {
+				request.setAttribute("m_profile", memberInfo.getM_profile());
 				return "mypage";
 				// 사용자가 네이버 인증회원이면
 			} else if (m_identified == 2) {
+				request.setAttribute("m_profile", memberInfo.getM_profile());
 				return "mypage";
 		   // 사용자가 정지회원이면
 			} else if (m_identified == 3) {
