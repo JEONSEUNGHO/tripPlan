@@ -53,4 +53,5 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		// 가입불가
 		return 1;
 	}
+	
 }

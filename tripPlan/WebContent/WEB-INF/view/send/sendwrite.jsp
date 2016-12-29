@@ -119,12 +119,13 @@ $(function(){
 		</div>
 	</div>
 	<div class="container">
+	
 		<form:form action="sendwritePro.do" method="post"
 			commandName="sendDataBean">
 			<div class="send">
 				<form:label path="sm_receiver" />
 				<form:input type="text" class="form-control" path="sm_receiver"
-					 value="${letter.sm_receiver}" placeholder="받는 사람" />
+					 value="${param.sm_receiver}" placeholder="받는 사람" />
 				<form:errors style="font-size:14px;color:#ff9800;" class="errors" path="sm_receiver" />
 				<span id="idchk"></span>
 			</div>

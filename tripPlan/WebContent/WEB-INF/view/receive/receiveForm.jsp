@@ -49,7 +49,7 @@ body {
   				<textarea class="form-control" rows="10" id="comment" style="resize: none;" disabled>${receive.rm_contents}</textarea>
 			</div>
 			<div class="bttn">
-				<a href="note/note.do" class="btn btn-info" role="button">답장</a>
+				<a href="sendwrite.do?sm_receiver=${receive.rm_sender}" class="btn btn-info" role="button">답장</a>
 				<a href="receive.do" class="btn btn-info" role="button">목록</a>
 			</div>
 		</form>

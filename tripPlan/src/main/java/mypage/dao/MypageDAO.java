@@ -16,5 +16,12 @@ public class MypageDAO extends SqlSessionDaoSupport {
 		getSqlSession().update("member.verify", m_email);
 		
 	}
+	// 실시간 쪽지 카운트
+	public int realtimeCount(String m_email) {
+		
+		int check = getSqlSession().selectOne("member.realtimeCount",m_email);
+		
+		return check;
+	}
 	
 }

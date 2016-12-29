@@ -10,7 +10,10 @@ public class SendDataBean {
 	private int sm_check;
 	private String sm_receiver;
 	private String m_email;
+	// 체크박스 
+	private String chk;
 	
+
 	public int getSm_id() {
 		return sm_id;
 	}
@@ -53,6 +56,11 @@ public class SendDataBean {
 	public void setM_email(String m_email) {
 		this.m_email = m_email;
 	}
-
+	public String getChk() {
+		return chk;
+	}
+	public void setChk(String chk) {
+		this.chk = chk;
+	}
 }
 

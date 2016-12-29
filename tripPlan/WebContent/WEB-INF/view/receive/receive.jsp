@@ -5,20 +5,23 @@
 <%@ page isELIgnored="false"%>
 <html>
 <head>
-<title>Bootstrap Example</title>
+<title>받은 쪽지함</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   href="/tripPlan/assets/css/bootstrap.min.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   src="/tripPlan/assets/js/jquery-3.1.1.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   src="/tripPlan/assets/js/bootstrap.min.js"></script>
 </head>
 <style>
 body {
 	margin-top: 10px;
 	text-align: center;
+}
+a:link, a:hover, a:visited, a:active, a:focus {
+	text-decoration: none;
 }
 </style>
 <script type="text/javascript">
@@ -82,8 +85,17 @@ body {
 						<c:forEach var="receive" items="${receiveList}">
 							<tr height="30">
 								<td align="center" style="position: absolute; left:18;"><input type="checkbox" id="chk" name="rm_check" /></td>
+								
+								<c:if test="${receive.rm_check == 0}">
+								<td align="center" style="position: absolute; left: 8%;"><a  href="content.do?rm_id=${receive.rm_id}&pageNum=${currentPage}" style="color: #FB5948;">
+								${receive.rm_title}</a></td>
+								</c:if>
+								
+								<c:if test="${receive.rm_check == 1}">
 								<td align="center" style="position: absolute; left: 8%;"><a href="content.do?rm_id=${receive.rm_id}&pageNum=${currentPage}">
 								${receive.rm_title}</a></td>
+								</c:if>
+
 								<td align="center" style="text-align:center; position: absolute; right:170;">${receive.rm_sender}</td>
 								<td align="center" style="text-align:center; position: absolute; right:13;">${receive.rm_date}</td>
 							</tr>

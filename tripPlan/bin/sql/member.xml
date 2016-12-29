@@ -6,32 +6,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <mapper namespace="member">
-<insert id="regist" parameterType="member.model.MemberInfo">
-	insert into tl_member (num, m_email, m_pass, m_nickname, m_registerdate, m_sex, m_agerange, m_profile, m_identified)
-  values(m_seq.nextval,#{m_email},#{m_pass},#{m_nickname},sysdate,#{m_sex},#{m_agerange},#{m_profile},#{m_identified})
-</insert>
+	<insert id="regist" parameterType="member.model.MemberInfo">
+		insert into tl_member (num, m_email, m_pass, m_nickname, m_registerdate,
+		m_sex, m_agerange, m_profile, m_identified)
+		values(m_seq.nextval,#{m_email},#{m_pass},#{m_nickname},sysdate,#{m_sex},#{m_agerange},#{m_profile},#{m_identified})
+	</insert>
 
-<select id="duplicheck" parameterType="member.model.MemberInfo" resultType="String">
-	select m_email, m_identified from tl_member where m_email = #{m_email}
-</select>	
+	<select id="duplicheck" parameterType="member.model.MemberInfo"
+		resultType="String">
+		select m_email, m_identified from tl_member where m_email = #{m_email}
+	</select>
 
-<select id="login" parameterType="member.model.MemberInfo" resultType="String">
-	select m_pass from tl_member where m_email = #{m_email}
-</select>	
+	<select id="login" parameterType="member.model.MemberInfo"
+		resultType="String">
+		select m_pass from tl_member where m_email = #{m_email}
+	</select>
 
-<select id="identified" parameterType="String" resultType="member.model.MemberInfo">
-	select m_email, m_profile, m_identified from tl_member where m_email = #{m_email}
-</select>
+	<select id="identified" parameterType="String" resultType="member.model.MemberInfo">
+		select m_email, m_profile, m_identified from tl_member where m_email =
+		#{m_email}
+	</select>
 
-<update id="verify" parameterType="String">
-	update tl_member set m_identified = 1 where m_email = #{m_email}
-</update>
+	<update id="verify" parameterType="String">
+		update tl_member set m_identified = 1 where m_email = #{m_email}
+	</update>
 
-<update id="updatepw" parameterType="member.model.MemberInfo">
-	update tl_member set m_pass = #{tempPW} where m_email = #{m_email}
-</update>
+	<update id="updatepw" parameterType="member.model.MemberInfo">
+		update tl_member set m_pass = #{tempPW} where m_email = #{m_email}
+	</update>
 
-<select id="realtimeidchk" parameterType="String" resultType="String">
-	select m_email from tl_member where m_email = #{m_email}
-</select>
+	<select id="realtimeidchk" parameterType="String" resultType="String">
+		select m_email from tl_member where m_email = #{m_email}
+	</select>
+	
+	<!-- 읽지않은 쪽지 -->
+	<select id="realtimeCount" parameterType="String" resultType="int">
+		select count(rm_check) from tl_receivemessage where m_email = #{m_email} and rm_check=0
+	</select>
 </mapper>

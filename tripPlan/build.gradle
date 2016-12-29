@@ -39,5 +39,8 @@ dependencies {
 	// OAuth2.0 Java Library 등록
 	compile group: 'com.github.scribejava', name: 'scribejava-core', version: '2.8.1' 
 	
+	// AWS 사용
+	compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.73'
+	
     testCompile 'junit:junit:4.12'
 }

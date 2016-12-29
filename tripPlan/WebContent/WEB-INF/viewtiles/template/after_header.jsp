@@ -6,6 +6,21 @@
 <link href="/tripPlan/assets/css/after_header.css" rel="stylesheet">
 
 <title>header</title>
+<script>
+	(function poll() {
+		setTimeout(function() {
+			$.ajax({
+				type:"GET",
+				url : "/tripPlan/tiles/realtimeCount.do",
+				success : function(args) {
+				$('#realtimeCount').html(args.data);
+				},
+				dataType : "json",
+				complete : poll
+			});
+		}, 3000);
+	})();
+</script>
 <nav id="header" class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -13,11 +28,10 @@
 				data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 				aria-controls="navbar"></button>
 			<a class="navbar-brand" href="mypage.do"><img
-				src="/tripPlan/assets/images/logo-header-gray.png"
-				 alt="triPplan"></a>
+				src="/tripPlan/assets/images/logo-header-gray.png" alt="triPplan"></a>
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
-			<form class="navbar-form navbar-left" role="search" >
+			<form class="navbar-form navbar-left" role="search">
 				<div id="form-search" class="form-group">
 					<input id="input-site-search" type="search"
 						class="form-control typeahead" name="keywordsearch" value=""
@@ -29,9 +43,10 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/create/"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;경로생성</a>
 				</li>
-				<li><a href="" onClick="window.open('/tripPlan/letter/receive.do','mypage','width=750,height=405'); return false;">
-					<i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;쪽지</a>
-				</li>
+				<li><a href=""
+					onClick="window.open('/tripPlan/letter/receive.do','mypage','width=750,height=405'); return false;">
+						<i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;쪽지 <span style="color:#fb5948;"id="realtimeCount"></span>
+				</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false"
 					style="padding-bottom: 17px; padding-top: 17px; background-color: transparent;"><img

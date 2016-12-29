@@ -61,5 +61,11 @@ public class SendListController {
 
 			return "send/send";// ÇØ´ç ºä
 		}
+		
+		@RequestMapping(value = "/delete.do", method = RequestMethod.POST)
+		public void submit(SendDataBean sendDB) {
+			System.out.println(sendDB.getChk());
+			
+		}
 
 }

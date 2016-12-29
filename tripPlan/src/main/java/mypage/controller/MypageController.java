@@ -1,8 +1,11 @@
 package mypage.controller;
 
+import java.io.PrintWriter;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import member.controller.SendEmail;
 import member.model.MemberInfo;
 import mypage.dao.MypageDAO;
+import net.sf.json.JSONObject;
 
 @Controller
 public class MypageController {
@@ -78,4 +82,23 @@ public class MypageController {
 			return "admin";
 		}
 	
+	@RequestMapping(value = "/realtimeCount.do", method = RequestMethod.GET)
+	public void form1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 세션에 저장된 이메일을 가져온다 
+		String m_email = (String) request.getSession().getAttribute("m_email");
+		
+		int realtimeCount = dao.realtimeCount(m_email);
+		
+
+		JSONObject jso = new JSONObject(); // JASON 객체생성
+		jso.put("data", realtimeCount); // jason은 map구조(키,값), data라는 key로 list데이터를 주입했다.
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(jso.toString()); // out.print
+									// 내용을
+									// ajax의dataType이 jason에게데이터 쏴줌
+	
+	}
 }
+
