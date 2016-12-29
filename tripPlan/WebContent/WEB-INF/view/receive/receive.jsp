@@ -36,11 +36,6 @@ body {
          }
       })
    })
-   function del(){
-      if($("input:checkbox[id=chk]").is(":checked") == true){
-         $('input:checkbox:checked').val();﻿
-      }
-   }
 </script>
 <script type="text/javascript">
 	function check() {
