@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.AmazonClientException;
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.PutObjectRequest;
@@ -59,7 +58,6 @@ public class RegistMemberController2 {
 			try {
 				response.sendRedirect("mypage.do");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return "mypage";
@@ -71,7 +69,6 @@ public class RegistMemberController2 {
 			
 			response.sendRedirect("mypage.do");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -88,16 +85,13 @@ public class RegistMemberController2 {
 			try {
 				uploadImg.transferTo(uploadFile);
 			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			try {
 				uploadAWS(uploadFile);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			int check = dao.insertFile(memberInfo);
@@ -114,22 +108,15 @@ public class RegistMemberController2 {
 		
 	}
 	
-	// AmazonWebServer에 이미지 upload
-	public void uploadAWS(File file) throws IOException {
+	// AmazonWebServer에 이미지 upload (어느 클래스에서든 올릴 수 있게 static으로 지정)
+	public static void uploadAWS(File file) throws IOException {
         String bucketName = "tripplan2017/profileImg";
-        // 여기서, accessKey와 secretKey를 설정하고 있음
-        AWSCredentials credentials = null;
-        try {
-            credentials = new ProfileCredentialsProvider().getCredentials();
-        } catch (Exception e) {
-            throw new AmazonClientException(
-                    "Cannot load the credentials from the credential profiles file. " +
-                    "Please make sure that your credentials file is at the correct " +
-                    "location (~/.aws/credentials), and is in valid format.",
-                    e);
-        }
-
-        AmazonS3 s3 = new AmazonS3Client(credentials);
+        // accessKey와 secretKey를 등록
+        BasicAWSCredentials credentials = new BasicAWSCredentials("AKIAISKDAQ7YRVLCDNAA", "wLNQEmjYXsshTWzn3fwmi5kLhUilNUSXolvvttET");
+        	
+        // AWS객체를 생성하고 config정보 (key, regions)를 등록
+        AmazonS3 s3 = new AmazonS3Client(credentials).withRegion(Regions.US_EAST_1);
+        // 생성된 객체를 AWS에 등록 
         s3.putObject(new PutObjectRequest(bucketName, file.getName(), file));
         System.out.println("AWS upload OK");
 	}
