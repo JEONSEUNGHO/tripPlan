@@ -1,5 +1,7 @@
 package mypage.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import member.model.MemberInfo;
 
@@ -24,6 +26,18 @@ public class MypageDAO extends SqlSessionDaoSupport {
 		int check = getSqlSession().selectOne("member.realtimeCount",m_email);
 		
 		return check;
+	}
+	
+	public List<String> finduser() {
+		List<String> resultList = getSqlSession().selectList("member.finduser");
+		
+		return resultList;
+	}
+	
+	public List<String> findfollow(String m_email) {
+		List<String> resultList = getSqlSession().selectList("member.findfollow", m_email);
+		
+		return resultList;
 	}
 	
 }

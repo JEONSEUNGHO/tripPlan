@@ -56,5 +56,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(rm_check) from tl_receivemessage where m_email = #{m_email} and rm_check=0
 	</select>
 	
+	<!-- Follow 회원찾기 -->
+	<select id="finduser" resultType="String">
+		select m_nickname ||chr(44)|| m_email ||chr(44)|| m_profile ||chr(44)|| num as m_email from tl_member
+	</select>
+	
+	<!-- Follow 내follower찾기 -->
+	<select id="findfollow" parameterType="String" resultType="String">
+		select m.m_nickname ||chr(44)||  m.m_email ||chr(44)|| m.m_profile ||chr(44)|| num as m_nickname from tl_member m join tl_friend f on m.m_email = f.f_email where f.m_email = #{m_email}
+	</select>
+	
+	
 
 </mapper>

@@ -1,12 +1,14 @@
 package mypage.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,10 +65,8 @@ public class MypageController {
 					
 					sendemail.generateAndSendEmail(memberInfo, subject, content);
 				} catch (AddressException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (MessagingException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				System.out.println("메일 전송 성공!!");
@@ -104,6 +104,49 @@ public class MypageController {
 									// 내용을
 									// ajax의dataType이 jason에게데이터 쏴줌
 	
+	}
+	
+	// Follow 검색창 요청 처리
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/finduser.do", method = RequestMethod.POST)
+	public void submit(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		response.setCharacterEncoding("utf-8");
+		String searchValue = request.getParameter("searchUser");
+		String m_email = (String) request.getSession().getAttribute("m_email");
+		System.out.println("m_email="+m_email);
+		System.out.println("search="+searchValue);
+		
+		JSONArray arrayObj = new JSONArray();
+		JSONObject jsonObj = null;
+		ArrayList<String> dblist = null;
+		if(searchValue.equals("")) {
+			 dblist= (ArrayList<String>) dao.findfollow(m_email);
+			
+		} else {
+			 dblist = (ArrayList<String>) dao.finduser();
+		}
+
+		// tl_member에 있는 모든 데이터를 가져온다
+		ArrayList<String> resultlist = new ArrayList<String>();
+
+		// DB에서 가져온 데이터를 비교
+		for (String str : dblist) {
+			if (str.toLowerCase().startsWith(searchValue) || str.toLowerCase().endsWith(searchValue) || str.indexOf(searchValue)>=1) {
+				resultlist.add(str);
+			}
+		}
+		// 뽑은 후 json파싱
+		for (String str : resultlist) {
+			jsonObj = new JSONObject();
+			jsonObj.put("data", str);
+			System.out.println("data="+str);
+			arrayObj.add(jsonObj);
+		}
+
+		PrintWriter pw = response.getWriter();
+		pw.print(arrayObj);
+		pw.flush();
+		pw.close();
 	}
 }
 
