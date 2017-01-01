@@ -7,11 +7,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="list" resultType="board.model.BoardDTO">
 
 	select * from tp_mainboard order by b_id desc
+<!-- 검색어로 검색 -->
 </select>
 <select id="mainSearch" resultType="board.model.BoardDTO" parameterType="String">
 	
-	select b_id, b_title,b_mainphoto,b_identified,b_totalspendtime ,instr(b_title,#{value})from tp_mainboard where instr(b_title,#{value})>=1
+	select b_id, b_title,b_mainphoto,b_identified,b_maincontents,b_totalspendtime ,instr(b_title,#{value}),instr(b_maincontents,#{value})from tp_mainboard where instr(b_title,#{value})>=1 or instr(b_maincontents,#{value})>=1
 
+</select>
+<select id="boardSearch" resultType="board.model.BoardDTO" parameterType="map">
+
+	select b_title,b_mainphoto,b_identified,b_totalspendtime ,b_id,instr(b_title,#{search1},1)from tp_mainboard where b_identified=#{option} and instr(b_title,#{search1})>=1
 </select>
 <!-- MainBoard Query -->
 	

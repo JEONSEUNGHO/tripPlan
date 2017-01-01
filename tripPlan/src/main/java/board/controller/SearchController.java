@@ -1,6 +1,9 @@
 package board.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +18,6 @@ import board.model.BoardDAO;
 import board.model.BoardDTO;
 
 @Controller
-@RequestMapping("/search")
 public class SearchController {
 
 	
@@ -25,8 +27,13 @@ public class SearchController {
 	public void setDao(BoardDAO dao) {
 		this.dao = dao;
 	}
-
-	@RequestMapping(method=RequestMethod.GET)
+	/**
+	 * 헤더에서 검색 시
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/search",method=RequestMethod.GET)
 	public ModelAndView submit(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("search");
 		System.out.println(request.getParameter("keywordsearch"));
@@ -36,6 +43,28 @@ public class SearchController {
 		mav.addObject("searchList",member.size());
 		
 		System.out.println("검색 결과 :::"+member.size());
+		return mav;
+	}
+	
+	/**
+	 * 경로 페이지에서 검색 시
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/searchboard",method=RequestMethod.POST)
+	public ModelAndView submit1(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mav = new ModelAndView("searchboard");
+		String option = (String)request.getParameter("boardsearch");
+		String search1 = (String)request.getParameter("input");
+		Map<String,String> abc = new HashMap<String,String>();
+		abc.put("option", option);
+		abc.put("search1",search1);
+		
+		List<BoardDTO> board = dao.searchzz(abc);
+		
+		mav.addObject("board",board);
+		mav.addObject("boardList",board.size());
 		return mav;
 	}
 }

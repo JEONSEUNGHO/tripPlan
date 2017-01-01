@@ -18,9 +18,9 @@
 				//화면에 directionsService class로 부터 얻은 방향을 렌더링 한다.
 				directionsDisplay.setMap(map);
 
-				var origin_input = document.getElementById('origin-input');//input에 있는 텍스트 가져옴
+				var origin_input = document.getElementById('originInput');//input에 있는 텍스트 가져옴
 				var destination_input = document
-						.getElementById('destination-input');//input에 있는 텍스트 가져옴.
+						.getElementById('destinationInput');//input에 있는 텍스트 가져옴.
 				var modes = document.getElementById('mode-selector');//대중교통인지 차량인지 가져오기.
 
 				var origin_autocomplete = new google.maps.places.Autocomplete(origin_input);
@@ -46,6 +46,12 @@
 					} else {
 						map.setCenter(place.geometry.location);//장소일 시에 장소를 맵 중심으로 설정하고
 						map.setZoom(17);//줌을 17로 설정.
+						myIcon = new google.maps.MarkerImage("/tripPlan/assets/images/marker.png", null, null, null, new google.maps.Size(30,30));
+						marker = new google.maps.Marker({ //검색 된 곳에 마커 설정
+							   position: place.geometry.location, 
+							   map: map,
+							   icon:myIcon
+						});
 					}
 				}
 
@@ -73,42 +79,86 @@
 							// If the place has a geometry, store its place ID and route if we have
 							// the other place ID
 							destination_place_id = place.place_id;
-							route(origin_place_id, destination_place_id, travel_mode,
-							          directionsService, directionsDisplay);
 							});
-				/*function route(origin_place_id, destination_place_id, travel_mode, directionsService, directionsDisplay) {
+				function route(origin_place_id, destination_place_id, travel_mode, directionsService, directionsDisplay) {
 					if (!origin_place_id || !destination_place_id) {
 						return;
 						}
 		    directionsService.route({
 		      origin: {'placeId': origin_place_id},
 		      destination: {'placeId': destination_place_id},
+		      provideRouteAlternatives: true,
 		      travelMode: travel_mode
 		    }, function(response, status) {
 		      if (status === google.maps.DirectionsStatus.OK) {
-		        directionsDisplay.setDirections(response);
+		    	  for (var i = 0; i < response.routes.length; i++) {
+						new google.maps.DirectionsRenderer({
+						    map: map,
+						    directions: response,
+						    routeIndex: i
+						  });
+		    	  }
 		      } else {
 		        window.alert('Directions request failed due to ' + status);
 		      }
-		    });*/
+		    });
 		  
 			}
 			
-			function route() {
-				var start = document.getElementById('origin-input').value;
-				var end = document.getElementById('destination-input').value;
+		/*	function route() {
+				var start = document.getElementById('originInput').value;
+				var end = document.getElementById('destinationInput').value;
 				 request = {
 		  				origin:start,
 		  				destination:end,
-						provideRouteAlternatives: true,
+						provideRouteAlternatives: true,//경로를 여러개 보일 것인지에 대한 boolean값.
 						travelMode : eval("google.maps.DirectionsTravelMode.TRANSIT")
 				}
 				directionsService.route(request, function(response, status) {
-					alert('zzz');
+					!confirm('경로를 계산하시겠습니까?')
 					if (status === google.maps.DirectionsStatus.OK) {
 						directionsDisplay.setDirections(response);
+						
 					} else {
 						window.alert('Directions request failed due to '+ status);
 					}
 				});
-			}
+			}*/
+			$(document).ready(function() {
+			    // If the browser supports the Geolocation API
+			    if (typeof navigator.geolocation == "undefined") {
+			      $("#error").text("Your browser doesn't support the Geolocation API");
+			      return;
+			    }
+
+			    $("#originInput-link, #destinationInput-link").click(function(event) {
+			      event.preventDefault();
+			      var addressId = this.id.substring(0, this.id.indexOf("-"));
+
+			      navigator.geolocation.getCurrentPosition(function(position) {
+			        var geocoder = new google.maps.Geocoder();
+			        geocoder.geocode({
+			          "location": new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+			        },
+			        function(results, status) {
+			          if (status == google.maps.GeocoderStatus.OK)
+			            $("#" + addressId).val(results[0].formatted_address);
+			          else
+			            $("#error").append("Unable to retrieve your address<br />");
+			        });
+			      },
+			      function(positionError){
+			        $("#error").append("Error: " + positionError.message + "<br />");
+			      },
+			      {
+			        enableHighAccuracy: true,
+			        timeout: 10 * 1000 // 10 seconds
+			      });
+			    });
+
+			    $("#calculate-route").submit(function(event) {
+			      event.preventDefault();
+			     route(origin_place_id, destination_place_id, travel_mode, directionsService, directionsDisplay);
+			    });
+			  });
+}

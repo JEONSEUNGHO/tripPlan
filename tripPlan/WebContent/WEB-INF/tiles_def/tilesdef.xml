@@ -95,11 +95,16 @@
 		<put-attribute name="body" value="/WEB-INF/view/board/search.jsp"/>
 	</definition>
 	
-	
+	<!-- 서브 게시판 -->
 	<definition name="createSubBoard" extends="base_layout">
 		<put-attribute name="title" value="서브게시판"/>
 		<put-attribute name="body" value="/WEB-INF/view/board/createSubBoard.jsp"/>
 	</definition>
 	
+	<!-- 경로 내 검색 결과 -->
+	<definition name="searchboard" extends="base_layout">
+		<put-attribute name="title" value="검색 결과"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/searchResult.jsp"/>
+	</definition>
 	
 </tiles-definitions>

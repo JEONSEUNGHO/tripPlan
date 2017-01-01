@@ -2,6 +2,7 @@ package board.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -10,6 +11,11 @@ public class BoardDAO extends SqlSessionDaoSupport{
 	/* 
 	 * MainBoard method
 	 * */
+	public List<BoardDTO> searchzz(Map<String,String> abc){
+		List<BoardDTO>board = new ArrayList<BoardDTO>();
+		board = getSqlSession().selectList("board.boardSearch",abc);
+		return board;
+	}
 	public List<BoardDTO> searchBoard(String search){
 		List<BoardDTO> board = new ArrayList<BoardDTO>();
 		board = getSqlSession().selectList("board.mainSearch",search);
@@ -20,7 +26,6 @@ public class BoardDAO extends SqlSessionDaoSupport{
 	public List<BoardDTO> selectAllBoard() {
 		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
 		boardList = getSqlSession().selectList("board.list");
-		System.out.println("이거는:::"+boardList.size());
 		return boardList;
 	}
 	//각 board별  MainBoard 조회

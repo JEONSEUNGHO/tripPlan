@@ -124,15 +124,24 @@
     </ul>
   </div>
 </aside>
-				<c:if test="${searchList==0 }">
-				
-				  	</c:if>
+		<form role="search" align="center" method="post" action="searchboard">
+			<select id="boardsearch" name="boardsearch">
+				<option value="0">후기</option>
+				<option value="1">계획</option>
+				<option value="2">그룹</option>
+			</select>
+			<input type="search" name="input" placeholder="검색어를 입력해 주세요">
+			<input type="submit" value="검색">
+		</form>
+				<c:if test="${boardList=0 }">
+				<span style="margin-left:300px;">검색 결과가 없습니다.</span>
+				 </c:if>
 				  
-				<c:if test="${searchList>0 }">
-				<br/>
-					<li class="result_item">검색 결과 : 총 ${searchList } 건 입니다.</li>
- 					<c:forEach var="list" items="${search}">
+				<c:if test="${boardList>0 }">
+				
+ 					<c:forEach var="list" items="${board}">
  					<li class="result_item">
+ 						<li>검색 결과 : #{boardList } 개 입니다.</li>
 						<a href="#" class="item">
 							<figure>
 								<img class="my-image" src="${list.b_mainphoto }" />

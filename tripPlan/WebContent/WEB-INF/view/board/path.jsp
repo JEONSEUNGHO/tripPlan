@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/tripPlan/assets/css/boardSearch.css">
 <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
 <link rel="stylesheet" href="/tripPlan/assets/css/boardNavigation.css">
+<link href="/tripPlan/assets/css/after_header.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
 <title>Insert title here</title>
@@ -124,6 +125,16 @@
     </ul>
   </div>
 </aside>
+		<form role="search" align="center" method="post" action="searchboard">
+			<select id="boardsearch" name="boardsearch">
+				<option value="0">후기</option>
+				<option value="1">계획</option>
+				<option value="2">그룹</option>
+			</select>
+			<input type="search" name="input" placeholder="검색어를 입력해 주세요">
+			<input type="submit" value="검색">
+		</form>
+	
 				<c:if test="${List>0 }">
  					<c:forEach var="list" items="${member}">
  					<li class="result_item">
