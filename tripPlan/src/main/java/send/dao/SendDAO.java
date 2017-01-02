@@ -1,10 +1,13 @@
 package send.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import receive.model.ReceiveDataBean;
 
 public class SendDAO extends SqlSessionDaoSupport {
 	
@@ -51,4 +54,19 @@ public class SendDAO extends SqlSessionDaoSupport {
 		}
 		return result;
 	}
+	
+	// 선택 쪽지 삭제 
+	public void senddelete(SendDataBean sendDB) {
+		String[] strList = sendDB.getChk().split(",");
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<String> chkList = new ArrayList<String>();
+		String m_email = sendDB.getM_email();
+		for (int i=0; i<strList.length; i++) {
+			chkList.add(strList[i]);
+		} 
+		map.put("chkList", chkList);
+		map.put("m_email", m_email);
+		getSqlSession().delete("letter.senddelete", map);
+	}
+	
 }

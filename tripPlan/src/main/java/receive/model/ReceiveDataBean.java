@@ -17,7 +17,8 @@ public class ReceiveDataBean {
 	private String rm_sender;
 	// 받은사람
 	private String m_email;
-	
+	// 체크박스 체크
+	private String chk;
 	
 	public int getRm_id() {
 		return rm_id;
@@ -60,6 +61,12 @@ public class ReceiveDataBean {
 	}
 	public void setM_email(String m_email) {
 		this.m_email = m_email;
+	}
+	public String getChk() {
+		return chk;
+	}
+	public void setChk(String chk) {
+		this.chk = chk;
 	}
 	
 

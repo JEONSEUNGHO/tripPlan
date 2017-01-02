@@ -1,5 +1,6 @@
 package receive.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,8 +51,17 @@ public class ReceiveDAO extends SqlSessionDaoSupport {
 	}
 	
 	// 선택 쪽지 삭제 
-	public void delete(int rm_id) {
-		getSqlSession().delete("letter.delete", rm_id);
+	public void receivedelete(ReceiveDataBean receiveDB) {
+		String[] strList = receiveDB.getChk().split(",");
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<String> chkList = new ArrayList<String>();
+		String m_email = receiveDB.getM_email();
+		for (int i=0; i<strList.length; i++) {
+			chkList.add(strList[i]);
+		} 
+		map.put("chkList", chkList);
+		map.put("m_email", m_email);
+		getSqlSession().delete("letter.receivedelete", map);
 	}
 }
 

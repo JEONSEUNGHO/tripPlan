@@ -63,14 +63,9 @@ public class ReceiveServiceImpl implements ReceiveService {
 
 	// 쪽지 삭제
 	@Override
-	public void delete(int rm_id) {
+	public void receivedelete(ReceiveDataBean receiveDB) {
 	
-		try {
-			dao.delete(rm_id);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-
+		dao.receivedelete(receiveDB);
 	}
 	
 

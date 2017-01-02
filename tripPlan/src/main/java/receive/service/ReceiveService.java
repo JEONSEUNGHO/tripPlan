@@ -16,6 +16,6 @@ public interface ReceiveService {
 	// 읽지않은 쪽지 수 
 	public int unCheckedCount();
 	// 쪽지 삭제 
-	public void delete(int rm_id);
+	public void receivedelete(ReceiveDataBean receiveDB);
 
 }

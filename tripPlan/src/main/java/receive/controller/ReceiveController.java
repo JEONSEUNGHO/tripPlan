@@ -1,9 +1,11 @@
 package receive.controller;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,6 +75,18 @@ public class ReceiveController {
 		
 		return "receive/receiveForm";
 	}
-
+	
+	@RequestMapping(value = "/receivedelete.do", method = RequestMethod.POST)
+	public void submit(ReceiveDataBean receiveDB, HttpServletRequest request, HttpServletResponse response) {
+		// session 값에서 아이디 가져오기 
+		String m_email = (String) request.getSession().getAttribute("m_email");
+		receiveDB.setM_email(m_email);
+		service.receivedelete(receiveDB);
+		try {
+			response.sendRedirect("receive.do");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
 

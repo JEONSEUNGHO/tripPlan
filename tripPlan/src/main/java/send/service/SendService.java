@@ -2,6 +2,7 @@ package send.service;
 
 import java.util.List;
 
+import receive.model.ReceiveDataBean;
 import send.dao.SendDataBean;
 
 public interface SendService {
@@ -18,5 +19,7 @@ public interface SendService {
 	public List<String> realTimeIdchk();
 	//  실시간 아이디 체크2
 	public int realTimeIdchk2(String sm_receiver);
+	// 쪽지 삭제 
+	public void senddelete(SendDataBean sendDB);
 	
 }

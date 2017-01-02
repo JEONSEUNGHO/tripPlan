@@ -23,8 +23,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 		
 	<!-- 받은 쪽지 삭제 -->
-	<delete id="delete" parameterType="int" >
-		delete from tl_receivemessage where rm_id = #{rm_id} 
+	<delete id="receivedelete" parameterType="map" >
+		delete from tl_receivemessage
+    <where>
+        rm_id in
+        <foreach collection="chkList" item="chk" index="index" separator="," open="(" close=")">
+            #{chk}
+        </foreach>
+        and m_email = #{m_email}
+    </where>
 	</delete>
 	
 	<!-- 보낸 쪽지 목록  -->
@@ -59,6 +66,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getSend" parameterType="int" resultType="send.dao.SendDataBean">
 		select * from tl_sendmessage where sm_id = #{sm_id}
 	</select>
+	
+	<!-- 보낸 쪽지 삭제 -->
+	<delete id="senddelete" parameterType="map" >
+		delete from tl_sendmessage
+    <where>
+        sm_id in
+        <foreach collection="chkList" item="chk" index="index" separator="," open="(" close=")">
+            #{chk}
+        </foreach>
+        and m_email = #{m_email}
+    </where>
+	</delete>
 	
 	<!-- 실시간 받는사람 검색  -->
 	<select id="realtimeidchk" resultType="String">

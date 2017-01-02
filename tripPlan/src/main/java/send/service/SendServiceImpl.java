@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import receive.model.ReceiveDataBean;
 import send.dao.SendDAO;
 import send.dao.SendDataBean;
 
@@ -71,6 +72,13 @@ public class SendServiceImpl implements SendService {
 		 
 		int check = senddao.realTimeIdchk2(sm_receiver);
 		return check;
+	}
+	
+	// 쪽지 삭제
+	@Override
+	public void senddelete(SendDataBean sendDB) {
+	
+		senddao.senddelete(sendDB);
 	}
 
 }

@@ -41,7 +41,7 @@ a:link, a:hover, a:visited, a:active, a:focus {
 
 <body>
 	<div class="container">
-		<form action="delete.do" method="post">
+		<form action="senddelete.do" method="post">
 			<div class="btn-group">
 				<a href="sendwrite.do" class="btn btn-info" role="button">쪽지 쓰기</a>
 				<a href="receive.do" class="btn btn-info" role="button">받은 쪽지</a> <a

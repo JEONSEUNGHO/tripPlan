@@ -1,9 +1,11 @@
 package send.controller;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import receive.model.ReceiveDataBean;
 import send.dao.SendDataBean;
 import send.service.SendService;
 
@@ -62,10 +65,17 @@ public class SendListController {
 			return "send/send";// 해당 뷰
 		}
 		
-		@RequestMapping(value = "/delete.do", method = RequestMethod.POST)
-		public void submit(SendDataBean sendDB) {
-			System.out.println(sendDB.getChk());
-			
+		@RequestMapping(value = "/senddelete.do", method = RequestMethod.POST)
+		public void submit(SendDataBean sendDB, HttpServletRequest request, HttpServletResponse response) {
+			// session 값에서 아이디 가져오기 
+			String m_email = (String) request.getSession().getAttribute("m_email");
+			sendDB.setM_email(m_email);
+			service.senddelete(sendDB);
+			try {
+				response.sendRedirect("send.do");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 }
