@@ -1,7 +1,7 @@
 			function initMap() {
-				var origin_place_id = null;//출발 지역
-				var destination_place_id = null;//도착 지역
-				var travel_mode = google.maps.TravelMode.TRANSIT;//교통형식 : 대중교통
+				var origin_place_id = null;									//출발 지역
+				var destination_place_id = null;							//도착 지역
+				var travel_mode = google.maps.TravelMode.TRANSIT;			//교통형식 : 대중교통
 				var map = new google.maps.Map(document.getElementById('map'), {//맵 객체 로딩
 					mapTypeControl : false,
 					center : {
@@ -44,10 +44,11 @@
 						map.fitBounds(place.geometry.viewport);
 						//fitBounds(bounds:LatLngBounds|LatLngBoundsLiteral)지정된 경계를 포함하도록 뷰 포트 설정
 					} else {
-						map.setCenter(place.geometry.location);//장소일 시에 장소를 맵 중심으로 설정하고
-						map.setZoom(17);//줌을 17로 설정.
+						alert(place.geometry.location);
+						map.setCenter(place.geometry.location);			//장소일 시에 장소를 맵 중심으로 설정하고
+						map.setZoom(17);								//줌을 17로 설정.
 						myIcon = new google.maps.MarkerImage("/tripPlan/assets/images/marker.png", null, null, null, new google.maps.Size(30,30));
-						marker = new google.maps.Marker({ //검색 된 곳에 마커 설정
+						marker = new google.maps.Marker({ 				//검색 된 곳에 마커 설정
 							   position: place.geometry.location, 
 							   map: map,
 							   icon:myIcon
@@ -55,10 +56,10 @@
 					}
 				}
 
-				origin_autocomplete.addListener('place_changed', function() {//출발지 자동완성어에 이벤트 처리.
-					var place = origin_autocomplete.getPlace();//자동완성어의 장소를 가져 온다.
-					if (!place.geometry) {//장소가 검색이 안될 시
-						window.alert("출발지를 올바르게 입력해 주세요.");//alert창 띄움.
+				origin_autocomplete.addListener('place_changed', function() {		//출발지 자동완성어에 이벤트 처리.
+					var place = origin_autocomplete.getPlace();						//자동완성어의 장소를 가져 온다.
+					if (!place.geometry) {											//장소가 검색이 안될 시
+						window.alert("출발지를 올바르게 입력해 주세요.");						//alert창 띄움.
 						return;
 					}
 					expandViewportToFitPlace(map, place);
@@ -68,7 +69,7 @@
 					origin_place_id = place.place_id;
 				});
 
-				destination_autocomplete.addListener('place_changed',function() {//도착지 자동완성어에 이벤트 처리
+				destination_autocomplete.addListener('place_changed',function() {	//도착지 자동완성어에 이벤트 처리
 							var place = destination_autocomplete.getPlace();
 							if (!place.geometry) {
 								window.alert("도착지를 올바르게 입력해 주세요.");
@@ -85,13 +86,13 @@
 						return;
 						}
 		    directionsService.route({
-		      origin: {'placeId': origin_place_id},
-		      destination: {'placeId': destination_place_id},
-		      provideRouteAlternatives: true,
-		      travelMode: travel_mode
+		      origin: {'placeId': origin_place_id},								//출발지의 정보 파라미터 값 가져옴
+		      destination: {'placeId': destination_place_id},					//도착지의 정보 파라미터 값 가져옴
+		      provideRouteAlternatives: true,									//대체경로를 보여 줄 것인지 결정.
+		      travelMode: travel_mode											//어떤 교통 매체 이용할 건지 결정.
 		    }, function(response, status) {
-		      if (status === google.maps.DirectionsStatus.OK) {
-		    	  for (var i = 0; i < response.routes.length; i++) {
+		      if (status === google.maps.DirectionsStatus.OK) {					//status가 구글 맵의 길찾기 경로가 있다면
+		    	  for (var i = 0; i < response.routes.length; i++) {			//경로  멤버 테이블에 있는 모든 정보랑 friend의 f_id가지고 오고 싶다.
 						new google.maps.DirectionsRenderer({
 						    map: map,
 						    directions: response,

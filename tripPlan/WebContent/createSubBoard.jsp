@@ -31,7 +31,6 @@
 			
 			<form id="calculate-route" name="calculate-route" action="#" method="get"style="margin-left:650px; margin-top:-480px">
 				<article class="page">
-			 		 <ul id="test" class="timeline">
 			   			 <li class="timeline-milestone is-completed timeline-start">
 			     		 	<div class="timeline-action">
 								<table border="1" width="600" height="400">
