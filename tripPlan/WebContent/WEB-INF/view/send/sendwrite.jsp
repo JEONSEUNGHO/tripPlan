@@ -68,7 +68,7 @@ $(function(){
 	 $(function(){
  		$( "#sm_receiver" ).autocomplete({
  			source : function( request, response ) {
- 				//많이 봤죠? jquery Ajax로 비동기 통신한 후
+ 				//jquery Ajax로 비동기 통신한 후
  				//json객체를 서버에서 내려받아서 리스트 뽑는 작업
  		        $.ajax({
  		        	//호출할 URL

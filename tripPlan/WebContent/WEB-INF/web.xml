@@ -32,7 +32,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
+	
 	<!-- tiles 요청 처리 -->
 	<servlet>
 		<servlet-name>dispatcherTiles</servlet-name>
@@ -54,6 +54,7 @@
 		<servlet-name>dispatcher</servlet-name>
 		<url-pattern>/letter/*</url-pattern>
 	</servlet-mapping>
+
 
 	<!-- 파일 업로드 처리 -->
 	<filter>

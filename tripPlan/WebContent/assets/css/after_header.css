@@ -256,11 +256,11 @@ body {
 }
 
 .gnb_01>li>a span {
-	display: block
+	display: block; 
 }
 
 .gnb_01>li.on a, .gnb_01>li.active a {
-	color: #0079cf
+	color: #0079cf;
 }
 
 .btn-default {
@@ -273,6 +273,7 @@ body {
 	height: 50px;
 	position: absolute;
 	left: 25;
+	top: 3;
 	background-color: transparent;
 	color: #fff;
 	border-radius: 50%;

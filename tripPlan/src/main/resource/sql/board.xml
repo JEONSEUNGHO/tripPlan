@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+<select id="list" resultType="board.model.BoardDTO">
+
+	select * from tp_mainboard order by b_id desc
+<!-- 검색어로 검색 -->
+</select>
+<select id="mainSearch" resultType="board.model.BoardDTO" parameterType="String">
+	
+	select b_id, b_title,b_mainphoto,b_identified,b_maincontents,b_totalspendtime ,instr(b_title,#{value}),instr(b_maincontents,#{value})from tp_mainboard where instr(b_title,#{value})>=1 or instr(b_maincontents,#{value})>=1
+
+</select>
+<select id="boardSearch" resultType="board.model.BoardDTO" parameterType="map">
+
+	select b_title,b_mainphoto,b_identified,b_totalspendtime ,b_id,instr(b_title,#{search1},1)from tp_mainboard where b_identified=#{option} and instr(b_title,#{search1})>=1
+</select>
+<!-- MainBoard Query -->
+	
+	<select id="mainBoardAll" resultType="board.model.BoardDTO" parameterType="integer">
+		select * from tp_mainboard where b_identified = #{value}
+	</select>
+	<select id="mainBoard" parameterType="integer" resultType="board.model.BoardDTO">
+		select * from tp_mainboard where = #{value}
+	</select>
+	<insert id="insertMainBoard" parameterType="board.model.BoardDTO">
+		insert into tp_mainboard values(mb_seq.nextval,#{b_title},#{b_maincontents},#{b_mainphoto},#{b_registertime},0,#{b_totalprice},#{b_totalspendtime},#{b_identified},#{m_email})
+	</insert>
+	<update id="updateMainBoard" parameterType="board.model.BoardDTO">
+		update tp_mainboard set b_title=#{b_title}, b_maincontents=#{b_maincontents}, b_mainphoto=#{b_mainphoto}
+	</update>
+	<delete id="deleteMainBoard" parameterType="integer">
+		delete from tp_mainboard where d_id = #{value}
+	</delete>
+	
+	<!-- SubBoard Query -->
+	
+	<select id="subBoardAll" parameterType="integer" resultType="board.model.SubBoardDTO">
+		select * from tp_subboard where = #{value} order by sb_procedure ASC
+	</select>
+	<insert id="insertSubBoard" parameterType="board.model.SubBoardDTO">
+		insert into tp_subboard values(sb_seq.nextval,#{sb_subcontent},#{sb_tcharge},#{sb_fcharge},#{sb_rcharge},#{sb_spendtime},#{sb_photo1},#{sb_photo2},#{sb_photo3},#{sb_photo4},#{sb_photo5},#{sb_lat},#{sb_lon},#{sb_procedure},#{b_id})
+	</insert>
+	<update id="updateSubBoard" parameterType="board.model.SubBoardDTO">
+		update tp_subboard set sb_subcontent=#{sb_subcontent} ,#{sb_tcharge},#{sb_fcharge},#{sb_rcharge}, sb_spendtime=#{sb_spendtime}, sb_photo1=#{sb_photo1}, sb_photo2=#{sb_photo2}, sb_photo3=#{sb_photo3}, sb_photo4=#{sb_photo4}, sb_photo5=#{sb_photo5}, sb_lat=#{sb_lat}, sb_lon=#{sb_lon} 
+	</update>
+</mapper>

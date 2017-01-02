@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+
 import member.dao.MemberDAO;
 import member.model.MemberInfo;
 import member.validator.MemberInfoValidator2;
@@ -52,7 +58,6 @@ public class RegistMemberController2 {
 			try {
 				response.sendRedirect("mypage.do");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return "mypage";
@@ -61,9 +66,9 @@ public class RegistMemberController2 {
 		upload(uploadImg, memberInfo);
 		request.getSession().setAttribute("m_email", memberInfo.getM_email());
 		try {
+			
 			response.sendRedirect("mypage.do");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -74,20 +79,21 @@ public class RegistMemberController2 {
 		// 파일사이즈가 0일 경우 (업로드를 하지 않았을 경우) image폴더에 임시파일을 생성하지 않음
 		if (uploadImg.getSize() != 0.0) {
 
-			File uploadFile = new File(
-					"c://images//" + System.currentTimeMillis() + "-" + uploadImg.getOriginalFilename());
+			File uploadFile = new File("c:\\images\\"+System.currentTimeMillis()+uploadImg.getOriginalFilename());
+			String m_profile = "http://s3.amazonaws.com/tripplan2017/profileImg/"+uploadFile.getName();
+			memberInfo.setM_profile(m_profile);
 			try {
 				uploadImg.transferTo(uploadFile);
 			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			memberInfo.setM_profile(uploadFile.getPath());
-			
+			try {
+				uploadAWS(uploadFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			int check = dao.insertFile(memberInfo);
 			if (check == 0)
 				System.out.println("업로드 실패");
@@ -99,6 +105,20 @@ public class RegistMemberController2 {
 			if (check == 0)
 				System.out.println("업로드 실패");
 		}
+		
+	}
+	
+	// AmazonWebServer에 이미지 upload (어느 클래스에서든 올릴 수 있게 static으로 지정)
+	public static void uploadAWS(File file) throws IOException {
+        String bucketName = "tripplan2017/profileImg";
+        // accessKey와 secretKey를 등록
+        BasicAWSCredentials credentials = new BasicAWSCredentials("AKIAISKDAQ7YRVLCDNAA", "wLNQEmjYXsshTWzn3fwmi5kLhUilNUSXolvvttET");
+        	
+        // AWS객체를 생성하고 config정보 (key, regions)를 등록
+        AmazonS3 s3 = new AmazonS3Client(credentials).withRegion(Regions.US_EAST_1);
+        // 생성된 객체를 AWS에 등록 
+        s3.putObject(new PutObjectRequest(bucketName, file.getName(), file));
+        System.out.println("AWS upload OK");
 	}
 	
 }

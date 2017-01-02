@@ -10,25 +10,32 @@
 
 	<context:annotation-config />
 	<!-- bean 객체 등록 -->
-	
+
 	<!-- 로그인 전 메인 -->
 	<bean class="main.controller.MainController" />
-	<!--  로그인 후 마이페이지 -->
+	<!-- 로그인 후 마이페이지 -->
 	<bean class="mypage.controller.MypageController" p:dao-ref="mypageDAO" />
-	<!--  회원가입 페이지1 -->
+	<!-- 회원가입 페이지1 -->
 	<bean class="member.controller.RegistMemberController" p:dao-ref="memberDAO" />
-	<!--  회원가입 페이지2 -->
+	<!-- 회원가입 페이지2 -->
 	<bean class="member.controller.RegistMemberController2" p:dao-ref="memberDAO" />
-	<!-- 로그인  -->
+	<!-- 로그인 -->
 	<bean class="login.controller.LoginController" p:dao-ref="loginDAO" />
 	<!-- 네이버 간편 로그인 -->
- 	<bean id="naverLoginBO" class="login.controller.NaverLoginBO" />
- 	<!-- 로그아웃  -->
- 	<bean class="logout.controller.LogoutController" />
- 	<!-- email 발송 -->
- 	<bean id="sendmail" class="member.controller.SendEmail" />
- 	<!-- 비밀번호 찾기 -->
- 	<bean id="findpw" class="member.controller.FindpwController" p:dao-ref="memberDAO"/>
+	<bean id="naverLoginBO" class="login.controller.NaverLoginBO" />
+	<!-- 로그아웃 -->
+	<bean class="logout.controller.LogoutController" />
+	<!-- email 발송 -->
+	<bean id="sendmail" class="member.controller.SendEmail" />
+	<!-- 비밀번호 찾기 -->
+	<bean id="findpw" class="member.controller.FindpwController"
+		p:dao-ref="memberDAO" />
+	<!-- 경로생성 -->
+	<bean class="board.controller.BoardController" id="board" />
+	<!-- 경로 게시판 -->
+	<bean class="board.controller.PathList" p:dao-ref="pathDAO" id="pathList" />
+	<!-- 검색 -->
+	<bean class="board.controller.SearchController" id="search" />
 
 
 	<!-- tiles 요청 처리 -->
@@ -81,19 +88,19 @@
 
 	<bean id="memberDAO" class="member.dao.MemberDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean> 
-	
+	</bean>
+
 	<bean id="loginDAO" class="login.dao.LoginDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
-	</bean> 
-	
+	</bean>
+
 	<bean id="mypageDAO" class="mypage.dao.MypageDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	
-	
-
-
+	<!-- boardDAO관련 -->
+	<bean class="board.model.BoardDAO" id="pathDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
 
 </beans>
 

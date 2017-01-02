@@ -54,4 +54,5 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		return 1;
 	}
 	
+	
 }

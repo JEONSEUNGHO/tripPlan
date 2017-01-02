@@ -1,12 +1,15 @@
 package mypage.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import member.controller.SendEmail;
 import member.model.MemberInfo;
 import mypage.dao.MypageDAO;
-import net.sf.json.JSONObject;
+
 
 @Controller
 public class MypageController {
@@ -46,7 +49,6 @@ public class MypageController {
 			// m_identified 0 > 1로 변경
 			dao.verifySuccess(m_email);
 			System.out.println("이메일 인증 완료!!");
-			
 		}
 
 			// DB에서 가져올 mypage화면에 필요한 정보 m_email, m_profile, m_identified
@@ -54,7 +56,6 @@ public class MypageController {
 
 			// DB에서 가져온 정보 m_profile, m_identified
 			int m_identified = memberInfo.getM_identified();
-
 			// 사용자가 가입대기중이면
 			if (m_identified == 0) {
 				try {
@@ -64,24 +65,28 @@ public class MypageController {
 					
 					sendemail.generateAndSendEmail(memberInfo, subject, content);
 				} catch (AddressException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (MessagingException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				System.out.println("메일 전송 성공!!");
 				return "mypagewait";
 				// 사용자가 인증완료면
 			} else if (m_identified == 1) {
+				request.setAttribute("m_profile", memberInfo.getM_profile());
 				return "mypage";
-				// 사용자가 정지회면이면
+				// 사용자가 네이버 인증회원이면
 			} else if (m_identified == 2) {
+				request.setAttribute("m_profile", memberInfo.getM_profile());
+				return "mypage";
+		   // 사용자가 정지회원이면
+			} else if (m_identified == 3) {
 				return "mypageblock";
-			} // 사용자가 관리자라면
+			} // 사용자가 관리자이면 
 			return "admin";
 		}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/realtimeCount.do", method = RequestMethod.GET)
 	public void form1(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 세션에 저장된 이메일을 가져온다 
@@ -99,6 +104,69 @@ public class MypageController {
 									// 내용을
 									// ajax의dataType이 jason에게데이터 쏴줌
 	
+	}
+	
+	// Follow 검색창 요청 처리
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/finduser.do", method = RequestMethod.POST)
+	public void submit(HttpServletResponse response, HttpServletRequest request) throws Exception {
+		response.setCharacterEncoding("utf-8");
+		// follow 검색창에서 입력받은 키워드를 가져옴 
+		String searchValue = request.getParameter("searchUser");
+		// 내가 follow한 사람들의 정보를 가져오기 위해 session에서 내 이메일을 가져옴 
+		String m_email = (String) request.getSession().getAttribute("m_email");
+		
+		JSONArray arrayObj = new JSONArray();
+		JSONObject jsonObj = null;
+		ArrayList<String> dblist = null;
+		// 검색어를 입력하지 않았을 경우 or 입력했다 모두 지웠을 경우 내가 follow한 목록으로 넘어가게 하는 처리 
+		if(searchValue.equals("")) {
+			 dblist= (ArrayList<String>) dao.findfollow(m_email);
+			
+		} else {
+			 dblist = (ArrayList<String>) dao.finduser(m_email);
+		}
+
+		// tl_member에 있는 모든 데이터를 가져온다
+		ArrayList<String> resultlist = new ArrayList<String>();
+
+		// DB에서 가져온 데이터를 비교
+		for (String str : dblist) {
+			if (str.toLowerCase().startsWith(searchValue) || str.toLowerCase().endsWith(searchValue) || str.indexOf(searchValue)>=1) {
+				resultlist.add(str);
+			}
+		}
+		// 뽑은 후 json파싱
+		for (String str : resultlist) {
+			jsonObj = new JSONObject();
+			jsonObj.put("data", str);
+			arrayObj.add(jsonObj);
+		}
+
+		PrintWriter pw = response.getWriter();
+		pw.print(arrayObj);
+		pw.flush();
+		pw.close();
+	} 
+	
+	@RequestMapping(value = "/addfollow.do", method = RequestMethod.POST)
+	public void submit(HttpServletRequest request) {
+		// follow 검색창에서 입력받은 키워드를 가져옴 
+		String f_email = request.getParameter("f_email");
+		// 내가 follow한 사람들의 정보를 가져오기 위해 session에서 내 이메일을 가져옴 
+		String m_email = (String) request.getSession().getAttribute("m_email");
+		dao.addfollow(f_email, m_email);
+		System.out.println("insert성공");
+	}
+	 
+	@RequestMapping(value = "/delfollow.do", method = RequestMethod.POST)
+	public void submit2(HttpServletRequest request) {
+		// follow 검색창에서 입력받은 키워드를 가져옴 
+		String f_email = request.getParameter("f_email");
+		// 내가 follow한 사람들의 정보를 가져오기 위해 session에서 내 이메일을 가져옴 
+		String m_email = (String) request.getSession().getAttribute("m_email");
+		dao.delfollow(f_email, m_email);
+		System.out.println("delete성공");
 	}
 }
 

@@ -8,37 +8,35 @@
 <title>받은 쪽지함</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-   href="/tripPlan/assets/css/bootstrap.min.css">
-<script
-   src="/tripPlan/assets/js/jquery-3.1.1.min.js"></script>
-<script
-   src="/tripPlan/assets/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/tripPlan/assets/css/bootstrap.min.css">
+<script src="/tripPlan/assets/js/jquery-3.1.1.min.js"></script>
+<script src="/tripPlan/assets/js/bootstrap.min.js"></script>
 </head>
 <style>
 body {
 	margin-top: 10px;
 	text-align: center;
 }
+
 a:link, a:hover, a:visited, a:active, a:focus {
 	text-decoration: none;
 }
 </style>
 <script type="text/javascript">
-   $(document).ready(function() {
-      //최상단 체크박스 클릭
-      $("#checkall").click(function() {
-         //클릭되었으면
-         if ($("#checkall").prop("checked")) {
-            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
-            $("input[id=chk]").prop("checked", true);
-            //클릭이 안되있으면
-         } else {
-            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
-            $("input[id=chk]").prop("checked", false);
-         }
-      })
-   })
+	$(document).ready(function() {
+		//최상단 체크박스 클릭
+		$("#checkall").click(function() {
+			//클릭되었으면
+			if ($("#checkall").prop("checked")) {
+				//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+				$("input[id=chk]").prop("checked", true);
+				//클릭이 안되있으면
+			} else {
+				//input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+				$("input[id=chk]").prop("checked", false);
+			}
+		})
+	})
 </script>
 <script type="text/javascript">
 	function check() {
@@ -53,26 +51,29 @@ a:link, a:hover, a:visited, a:active, a:focus {
 	}
 </script>
 <body>
+
+
 	<div class="container">
-  <div class="btn-group">
-    <a href="sendwrite.do" class="btn btn-info" role="button">쪽지 쓰기</a>
-    <a href="receive.do" class="btn btn-info" role="button">받은 쪽지</a>
-    <a href="send.do" class="btn btn-info" role="button">보낸 쪽지</a>
-  </div>
+		<div class="btn-group">
+			<a href="sendwrite.do" class="btn btn-info" role="button">쪽지 쓰기</a> <a
+				href="receive.do" class="btn btn-info" role="button">받은 쪽지</a> <a
+				href="send.do" class="btn btn-info" role="button">보낸 쪽지</a>
+		</div>
 		<table class="table">
 			<thead>
 				<tr height="30">
-					<td align="center" style="position: absolute; left:10;"><input type="checkbox" id="checkall" value="rm_check"></td>
-					<td align="center" style="position: absolute; left:170;">제목</td>
-					<td align="center" style="position: absolute; right:200;">보낸이</td>
-					<td align="center" style="position: absolute; right:50;">날짜</td>
+					<td align="center" style="position: absolute; left: 10;"><input
+						type="checkbox" id="checkall" value="rm_check"></td>
+					<td align="center" style="position: absolute; left: 170;">제목</td>
+					<td align="center" style="position: absolute; right: 200;">보낸이</td>
+					<td align="center" style="position: absolute; right: 50;">날짜</td>
 				</tr>
 			</thead>
 			<tbody>
 
 				<c:if test="${count == 0}">
 					<table>
-					<hr>
+						<hr>
 						<tr height="30" class="danger">
 							<td style="position: absolute; left: 40%;">받은 쪽지가 없습니다.</td>
 						</tr>
@@ -80,24 +81,29 @@ a:link, a:hover, a:visited, a:active, a:focus {
 				</c:if>
 
 				<c:if test="${count > 0}">
-					<table style="width:100%; font-size:13px;">
-					<hr>
+					<table style="width: 100%; font-size: 13px;">
+						<hr>
 						<c:forEach var="receive" items="${receiveList}">
 							<tr height="30">
-								<td align="center" style="position: absolute; left:18;"><input type="checkbox" id="chk" name="rm_check" /></td>
-								
+								<td align="center" style="position: absolute; left: 18;"><input
+									type="checkbox" id="chk" name="rm_check" /></td>
+
 								<c:if test="${receive.rm_check == 0}">
-								<td align="center" style="position: absolute; left: 8%;"><a  href="content.do?rm_id=${receive.rm_id}&pageNum=${currentPage}" style="color: #FB5948;">
-								${receive.rm_title}</a></td>
-								</c:if>
-								
-								<c:if test="${receive.rm_check == 1}">
-								<td align="center" style="position: absolute; left: 8%;"><a href="content.do?rm_id=${receive.rm_id}&pageNum=${currentPage}">
-								${receive.rm_title}</a></td>
+									<td align="center" style="position: absolute; left: 8%;"><a
+										href="content.do?rm_id=${receive.rm_id}&pageNum=${currentPage}"
+										style="color: #FB5948;"> ${receive.rm_title}</a></td>
 								</c:if>
 
-								<td align="center" style="text-align:center; position: absolute; right:170;">${receive.rm_sender}</td>
-								<td align="center" style="text-align:center; position: absolute; right:13;">${receive.rm_date}</td>
+								<c:if test="${receive.rm_check == 1}">
+									<td align="center" style="position: absolute; left: 8%;"><a
+										href="content.do?rm_id=${receive.rm_id}&pageNum=${currentPage}">
+											${receive.rm_title}</a></td>
+								</c:if>
+
+								<td align="center"
+									style="text-align: center; position: absolute; right: 170;">${receive.rm_sender}</td>
+								<td align="center"
+									style="text-align: center; position: absolute; right: 13;">${receive.rm_date}</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -137,5 +143,7 @@ a:link, a:hover, a:visited, a:active, a:focus {
 		<input type="submit" class="btn btn-info" value="선택삭제"> <a
 			href="javascript:window.close()" class="btn btn-info" role="button">닫기</a>
 	</div>
+
+
 </body>
 </html>
