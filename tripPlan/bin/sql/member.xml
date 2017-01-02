@@ -8,8 +8,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="member">
 	<!-- 회원가입 -->
 	<insert id="regist" parameterType="member.model.MemberInfo">
-		insert into tl_member (num, m_email, m_pass, m_nickname, m_registerdate,
-		m_sex, m_agerange, m_profile, m_identified)
+		insert into tl_member (num,
+		m_email, m_pass, m_nickname, m_registerdate,
+		m_sex, m_agerange,
+		m_profile, m_identified)
 		values(m_seq.nextval,#{m_email},#{m_pass},#{m_nickname},sysdate,#{m_sex},#{m_agerange},#{m_profile},#{m_identified})
 	</insert>
 
@@ -25,47 +27,73 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 회원가입 하고 간편로그인 시 회원정보 자동 변경 -->
 	<update id="changeMemberInfo" parameterType="member.model.MemberInfo">
-		update tl_member set m_pass = #{m_pass}, m_sex = #{m_sex}, 
-		m_agerange = #{m_agerange}, m_identified = #{m_identified} where m_email = #{m_email}
+		update tl_member set
+		m_pass = #{m_pass}, m_sex = #{m_sex},
+		m_agerange = #{m_agerange}, m_identified = #{m_identified} where m_email =
+		#{m_email}
 	</update>
-	
+
 	<!-- 회원가입 하고 간편로그인 시 회원정보 자동 변경 -->
 	<select id="getIdentified" parameterType="String" resultType="int">
 		select m_identified from tl_member where m_email = #{m_email}
 	</select>
-	
+
 	<select id="identified" parameterType="String" resultType="member.model.MemberInfo">
 		select m_email, m_profile, m_identified from tl_member where m_email =
 		#{m_email}
 	</select>
 
 	<update id="verify" parameterType="String">
-		update tl_member set m_identified = 1 where m_email = #{m_email}
+		update tl_member set
+		m_identified = 1 where m_email = #{m_email}
 	</update>
 
 	<update id="updatepw" parameterType="member.model.MemberInfo">
-		update tl_member set m_pass = #{tempPW} where m_email = #{m_email}
+		update tl_member set m_pass
+		= #{tempPW} where m_email = #{m_email}
 	</update>
 
 	<select id="realtimeidchk" parameterType="String" resultType="String">
 		select m_email from tl_member where m_email = #{m_email}
 	</select>
-	
+
 	<!-- 읽지않은 쪽지 -->
 	<select id="realtimeCount" parameterType="String" resultType="int">
-		select count(rm_check) from tl_receivemessage where m_email = #{m_email} and rm_check=0
+		select count(rm_check) from tl_receivemessage where m_email =
+		#{m_email} and rm_check=0
 	</select>
-	
+
 	<!-- Follow 회원찾기 -->
-	<select id="finduser" resultType="String">
-		select m_nickname ||chr(44)|| m_email ||chr(44)|| m_profile ||chr(44)|| num as m_email from tl_member
+	<select id="finduser" parameterType="String" resultType="String">
+		SELECT
+		A.m_nickname ||chr(44)|| a.m_email ||chr(44)|| a.m_profile ||chr(44)||
+		a.num ||chr(44)|| NVL(B.F_ID, -1) AS f_id
+		FROM (
+		SELECT *
+		FROM tl_member
+		WHERE M_EMAIL != #{m_email}
+		) A
+		LEFT JOIN (
+		SELECT * FROM tl_friend WHERE M_EMAIL = #{m_email}
+		) B
+		ON A.M_EMAIL = F_EMAIL
 	</select>
-	
+
 	<!-- Follow 내follower찾기 -->
 	<select id="findfollow" parameterType="String" resultType="String">
-		select m.m_nickname ||chr(44)||  m.m_email ||chr(44)|| m.m_profile ||chr(44)|| num as m_nickname from tl_member m join tl_friend f on m.m_email = f.f_email where f.m_email = #{m_email}
+		select m.m_nickname ||chr(44)|| m.m_email ||chr(44)|| m.m_profile
+		||chr(44)|| m.num ||chr(44)|| f.f_id as m_nickname from tl_member m
+		join tl_friend f on m.m_email = f.f_email where f.m_email = #{m_email}
 	</select>
+
+	<!-- mypage follow list -->
+	<insert id="addfollow" parameterType="map">
+		insert into tl_friend values(f_seq.nextval, #{f_email}, #{m_email})
+	</insert>
 	
-	
+		<!-- mypage follow list -->
+	<delete id="delfollow" parameterType="map">
+		delete from tl_friend where f_email = #{f_email} and m_email = #{m_email}
+	</delete>
 
 </mapper>

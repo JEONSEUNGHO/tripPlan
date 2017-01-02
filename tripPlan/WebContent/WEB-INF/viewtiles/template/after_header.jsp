@@ -40,7 +40,7 @@
 				</div>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/create/"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;경로생성</a>
+				<li><a href="createBoard.do"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;경로생성</a>
 				</li>
 				<li><a href="" onClick="window.open('/tripPlan/letter/receive.do','mypage','width=750,height=405'); return false;">
 					<i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;쪽지<span style="color: #fb5948;" id="realtimeCount"></span></a>

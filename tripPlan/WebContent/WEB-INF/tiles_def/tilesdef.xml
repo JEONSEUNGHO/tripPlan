@@ -46,36 +46,66 @@
 		<put-attribute name="title" value="로그인" />
 		<put-attribute name="body" value="/WEB-INF/view/login/loginForm.jsp" />
 	</definition>
-	
-	<!-- 마이페이지 이동 전  -->
+
+	<!-- 마이페이지 이동 전 -->
 	<definition name="mypageload" extends="base_layout">
 		<put-attribute name="title" value="처리중" />
-		<put-attribute name="body" value="/WEB-INF/view/myPage/myPageLoad.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/myPage/myPageLoad.jsp" />
 	</definition>
-	
+
 	<!-- 마이페이지 (인증대기) -->
 	<definition name="mypagewait" extends="layout">
 		<put-attribute name="title" value="인증대기" />
-		<put-attribute name="body" value="/WEB-INF/view/myPage/myPageWait.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/myPage/myPageWait.jsp" />
 	</definition>
-	
+
 	<!-- 마이페이지 (인증완료) -->
 	<definition name="mypage" extends="base_layout">
 		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="body" value="/WEB-INF/view/myPage/myPage.jsp" />
 	</definition>
-	
+
 	<!-- 비밀번호 찾기 -->
 	<definition name="findpw" extends="layout">
 		<put-attribute name="title" value="비밀번호 찾기" />
 		<put-attribute name="body" value="/WEB-INF/view/findpw/findpw.jsp" />
 	</definition>
-	
+
 	<!-- 실시간 아이디 중복검사 -->
 	<definition name="idchk" extends="layout">
 		<put-attribute name="title" value="실시간 아이디찾기" />
 		<put-attribute name="body" value="/WEB-INF/view/regist/idchk.jsp" />
 	</definition>
 
+	<!-- 경로 생성 -->
+	<definition name="createBoard" extends="base_layout">
+		<put-attribute name="title" value="경로생성" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/board/createBoard.jsp" />
+	</definition>
+	<!-- 경로 게시판 -->
+	<definition name="pathList" extends="base_layout">
+		<put-attribute name="title" value="경로 게시판" />
+		<put-attribute name="body" value="/WEB-INF/view/board/path.jsp" />
+	</definition>
+	<!-- 경로 검색 -->
+	<definition name="search" extends="base_layout">
+		<put-attribute name="title" value="검색 결과" />
+		<put-attribute name="body" value="/WEB-INF/view/board/search.jsp" />
+	</definition>
+	<!-- 서브 게시판 -->
+	<definition name="createSubBoard" extends="base_layout">
+		<put-attribute name="title" value="서브게시판" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/board/createSubBoard.jsp" />
+	</definition>
+	<!-- 경로 내 검색 결과 -->
+	<definition name="searchboard" extends="base_layout">
+		<put-attribute name="title" value="검색 결과" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/board/searchResult.jsp" />
+	</definition>
 
 </tiles-definitions>

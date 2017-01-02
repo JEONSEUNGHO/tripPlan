@@ -8,6 +8,186 @@
 	window.onpopstate = function(event) {
 		history.go(1);
 	}
+	function list() {
+		$('#searchBar').focus(function(){
+			 $.ajax({
+				type:"post"			 
+		 		,url:"/tripPlan/tiles/finduser.do"
+				,data:{"searchUser" : $('#searchBar').val()}
+		 		,dataType:"json"
+				,success:function(data){
+				
+					var _len = data.length;
+					var post, i;
+
+					  for (i = 0; i < _len; i++) {
+					    // post배열에 JSON 배열을 하나씩 저장
+					    post = data[i];
+					    
+					  }
+					$(".container_ui__item").remove();
+					 for(i = 0; i < _len; i++) {
+						 	post = data[i];
+					    	var jbString = post.data;
+					    	var jbSplit = jbString.split(',');
+						if(!jbSplit[2]) {
+							jbSplit[2]="/tripPlan/assets/images/default-user-image.png"
+						}
+						 var html = '';
+					   	 html += '<div class="container_ui__item">';
+					   	 html += '<div class="face">';
+			          	 html += '<a href=""><img src="'+jbSplit[2]+'"></a>';
+				         html += '<div>';
+				         html += '<h2>'+jbSplit[0]+'</h2>';
+			          	 html += '&nbsp;&nbsp;<a href="/tripPlan/letter/sendwrite.do?sm_receiver='+jbSplit[1]+'" target="_blank"><i style="color: #fb5948;" class="fa fa-paper-plane-o"></i></a>';
+			             html += '<h3 class="h3">'+jbSplit[1]+'</h3>';
+			             html += '</div>';
+			             if(jbSplit[4]==-1) {
+			            	 html += '<button class="btn btn-primary btn-sm" onclick="addfollow(\''+jbSplit[1]+'\')" style="border-style:none;">Follow</button>';		            	 
+			             } else {
+			            	 html += '<button class="btn btn-primary btn-sm" onclick="delfollow(\''+jbSplit[1]+'\')" style="background-color:#70c1b3; border-style:none;" >Unfollow</button>';
+			             }
+			             html += '</div>';
+			             html += '</div>';
+
+			             $(".inner").after(html);
+			             
+					 }
+		 	}
+		 	,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
+			alert(e.responseText);
+			}
+		 	});    
+		}); 
+	}
+	// mypage 로딩 시 follow list 출력
+	$(document).ready(function () {
+		 $.ajax({
+				type:"post"			 
+		 		,url:"/tripPlan/tiles/finduser.do"
+				,data:{"searchUser" : $('#searchBar').val()}
+		 		,dataType:"json"
+				,success:function(data){
+				
+					var _len = data.length;
+					var post, i;
+
+					  for (i = 0; i < _len; i++) {
+					    // post배열에 JSON 배열을 하나씩 저장
+					    post = data[i];
+					    
+					  }
+					$(".container_ui__item").remove();
+					 for(i = 0; i < _len; i++) {
+						 	post = data[i];
+					    	var jbString = post.data;
+					    	var jbSplit = jbString.split(',');
+						if(!jbSplit[2]) {
+							jbSplit[2]="/tripPlan/assets/images/default-user-image.png"
+						}
+						 var html = '';
+					   	 html += '<div class="container_ui__item">';
+					   	 html += '<div class="face">';
+			          	 html += '<a href=""><img src="'+jbSplit[2]+'"></a>';
+				         html += '<div>';
+				         html += '<h2>'+jbSplit[0]+'</h2>';
+			          	 html += '&nbsp;&nbsp;<a href="/tripPlan/letter/sendwrite.do?sm_receiver='+jbSplit[1]+'" target="_blank"><i style="color: #fb5948;" class="fa fa-paper-plane-o"></i></a>';
+			             html += '<h3 class="h3">'+jbSplit[1]+'</h3>';
+			             html += '</div>';
+			             if(jbSplit[4]==-1) {
+			            	 html += '<button class="btn btn-primary btn-sm" onclick="addfollow(\''+jbSplit[1]+'\')" style="border-style:none;">Follow</button>';	            	 
+			             } else {
+			            	 html += '<button class="btn btn-primary btn-sm" onclick="delfollow(\''+jbSplit[1]+'\')" style="background-color:#70c1b3; border-style:none;" >Unfollow</button>';
+			             }
+			             html += '</div>';
+			             html += '</div>';
+
+			             $(".inner").after(html);
+			             
+					 }
+		 	}
+		 	,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
+			alert(e.responseText);
+			}
+		 });    
+	});
+	// 검색창에 입력 시 해당 lsit 출력
+	$(function (){
+		$('#searchBar').keyup(function(){
+			 $.ajax({
+				type:"post"			 
+		 		,url:"/tripPlan/tiles/finduser.do"
+				,data:{"searchUser" : $('#searchBar').val()}
+		 		,dataType:"json"
+				,success:function(data){
+				
+					var _len = data.length;
+					var post, i;
+
+					  for (i = 0; i < _len; i++) {
+					    // post배열에 JSON 배열을 하나씩 저장
+					    post = data[i];
+					    
+					  }
+					$(".container_ui__item").remove();
+					 for(i = 0; i < _len; i++) {
+						 	post = data[i];
+					    	var jbString = post.data;
+					    	var jbSplit = jbString.split(',');
+						if(!jbSplit[2]) {
+							jbSplit[2]="/tripPlan/assets/images/default-user-image.png"
+						}
+						 var html = '';
+					   	 html += '<div class="container_ui__item">';
+					   	 html += '<div class="face">';
+			          	 html += '<a href=""><img src="'+jbSplit[2]+'"></a>';
+				         html += '<div>';
+				         html += '<h2>'+jbSplit[0]+'</h2>';
+			          	 html += '&nbsp;&nbsp;<a href="/tripPlan/letter/sendwrite.do?sm_receiver='+jbSplit[1]+'" target="_blank"><i style="color: #fb5948;" class="fa fa-paper-plane-o"></i></a>';
+			             html += '<h3>'+jbSplit[1]+'</h3>';
+			             html += '</div>';
+			             if(jbSplit[4]==-1) {
+			            	 html += '<button class="btn btn-primary btn-sm" onclick="addfollow(\''+jbSplit[1]+'\')" style="border-style:none;">Follow</button>';		            	 
+			             } else { 
+			            	 html += '<button class="btn btn-primary btn-sm" onclick="delfollow(\''+jbSplit[1]+'\')" style="background-color:#70c1b3; border-style:none;" >Unfollow</button>';
+			             }
+			             html += '</div>';
+			             html += '</div>';
+
+			             $(".inner").after(html);
+			             
+					 }
+		 	}
+		 	,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
+			alert(e.responseText);
+			}
+		 	});    
+		});
+	}); 
+	function addfollow(f_email) {
+		 $.ajax({
+				type:"post"			 
+		 		,url:"/tripPlan/tiles/addfollow.do"
+				,data:{"f_email" : f_email}
+				,success:function(){
+					 
+		 	}
+		 	});  
+		 $('#searchBar').focus();
+		 list();
+	}
+	function delfollow(f_email) {
+		 $.ajax({
+				type:"post"			 
+		 		,url:"/tripPlan/tiles/delfollow.do"
+				,data:{"f_email" : f_email}
+				,success:function(){
+					 
+		 	}
+		 	});  
+		 $('#searchBar').focus();
+		 list();
+	} 
 </script>
 <style>
 body {
@@ -154,64 +334,8 @@ body {
 	color: #ccc;
 }
 </style>
-<script>
-$(function(){
-	$('#searchBar').keyup(function(){
-		 $.ajax({
-			type:"post"			 
-	 		,url:"/tripPlan/tiles/finduser.do"
-			,data:{"searchUser" : $('#searchBar').val()}
-	 		,dataType:"json"
-			,success:function(data){
-			
-				var _len = data.length;
-				var post, i;
 
-				  for (i = 0; i < _len; i++) {
-				    // post배열에 JSON 배열을 하나씩 저장
-				    post = data[i];
-				    
-				  }
-				$(".container_ui__item").remove();
-				 for(i = 0; i < _len; i++) {
-					 	post = data[i];
-				    	var jbString = post.data;
-				    	var jbSplit = jbString.split(',');
-					if(!jbSplit[2]) {
-						jbSplit[2]="/tripPlan/assets/images/default-user-image.png"
-					}
-					 var html = '';
-				   	 html += '<div class="container_ui__item">';
-				   	 html += '<div class="face">';
-		          	 html += '<a href=""><img src="'+jbSplit[2]+'"></a>';
-			         html += '<div>';
-			         html += '<h2>'+jbSplit[0]+'</h2>';
-		          	 html += '&nbsp;&nbsp;<a href="/tripPlan/letter/sendwrite.do?sm_receiver='+jbSplit[1]+'" target="_blank"><i style="color: #fb5948;" class="fa fa-paper-plane-o"></i></a>';
-		             html += '<h3 class="h3">'+jbSplit[1]+'</h3>';
-		             html += '</div>';
-		             if(!$('#searchBar')) {
-		            	 html += '<a class="btn btn-primary btn-sm" style="color:#70c1b3;" href="">Unfollow</a>';
-		             } else {
-		            	 html += '<a class="btn btn-primary btn-sm" href="">Follow</a>';
-		             }
-		             html += '</div>';
-		             html += '</div>';
-
-		             $(".inner").after(html);
-		             
-				 }
-				 
-				
-	 	}
-	 	,error:function(e) {	// 이곳의 ajax에서 에러가 나면 얼럿창으로 에러 메시지 출력
-		alert(e.responseText);
-		}
-	 	});    
-	});
-}); 
-</script>
 <div id="body">
-
 
 	${m_email}
 	<!-- 오른쪽 사이드바 -->
@@ -226,6 +350,7 @@ $(function(){
 					placeholder="찾으실 닉네임 또는 이메일을 입력하세요." required />
 			</div>
 			<div class="inner"></div>
+			
 
 		</div>
 

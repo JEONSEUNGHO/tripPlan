@@ -111,19 +111,20 @@ public class MypageController {
 	@RequestMapping(value = "/finduser.do", method = RequestMethod.POST)
 	public void submit(HttpServletResponse response, HttpServletRequest request) throws Exception {
 		response.setCharacterEncoding("utf-8");
+		// follow 검색창에서 입력받은 키워드를 가져옴 
 		String searchValue = request.getParameter("searchUser");
+		// 내가 follow한 사람들의 정보를 가져오기 위해 session에서 내 이메일을 가져옴 
 		String m_email = (String) request.getSession().getAttribute("m_email");
-		System.out.println("m_email="+m_email);
-		System.out.println("search="+searchValue);
 		
 		JSONArray arrayObj = new JSONArray();
 		JSONObject jsonObj = null;
 		ArrayList<String> dblist = null;
+		// 검색어를 입력하지 않았을 경우 or 입력했다 모두 지웠을 경우 내가 follow한 목록으로 넘어가게 하는 처리 
 		if(searchValue.equals("")) {
 			 dblist= (ArrayList<String>) dao.findfollow(m_email);
 			
 		} else {
-			 dblist = (ArrayList<String>) dao.finduser();
+			 dblist = (ArrayList<String>) dao.finduser(m_email);
 		}
 
 		// tl_member에 있는 모든 데이터를 가져온다
@@ -139,7 +140,6 @@ public class MypageController {
 		for (String str : resultlist) {
 			jsonObj = new JSONObject();
 			jsonObj.put("data", str);
-			System.out.println("data="+str);
 			arrayObj.add(jsonObj);
 		}
 
@@ -147,6 +147,26 @@ public class MypageController {
 		pw.print(arrayObj);
 		pw.flush();
 		pw.close();
+	} 
+	
+	@RequestMapping(value = "/addfollow.do", method = RequestMethod.POST)
+	public void submit(HttpServletRequest request) {
+		// follow 검색창에서 입력받은 키워드를 가져옴 
+		String f_email = request.getParameter("f_email");
+		// 내가 follow한 사람들의 정보를 가져오기 위해 session에서 내 이메일을 가져옴 
+		String m_email = (String) request.getSession().getAttribute("m_email");
+		dao.addfollow(f_email, m_email);
+		System.out.println("insert성공");
+	}
+	 
+	@RequestMapping(value = "/delfollow.do", method = RequestMethod.POST)
+	public void submit2(HttpServletRequest request) {
+		// follow 검색창에서 입력받은 키워드를 가져옴 
+		String f_email = request.getParameter("f_email");
+		// 내가 follow한 사람들의 정보를 가져오기 위해 session에서 내 이메일을 가져옴 
+		String m_email = (String) request.getSession().getAttribute("m_email");
+		dao.delfollow(f_email, m_email);
+		System.out.println("delete성공");
 	}
 }
 

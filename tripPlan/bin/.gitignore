@@ -1,7 +1,11 @@
-/message/
-/sql/
-/mypage/
+/db.properties
+/board/
 /login/
+/logout/
+/main/
 /member/
-/.aws/
-/aws/
+/message/
+/mypage/
+/receive/
+/send/
+/sql/

@@ -1,6 +1,8 @@
 package mypage.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import member.model.MemberInfo;
@@ -28,8 +30,8 @@ public class MypageDAO extends SqlSessionDaoSupport {
 		return check;
 	}
 	
-	public List<String> finduser() {
-		List<String> resultList = getSqlSession().selectList("member.finduser");
+	public List<String> finduser(String m_email) {
+		List<String> resultList = getSqlSession().selectList("member.finduser", m_email);
 		
 		return resultList;
 	}
@@ -38,6 +40,22 @@ public class MypageDAO extends SqlSessionDaoSupport {
 		List<String> resultList = getSqlSession().selectList("member.findfollow", m_email);
 		
 		return resultList;
+	}
+	
+	public void addfollow(String f_email, String m_email) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("f_email", f_email);
+		map.put("m_email", m_email);
+		getSqlSession().insert("member.addfollow", map);
+		
+	}
+	
+	public void delfollow(String f_email, String m_email) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("f_email", f_email);
+		map.put("m_email", m_email);
+		getSqlSession().delete("member.delfollow", map);
+		
 	}
 	
 }
