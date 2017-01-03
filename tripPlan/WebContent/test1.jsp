@@ -1,94 +1,144 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>�� �߰�/���� ����</title>
-<script type="text/javascript">
-var directionDisplay;
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+  
+  
+
+  
+  
+  
+
+  
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.7.1.js"></script>
+
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+  
+
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+
+  
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDenhlxS0ffAWJ13dfpLxLoqcz94fUAL3o&libraries=places&callback=initMap"async defer></script>
+  
+
+  <style type="text/css">
+    #map_canvas{
+    width: 60%;
+    height: 400px;
+    border: 1px solid black;
+    float: left;
+}
+#directions {
+    width: 38%;
+    float: right; 
+}
+body {
+    font-size: 12px;
+}
+  </style>
+
+  <title>Google Maps Routing Options</title>
+
+  
+    
+
+
+
+
+<script type='text/javascript'>//<![CDATA[
+$(function(){
+var directionsDisplay = new google.maps.DirectionsRenderer({ draggable: true });
 var directionsService = new google.maps.DirectionsService();
 var map;
 
-function initialize() {
-    
-    directionsDisplay = new google.maps.DirectionsRenderer();
-    var center = new google.maps.LatLng(0, 0);
+$(window).load(function() {
     var myOptions = {
-        zoom: 7,
+        zoom: 10,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        center: center
-    }
-
-    map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-    directionsDisplay.setMap(map);
-
-    var start = "Yamuna Nagar, Haryana, India";
-    var end = "New Delhi, India";
-    var method = 'DRIVING';
-    var request = {
-        origin: start,
-        destination: end,
-        travelMode: google.maps.DirectionsTravelMode[method],
-        provideRouteAlternatives: true
+        center: new google.maps.LatLng(35.270, -80.837)
     };
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    directionsDisplay.setMap(map);
+    directionsDisplay.setPanel(document.getElementById("directions"));
+    
+    $("#routeMode").on("change", function() { calcRoute(); });
+    $("#routeGo").on("click", function() { calcRoute(); });
+    $("#routeClear").on("click", function() { directionsDisplay.setDirections({ routes: [] }); });
+    
+});
 
-    directionsService.route(request, function (response, status) {
 
+function calcRoute() {
+    var request = {
+        origin: $("#routeFrom").val(),
+        destination: $("#routeTo").val(),
+        provideRouteAlternatives: true,
+        travelMode: google.maps.TravelMode[$("#routeMode").val()]
+    };
+    directionsService.route(request, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
-
-            var routesSteps = [];
-            var routes = response.routes;
-            var colors = ['red', 'green', 'blue', 'orange', 'yellow', 'black'];
-
-            for (var i = 0; i < routes.length; i++) {
-
-                new google.maps.DirectionsRenderer({
-                    map: map,
-                    directions: response,
-                    routeIndex: i,
-                    polylineOptions: {
-
-                        strokeColor: colors[i],
-                        strokeWeight: 4,
-                        strokeOpacity: .3
-                    }
-                });
-
-                var steps = routes[i].legs[0].steps;
-                var stepsCoords = [];
-
-                for (var j = 0; j < steps.length; j++) {
-
-                    stepsCoords[j] = new google.maps.LatLng(steps[j].start_location.lat(), steps[j].start_location.lng());
-
-                    new google.maps.Marker({
-                        position: stepsCoords[j],
-                        map: map,
-                        icon: {
-                            path: 'M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0',
-                            scale: .5,
-                            fillColor: colors[i],
-                            fillOpacity: .3,
-                            strokeWeight: 0
-                        },
-                        title: steps[j].maneuver
-                    });
-                }
-
-                routesSteps[i] = stepsCoords;
-            }
-
-            // Here is your array of routes steps coordinates
-            console.log('routesSteps', routesSteps);
+        	 for (var i = 0; i < response.routes.length; i++) {						
+					new google.maps.DirectionsRenderer({								//새로운 경로를 가져온다.
+					    map: map,														//map에는 위에 선언된 map변수를 가져와 담는다.
+					    directions: response,											//경로에 response정보를 담는다.
+					    routeIndex: i													//대체 경로들을 담아서 보여준다.
+					  });
+	    	  }
+            directionsDisplay.setDirections(response);
         }
     });
 }
+});//]]> 
 
-initialize();
 </script>
+
+  
 </head>
+
 <body>
-<div id="map-canvas"></div>
+  <input type="text" id="routeFrom" name="routeFrom" value="700 n tryon st, charlotte nc" />
+<label for="routeFrom">From</label><br />
+<input type="text" id="routeTo" name="routeTo" value="Huntersville, NC" />
+<label for="routeTo">To</label><br />
+<select id="routeMode" name="routeMode">
+    <option value="DRIVING">Driving</option>
+    <option value="WALKING">Walking</option>
+    <option value="BICYCLING">Bicycling</option>
+    <option value="TRANSIT">Transit</option>
+</select>
+<label for="routeMode">Mode</label><br />
+<div class="textcenter">
+    <button id="routeGo">Route</button>
+    <button id="routeClear">Clear Route</button>
+</div>
+<div id="map_canvas"></div>
+<div id="directions"></div>
+
+
+  
+ <!--  <script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "gHK7s"
+    }], "*")
+  }
+</script> -->
+
 </body>
+
 </html>
+

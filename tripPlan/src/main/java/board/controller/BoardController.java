@@ -36,9 +36,9 @@ public class BoardController {
 	@RequestMapping(value="/createBoard.do", method=RequestMethod.POST)
 	public ModelAndView submitMainBoard(String maintitle, String identified, String mainphoto, String maincontents){			//jsp에서 값 받아와야함
 		ModelAndView mav = new ModelAndView("createSubBoard");
-		BoardDTO board = new BoardDTO(maintitle,maincontents,mainphoto,0,currentTime(),0,currentTime(),1,"cool4706@naver.com");								//값 받아와서 생성자에 넣어줘야함
+		/*BoardDTO board = new BoardDTO(maintitle,maincontents,mainphoto,0,currentTime(),0,currentTime(),1,"cool4706@naver.com");								//값 받아와서 생성자에 넣어줘야함
 		int check = dao.insertMainBoard(board);
-		mav.addObject("check", check);
+		mav.addObject("check", check);*/
 		return mav;
 	}
 	//mainBoard에서 다음 버튼 클릭 후 화면

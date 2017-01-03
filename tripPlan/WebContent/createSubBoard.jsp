@@ -10,7 +10,7 @@
 		<script src="/tripPlan/assets/js/subBoard.js"></script>
 		<script src="/tripPlan/assets/js/map.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDenhlxS0ffAWJ13dfpLxLoqcz94fUAL3o&libraries=places&callback=initMap"async defer></script>
-		<!-- <script type="text/javascript">
+	 <script type="text/javascript">
 			$(document).ready(function() {
 				$('#test').click(function() {
 					$('#sgsg').append('<div class="sgDiv">kkkkk</div>');
@@ -22,14 +22,14 @@
 			$(document).on('click', '.sgDiv', function() {
 				alert('승구');
 			});
-		</script> -->
+		</script>
 		<title>Insert title here</title>
 	</head>
 	<body>
 		<div id="body">
 			<div id="map"></div>
-			
-			<form id="calculate-route" name="calculate-route" action="#" method="get"style="margin-left:650px; margin-top:-480px">
+			<div id="directions"></div>
+			<form id="calculate-route" name="calculate-route" action="#" method="get"style="margin-left:650px;">
 				<article class="page">
 			   			 <li class="timeline-milestone is-completed timeline-start">
 			     		 	<div class="timeline-action">
@@ -44,8 +44,9 @@
 											<input id="destinationInput" class="controls" type="text" name="sb_lon" placeholder="도착지를 입력해 주세요."><br/>
 											<a id="destinationInput-link" href="#">Get my position</a>
 										</td>
-										<td colspan="1" width="150"><input type="hidden" name="type" id="changemode-transit" checked="checked">
-											<input type="submit"/>
+										<td colspan="1" width="150">
+											<button id="routeClear">Clear Route</button>
+											<input type="submit" value="길찾기!">
 										</td>
 									</tr>
 									<tr height="250">
@@ -67,9 +68,9 @@
 				<input type="button" class="btn btn-danger controls" style="margin:auto;"value="취소"/>
 			</form>
 		</div>
-		<!-- <div id="test" style="width:50px; height:50px;">승구</div>
+		<div id="test" style="width:50px; height:50px;">승구</div>
 		<div id="sgsg">
 		
-		</div> -->
+		</div>
 	</body>
 </html>
