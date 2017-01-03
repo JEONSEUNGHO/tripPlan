@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import receive.model.ReceiveDataBean;
 
 public class SendDAO extends SqlSessionDaoSupport {
 	

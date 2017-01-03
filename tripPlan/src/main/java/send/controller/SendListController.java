@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import receive.model.ReceiveDataBean;
 import send.dao.SendDataBean;
 import send.service.SendService;
 

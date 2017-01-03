@@ -2,7 +2,6 @@ package send.service;
 
 import java.util.List;
 
-import receive.model.ReceiveDataBean;
 import send.dao.SendDataBean;
 
 public interface SendService {

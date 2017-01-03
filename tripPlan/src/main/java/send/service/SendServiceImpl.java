@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import receive.model.ReceiveDataBean;
 import send.dao.SendDAO;
 import send.dao.SendDataBean;
 

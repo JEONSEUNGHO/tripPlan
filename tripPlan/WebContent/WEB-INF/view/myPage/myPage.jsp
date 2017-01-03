@@ -248,7 +248,7 @@ body {
 
 /* 오른쪽 사이드바 */
 .left_container {
-	width: 20%;
+	width: 22%;
 	text-align: center;
 	height: 100%;
 	position: absolute;
@@ -423,7 +423,6 @@ body {
 			</i>&nbsp;&nbsp;&nbsp;찜목록</a></li>
 			<li class="side-bar"><a href="#"><i class="fa fa-user-o" aria-hidden="true">
 			</i>&nbsp;&nbsp;&nbsp;프로필 수정</a></li>
-
 			<li class="side-bar"><a href="#"><i class="fa fa-lock" aria-hidden="true">
 			</i>&nbsp;&nbsp;&nbsp;비밀번호 변경</a></li>
 
