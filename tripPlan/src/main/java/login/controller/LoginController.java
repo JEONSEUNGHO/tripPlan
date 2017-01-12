@@ -71,26 +71,28 @@ public class LoginController {
 			String[] ages = jsonValue.get("age").toString().split("-");
 			m_agerange = ages[0];
 			m_sex = jsonValue.get("gender").toString();
-
+			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		memberInfo.setM_email(m_email);
 		memberInfo.setM_pass(m_pass);
 		memberInfo.setM_sex(m_sex);
 		memberInfo.setM_agerange(m_agerange);
-		memberInfo.setM_identified(1);
+		// 네이버 간편 로그인으로 회원가입 시 m_identified = 2
+		memberInfo.setM_identified(2);
 		
 		// 간편로그인 시 기존회원인지 확인
 		String check = dao.duplicationCheck(memberInfo);
 		if(check == null) {
 			check = "";
-		} else if(check != null) {
+		// 일반 회원가입하고 동일 아이디로 가입한 이메일로 간편로그인 시 
+		} else if(check.equals(m_email)) {
+			// 네이버에서 제공하는 회원정보로 DB정보를 교체
+			dao.changeMemberInfo(memberInfo); 
 			session.setAttribute("m_email", memberInfo.getM_email());
 			resp.sendRedirect("mypage.do");
 		}
-		
 		return new ModelAndView("registMemberForm2", "memberInfo", memberInfo);
 	}
 
@@ -125,7 +127,6 @@ public class LoginController {
 		try {
 			response.sendRedirect("mypage.do");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "mypage";

@@ -16,7 +16,7 @@
 </head>
 <body>
 <div id="body">
-<form method="post" action="createBoard.do">
+<form method="post" action="createBoard.do" enctype="multipart/form-data">
 	<div class="wrapper">
     
     <section class="container animated fadeInDown slow custom-ease">
@@ -29,37 +29,34 @@
 
           <div class="row">
             <label class="column">
-              <span class="label">Destination</span>
-              <input name="destination" type="text" tabindex="1" placeholder="제목을 입력하세요.." autofocus>
+              <span class="group-label">제목</span>
+              <input name="b_title" type="text" tabindex="1" placeholder="제목을 입력하세요.." required="required" autofocus>
             </label>
           </div>
 
           <div class="row">
             <label class="column">
-              <span class="label">Departure</span>
+              <span class="group-label">시작일</span>
               <span class="date-wrapper">
-                <input id="departure" class="date" name="departure" type="text" tabindex="2" placeholder="제목" readonly>
-                <input id="departure-timestamp" name="departureTimestamp" type="hidden"> <!-- used to store unix timestamp -->
-                
-                <span class="icon date-icon">
-                  <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <rect fill-opacity="0" fill="#FFFFFF" x="0" y="0" width="16" height="16"></rect><rect fill="#969B9C" x="0" y="5" width="16" height="1"></rect><rect fill="#969B9C" x="1" y="15" width="14" height="1"></rect><rect fill="#969B9C" x="15" y="1" width="1" height="15"></rect><rect fill="#969B9C" x="0" y="1" width="1" height="15"></rect><rect fill="#969B9C" x="14" y="1" width="1" height="1"></rect><rect fill="#969B9C" x="1" y="1" width="1" height="1"></rect><rect fill="#969B9C" x="5" y="1" width="6" height="1"></rect><rect fill="#969B9C" x="12" y="0" width="1" height="3" rx="1"></rect><rect fill="#969B9C" x="3" y="0" width="1" height="3" rx="1"></rect>
-                    </g>
-                  </svg>
-                </span>
-                
+                <input type="date" id="b_startdate" name="b_startdate" required="required">
               </span>
             </label>
           </div>
-
+		  <div class="row">
+            <label class="column">
+              <span class="group-label">종료일</span>
+              <span class="date-wrapper">
+                <input type="date" id="b_enddate" name="b_enddate" required="required">
+              </span>
+            </label>
+          </div>
           <div class="row">
             <label class="has-other">
-              <span class="label">Purpose</span>
+              <span class="group-label">구분</span>
               
               <div class="select-wrapper">
                 <span class="select">
-                  <select name="purpose" tabindex="3">
+                  <select name="b_identified" tabindex="3" required="required">
                     <option value="" selected disabled>Why?</option>
                     <option value="0">후기</option>
                     <option value="1">계획</option>
@@ -73,22 +70,30 @@
           </div>
 
           <div class="row clearfix group">
-            <span class="group-label">Activity</span>
+            <span class="group-label">상태</span>
             <label class="column inline radio-wrapper">
-              <input name="activity" type="radio" value="private" tabindex="4" checked>
+              <input name="b_activity" type="radio" value="1" tabindex="4" checked>
               <span class="label">Private</span>
             </label>
-            <label class="column inline radio-wrapper">
-              <input name="activity" type="radio" value="public" tabindex="5">
+            <label class="b_column inline radio-wrapper">
+              <input name="b_activity" type="radio" value="2" tabindex="5">
               <span class="label">Public</span>
             </label>
           </div>
-
-                
+		<div class="row">
+			<span class="group-label">메인사진</span>
+			<input type="file" name="b_mainphoto" accept="image/*" >
+		</div>
+		
+        
+		<div class="row">
+			<span class="group-label">내용</span>
+			<textarea class="form-control" rows="5" id="comment" name="b_maincontents" required="required"></textarea>
+		</div>
         </div><!-- .content -->
 
         <input class="button button-primary" type="submit" value="다음" tabindex="7">
-
+		</div><!-- .content -->
       </form>
     </section>
   

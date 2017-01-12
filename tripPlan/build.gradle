@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.slf4j:slf4j-api:1.7.21'
+   compile 'org.slf4j:slf4j-api:1.7.21'
     
    compile group: 'org.springframework', name: 'spring-webmvc', version: '4.2.8.RELEASE'
    compile group: 'javax.validation', name: 'validation-api', version: '1.1.0.Final'
@@ -27,6 +27,7 @@ dependencies {
     // 파일 업로드를 위한 api 추가
     compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.3.1'
     //json이용하기 위해 추가
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 	compile group: 'net.sf.json-lib', name: 'json-lib-ext-spring', version: '1.0.2'
 	compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
 	//tiles
@@ -38,5 +39,8 @@ dependencies {
 	// OAuth2.0 Java Library 등록
 	compile group: 'com.github.scribejava', name: 'scribejava-core', version: '2.8.1' 
 	
-    testCompile 'junit:junit:4.12'
+	// AWS 사용
+	compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.73'
+	
+
 }

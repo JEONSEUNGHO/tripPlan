@@ -6,7 +6,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class MemberInfo {
 
 	private String m_email;
+	// DB에 저장된 비밀번호
+	private String passwdFromDB;
+	// 기존 비밀번호
 	private String m_pass;
+	// 새 비밀번호
+	private String m_pass1;
+	// 비밀번호 확인
 	private String m_pass2;
 	private String m_nickname;
 	private String m_sex;
@@ -17,11 +23,24 @@ public class MemberInfo {
 	private int m_identified;
 	private String tempPW;
 	
+	
+	public String getPasswdFromDB() {
+		return passwdFromDB;
+	}
+	public void setPasswdFromDB(String passwdFromDB) {
+		this.passwdFromDB = passwdFromDB;
+	}
 	public String getM_pass() {
 		return m_pass;
 	}
 	public void setM_pass(String m_pass) {
 		this.m_pass = m_pass;
+	}
+	public String getM_pass1() {
+		return m_pass1;
+	}
+	public void setM_pass1(String m_pass1) {
+		this.m_pass1 = m_pass1;
 	}
 	public String getM_pass2() {
 		return m_pass2;

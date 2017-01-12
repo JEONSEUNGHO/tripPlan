@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MainController {
 
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
-	public String form2() {
+	public String form() {
 		return "main";
 	}
 

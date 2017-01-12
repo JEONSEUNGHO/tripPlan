@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="letter">
+
+	<!-- 받은 쪽지 목록  -->
+	<select id="getList" parameterType="Map" resultType="receive.model.ReceiveDataBean">
+	    select rm_id, rm_title, rm_contents, rm_date, rm_check, rm_sender, m_email, r      
+        from (select rm_id, rm_title, rm_contents, rm_date, rm_check, rm_sender, m_email, rownum r
+        from (select * from tp_receivemessage order by rm_date desc, rm_id asc) order by rm_date desc, rm_id asc) where r &gt;= #{startRow} and r &lt;= #{endRow} 
+        and m_email = #{m_email}	
+	</select>
+	<!-- 받은 전체 쪽지 목록 -->
+	<select id="getReceiveCount" parameterType="String" resultType="int">
+		select count(*) from tp_receivemessage where m_email = #{m_email}
+	</select>
+	<!-- 쪽지 상세 내용 -->
+	<select id="getReceive" resultType="receive.model.ReceiveDataBean" parameterType="int" >
+		select * from tp_receivemessage where rm_id = #{rm_id}
+	</select>
+		
+	<!-- 받은 쪽지 삭제 -->
+	<delete id="receivedelete" parameterType="map" >
+		delete from tp_receivemessage
+    <where>
+        rm_id in
+        <foreach collection="chkList" item="chk" index="index" separator="," open="(" close=")">
+            #{chk}
+        </foreach>
+        and m_email = #{m_email}
+    </where>
+	</delete>
+	
+	<!-- 보낸 쪽지 목록  -->
+	<select id="getSends" parameterType="Map" resultType="send.dao.SendDataBean">
+	    select sm_id, sm_title, sm_contents, sm_date, sm_check, sm_receiver, m_email, r      
+        from (select sm_id, sm_title, sm_contents, sm_date, sm_check, sm_receiver, m_email, rownum r
+        from (select * from tp_sendmessage order by sm_date desc, sm_id asc) order by sm_date desc, sm_id asc) where r &gt;= #{startRow} and r &lt;= #{endRow} 
+        and m_email = #{m_email}	
+	</select>
+	<!-- 쪽지 쓰기 -->
+	<insert id="insert" parameterType="send.dao.SendDataBean">
+		insert all
+		into tp_sendmessage values (sm_seq.nextval,#{sm_title},#{sm_contents}, sysdate,#{sm_check},#{sm_receiver},#{m_email})
+		into tp_receivemessage values (rm_seq.nextval,#{sm_title},#{sm_contents}, sysdate,#{sm_check},#{m_email},#{sm_receiver})
+		select * from dual
+	</insert>
+	<!-- 수신확인 -->
+	<update id="updateCheck" parameterType="int"> 
+		update tp_sendmessage set sm_check=1 where sm_date = (select rm_date from tp_receivemessage where rm_id = #{rm_id})
+	</update>
+	<!-- 수신확인2 -->
+	<update id="updateCheck2" parameterType="int"> 
+		update tp_receivemessage set rm_check=1 where rm_id = #{rm_id}
+	</update>
+	
+	<!-- 보낸 전체 쪽지 개수 -->
+	<select id="getSendCount" parameterType="String" resultType="int">
+		select count(*) from tp_sendmessage where m_email = #{m_email}
+	</select>
+	
+	<!-- 보낸 쪽지 상세 -->
+	<select id="getSend" parameterType="int" resultType="send.dao.SendDataBean">
+		select * from tp_sendmessage where sm_id = #{sm_id}
+	</select>
+	
+	<!-- 보낸 쪽지 삭제 -->
+	<delete id="senddelete" parameterType="map" >
+		delete from tp_sendmessage
+    <where>
+        sm_id in
+        <foreach collection="chkList" item="chk" index="index" separator="," open="(" close=")">
+            #{chk}
+        </foreach>
+        and m_email = #{m_email}
+    </where>
+	</delete>
+	
+	<!-- 실시간 받는사람 검색  -->
+	<select id="realtimeidchk" resultType="String">
+		select m_nickname ||chr(32)||chr(40)|| m_email ||chr(41) as m_email from tp_member	
+	</select>
+	<select id="realtimeidchk2" parameterType="String" resultType="String">
+		select m_email from tp_member where m_email = #{sm_receiver}
+	</select>
+
+</mapper>

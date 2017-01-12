@@ -1,0 +1,125 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,900);
+
+body,html{
+  background:#EBEBEB !important;
+  min-height:100vh;
+}
+
+.wrap{
+  margin:3em auto;
+  width:90%;
+  min-width:450px;
+}
+
+.option{
+  width:100%;
+  background:#fff;
+  position:relative;
+  font-family: 'Roboto', sans-serif;
+  color:#333;
+  margin:10px 0px;
+  padding:0px;
+  border-radius: 5px;
+  box-shadow:0 0 5px 0 #999; 
+  border-bottom: 2px solid #869BA3;
+  padding-bottom:0.2em;
+
+}
+
+.option h2{
+  font-weight:300;
+  font-size:2.5em;
+  padding:0.3em;
+  color:#333;
+}
+
+.sub-info{
+  padding:1em;
+}
+
+.cell{
+  width:49%;
+  display:inline-block;
+  vertical-align: top;
+}
+
+.results .fa,.dropdown-menu .fa{
+  text-align:center !important;
+  font-size:1.3em !important;
+  width:1.4em !important;
+}
+.over{
+  overflow:visible;
+}
+
+.right{
+  float:right;
+}
+
+.clear{
+  display:inline-block;
+  clear:both;
+}
+
+
+.ng-enter {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  
+  opacity:1;
+}
+
+.ng-enter-active {
+  margin-left: 0;
+}
+
+.ng-leave {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  
+
+}
+
+.ng-leave-active {
+  opacity:0;
+  
+}
+
+.ng-move {
+  -webkit-transition: 0.2s;
+  transition:0.2s;
+  opacity:0;
+
+}
+
+.ng-move-active {
+  opacity:1;
+}
+map{
+  width:100%;
+  height:15em;
+}
+
+.appear{
+  opacity:0;
+  -webkit-transition:0.2s;
+  transition: 0.2s;
+}
+.option:hover .appear{
+  opacity:1;
+}
+
+[ng-cloak].splash {
+    opacity:1 !important;
+    display:block;
+}
+.splash {
+    opacity:0;
+    display:none;
+}
+.btn{
+  margin:-1px;
+}
+.unstyled{
+  background:transparent !important;
+}

@@ -1,51 +1,46 @@
-
-<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-			<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-			<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-
-
-<link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" media="screen" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<h3 id="linked-pickers">Linked Pickers</h3>
-
-
-
-<div class="container">
-    <div class='col-md-5'>
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker6'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class='col-md-5'>
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker7'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker6').datetimepicker();
-        $('#datetimepicker7').datetimepicker({
-            useCurrent: false
-        });
-        $("#datetimepicker6").on("dp.change", function (e) {
-            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-        });
-        $("#datetimepicker7").on("dp.change", function (e) {
-            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-        });
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<!DOCTYPE html>
+<html lang="ko" ng-app="angularStart">
+<script>
+var module = angular.module("angularStart", []);
+ 
+module.controller("MainController", function($scope, $http) {
+  
+  $scope.getUsers = function(){
+    $http({
+      method  : 'get',
+      url     : 'data.json',
+      headers : {'Content-Type': 'application/json; charset=utf-8'} 
+    }).success(function(data){
+      $scope.user = data;
     });
+  };
+});
 </script>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ 
+    <title>angularStart</title>
+    <meta name="description" content="">
+    <meta name="author" content="team.codekin@gmail.com">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <script src="/index.js"></script>
+  </head>
+ 
+  <body>
+    <div ng-controller="MainController">
+      id : <input type="text" ng-model="user.id" /><br/>
+      email : <input type="text" ng-model="user.email" /><br/>
+      <button type="button" ng-click="getUsers()">load users</button>
+      <div>
+        {{user.id}}
+      </div>
+      <div>
+        {{user.email}}
+      </div>
+    </div>
+  </body>
+</html>

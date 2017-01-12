@@ -125,7 +125,7 @@
   </div>
 </aside>
 				<c:if test="${searchList==0 }">
-				
+				<h1 style="margin-left:500px;margin-top:10px;">검색 결과가 없습니다.</h1>
 				  	</c:if>
 				  
 				<c:if test="${searchList>0 }">
@@ -148,8 +148,8 @@
 										</c:if>
 										<c:if test="${list.b_identified ==2 }">
 										<span class="item_status label label-primary">그룹</span>
-										</c:if>
-										<span class="item_label label label-danger">${list.b_totalspendtime}</span>
+										</c:if><%-- 
+										<span class="item_label label label-danger">${list.b_totalspendtime}</span> --%>
 										<span class="item_introduce"> ${list.b_title }</span>
 									</p>
 									<p>

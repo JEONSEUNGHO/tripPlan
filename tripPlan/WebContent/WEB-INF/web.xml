@@ -38,9 +38,10 @@
 
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/naver/*</url-pattern>
+		<url-pattern>/letter/*</url-pattern>
 	</servlet-mapping>
-	
+
+
 	<!-- tiles 요청 처리 -->
 	<servlet>
 		<servlet-name>dispatcherTiles</servlet-name>

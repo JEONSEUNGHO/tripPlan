@@ -1,6 +1,5 @@
 package board.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import board.model.BoardDAO;
 import board.model.BoardDTO;
+import board.model.SubBoardDTO;
 
 @Controller
 public class SearchController {
@@ -55,6 +55,8 @@ public class SearchController {
 	@RequestMapping(value="/searchboard",method=RequestMethod.POST)
 	public ModelAndView submit1(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("searchboard");
+		
+		System.out.println("검색어는::::"+request.getParameter("boardsearch"));
 		String option = (String)request.getParameter("boardsearch");
 		String search1 = (String)request.getParameter("input");
 		Map<String,String> abc = new HashMap<String,String>();
@@ -67,4 +69,16 @@ public class SearchController {
 		mav.addObject("boardList",board.size());
 		return mav;
 	}
+	
+	@RequestMapping(value="/gkgkgk",method=RequestMethod.GET)
+	public ModelAndView submit(){
+		ModelAndView mav = new ModelAndView("zzz");
+		List<SubBoardDTO> board = dao.zzz(90);
+		System.out.println("가져온 거 ::"+board.size());
+		mav.addObject("board",board);
+		mav.addObject("list",board.size());
+		return mav;
+	}
 }
+
+

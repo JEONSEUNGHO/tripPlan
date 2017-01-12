@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<context:annotation-config />
+	<!-- bean 객체 등록 -->
+
+	<!-- 로그인 전 메인 -->
+	<bean class="main.controller.MainController" />
+	<!-- 로그인 후 마이페이지 -->
+	<bean class="mypage.controller.MypageController" p:dao-ref="mypageDAO" />
+	<!-- 회원가입 페이지1 -->
+	<bean class="member.controller.RegistMemberController" p:dao-ref="memberDAO" />
+	<!-- 회원가입 페이지2 -->
+	<bean class="member.controller.RegistMemberController2" p:dao-ref="memberDAO" />
+	<!-- 로그인 -->
+	<bean class="login.controller.LoginController" p:dao-ref="loginDAO" />
+	<!-- 네이버 간편 로그인 -->
+	<bean id="naverLoginBO" class="login.controller.NaverLoginBO" />
+	<!-- 로그아웃 -->
+	<bean class="logout.controller.LogoutController" />
+	<!-- email 발송 -->
+	<bean id="sendmail" class="member.controller.SendEmail" />
+	<!-- 비밀번호 찾기 -->
+	<bean id="findpw" class="member.controller.FindpwController"
+		p:dao-ref="memberDAO" />
+	<!-- 비밀번호 변경 -->
+	<bean class="mypage.controller.PasswordController" />
+	<!-- 프로필 수정 -->
+	<bean class="mypage.controller.ProfileController" />
+	<!-- 마이페이지 댓글 -->
+	<bean class="mypage.controller.CommentController" />
+
+	<!-- tiles 요청 처리 -->
+	<bean id="tilesviewResolver"
+		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" />
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles_def/tilesdef.xml</value>
+			</list>
+		</property>
+		<property name="preparerFactoryClass"
+			value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory" />
+	</bean>
+
+	<!-- 유효성 메세지 property -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.validation</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 업로드 처리 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</bean>
+
+	<!-- properties파일 읽어오기 -->
+	<context:property-placeholder location="classpath:db.properties" />
+	<!-- 커넥션풀 연결 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:sql/*.xml" />
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="memberDAO" class="member.dao.MemberDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="loginDAO" class="login.dao.LoginDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="mypageDAO" class="mypage.dao.MypageDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean class="mypage.dao.PasswordDAO" id="passDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean class="mypage.dao.CommentDAO" id="commentDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+

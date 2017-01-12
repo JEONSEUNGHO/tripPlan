@@ -6,4 +6,4 @@
 <body>
 <% response.sendRedirect("tiles/main.do"); %>
 </body>
-</html> 
+</html>

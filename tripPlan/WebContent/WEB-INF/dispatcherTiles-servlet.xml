@@ -86,12 +86,20 @@
 	<bean id="memberDAO" class="member.dao.MemberDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	
+
 	<bean id="loginDAO" class="login.dao.LoginDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-	
+
 	<bean id="mypageDAO" class="mypage.dao.MypageDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean class="mypage.dao.PasswordDAO" id="passDAO">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean class="mypage.dao.CommentDAO" id="commentDAO">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	<!-- boardDAO관련 -->

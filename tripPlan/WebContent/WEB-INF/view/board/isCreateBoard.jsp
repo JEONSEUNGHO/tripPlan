@@ -17,7 +17,7 @@
 	<script type="text/javascript">
 		alert("해당 게시물이 생성되었습니다.");
 	</script>
-	<meta http-equiv="Refresh" content="0;url=main.do" >
+	<meta http-equiv="Refresh" content="0;url=pathList" >
 </c:if>
 	
 </body>

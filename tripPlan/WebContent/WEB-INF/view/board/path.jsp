@@ -1,180 +1,182 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+
 <!DOCTYPE html>
-<html>
+<html >
 <head>
-<link href="/tripPlan/assets/css/after_body.css" rel="stylesheet">
-<link rel="stylesheet" href="/tripPlan/assets/css/boardSearch.css">
-<link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
-<link rel="stylesheet" href="/tripPlan/assets/css/boardNavigation.css">
-<link href="/tripPlan/assets/css/after_header.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <meta charset="UTF-8">
+  <title>List display/sort/filter using AngularJS & Bootstrap </title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 
-<title>Insert title here</title>
+  
+      <link rel="stylesheet" href="/tripPlan/assets/css/abc.css">
+
+  
 </head>
+
 <body>
-
 <div id="body">
- <aside class="sidebar">
-  <div id="leftside-navigation" class="nano">
-    <ul class="nano-content">
-      <li>
-        <a href="index.html"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
-      </li>
-      <li class="sub-menu">
-        <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>UI Elements</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-        <ul>
+  <html ng-app="planner">  <!-- 앱을 정의하는데 planner란 이름을 사용 -->
+  <head>  
+    
+    <!--angular-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+    
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>  
+    
+    <script src="//code.angularjs.org/1.2.14/angular-animate.min.js"></script>
+    
+    
 
-          <li><a href="#">Alerts &amp; Notifications</a>
-          </li>
-          <li><a href="#">Panels</a>
-          </li>
-          <li><a href="#">Buttons</a>
-          </li>
-          <li><a href="#">Sliders &amp; Progress</a>
-          </li>
-          <li><a href="#">Modals &amp; Popups</a>
-          </li>
-          <li><a href="#">Icons</a>
-          </li>
-          <li><a href="#">Grid</a>
-          </li>
-          <li><a href="#">Tabs &amp; Accordions</a>
-          </li>
-          <li><a href="#">Nestable Lists</a>
-          </li>
-        </ul>
-      </li>
-      <li class="sub-menu">
-        <a href="javascript:void(0);"><i class="fa fa-table"></i><span>Tables</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-        <ul>
-          <li><a href="tables-basic.html">Basic Tables</a>
-          </li>
+    <script src="//rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.min.js"></script>
+    
+    <!--bootstrap-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  </head>
+   
+  
+  <body>  
+  	<!-- 컨트롤러 이름 ctrl -->
+    <div class='wrap' ng-controller="ctrl" style="margin-top:120px;margin-left:250px"> 
+      
+      <div class="splash" ng-cloak="">
+        <p>Loading...</p>
+      </div>
 
-          <li><a href="tables-data.html">Data Tables</a>
-          </li>
-        </ul>
-      </li>
-      <li class="sub-menu">
-        <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Forms</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-        <ul>
-          <li><a href="forms-components.html">Components</a>
-          </li>
-          <li><a href="forms-validation.html">Validation</a>
-          </li>
-          <li><a href="forms-mask.html">Mask</a>
-          </li>
-          <li><a href="forms-wizard.html">Wizard</a>
-          </li>
-          <li><a href="forms-multiple-file.html">Multiple File Upload</a>
-          </li>
-          <li><a href="forms-wysiwyg.html">WYSIWYG Editor</a>
-          </li>
-        </ul>
-      </li>
-      <li class="sub-menu">
-        <a href="javascript:void(0);"><i class="fa fa-envelope"></i><span>Mail</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-        <ul>
-          <li><a href="mail-inbox.html">Inbox</a>
-          </li>
-          <li><a href="mail-compose.html">Compose Mail</a>
-          </li>
-        </ul>
-      </li>
-      <li class="sub-menu">
-        <a href="javascript:void(0);"><i class="fa fa-bar-chart-o"></i><span>Charts</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-        <ul>
-          <li><a href="charts-chartjs.html">Chartjs</a>
-          </li>
-          <li><a href="charts-morris.html">Morris</a>
-          </li>
-          <li><a href="charts-c3.html">C3 Charts</a></li>
-        </ul>
-      </li>
-      <li class="sub-menu">
-        <a href="javascript:void(0);"><i class="fa fa-map-marker"></i><span>Maps</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-        <ul>
-          <li><a href="map-google.html">Google Map</a>
-          </li>
-          <li><a href="map-vector.html">Vector Map</a>
-          </li>
-        </ul>
-      </li>
-      <li class="sub-menu">
-        <a href="typography.html"><i class="fa fa-text-height"></i><span>Typography</span></a>
-      </li>
-      <li class="sub-menu">
-        <a href="javascript:void(0);"><i class="fa fa-file"></i><span>Pages</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-        <ul>
-          <li><a href="pages-blank.html">Blank Page</a>
-          </li>
-          <li><a href="pages-login.html">Login</a>
-          </li>
-          <li><a href="pages-sign-up.html">Sign Up</a>
-          </li>
-          <li><a href="pages-calendar.html">Calendar</a>
-          </li>
-          <li><a href="pages-timeline.html">Timeline</a>
-          </li>
-          <li><a href="pages-404.html">404</a>
-          </li>
-          <li><a href="pages-500.html">500</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</aside>
-		<form role="search" align="center" method="post" action="searchboard">
-			<select id="boardsearch" name="boardsearch">
-				<option value="0">후기</option>
-				<option value="1">계획</option>
-				<option value="2">그룹</option>
-			</select>
-			<input type="search" name="input" placeholder="검색어를 입력해 주세요">
-			<input type="submit" value="검색">
-		</form>
-	
-				<c:if test="${List>0 }">
- 					<c:forEach var="list" items="${member}">
- 					<li class="result_item">
-						<a href="#" class="item">
-							<figure>
-								<img class="my-image" src="${list.b_mainphoto }" />
-								<figcaption class="item_description">
-									<p>
-									
-										<span class="item_title">${list.b_id }</span>
-										<c:if test="${list.b_identified == 0 }">
-										<span class="item_status label label-primary">후기</span>
-										</c:if>
-										<c:if test="${list.b_identified == 1 }">
-										<span class="item_status label label-primary">계획</span>
-										</c:if>
-										<c:if test="${list.b_identified ==2 }">
-										<span class="item_status label label-primary">그룹</span>
-										</c:if>
-										<span class="item_label label label-danger">${list.b_totalspendtime}</span>
-										<span class="item_introduce"> ${list.b_title }</span>
-									</p>
-									<p>
-										<span class="item_host">최순실</span> | <span class="item_date">${list.b_registertime }</span>
-									</p>
-								</figcaption>
-								<div class="item_entry">
-									<span class="entry_number">2</span> / <span class="entry_total">4</span> 명
-								</div>
-							</figure>
-						</a>
-					</li>
- 					
- 					</c:forEach>
- 				</c:if>
+      <div ng-cloak="">
+      
 
-	
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
-<script src="/tripPlan/assets/js/boardNavigation.js"></script>
+      <div class='option'>
+       
+      <div class="sub-info">
+        <div class='row'>
+         <div class="col-md-6">
+         
+          <button class='btn btn-success'>
+            <i class="fa fa-plus-circle" ></i>
+            경로생성
+          </button>  
+           
+          <div class="btn-group">
+            <label class="btn btn-default" ng-model="sortType" btn-radio="'asc'" popover-placement="bottom" popover="Ascending" popover-trigger="mouseenter">
+              <i class="fa fa-chevron-up"></i>
+            </label>
+        
+            <label class="btn btn-default" ng-model="sortType" btn-radio="'desc'" popover-placement="bottom" popover="Descending" popover-trigger="mouseenter">
+              <i class="fa fa-chevron-down"></i>
+            </label>
+            
+            <button class='btn btn-default' ng-click="sort(selectedSort)">
+              <i class="fa fa-sort-amount-desc" ></i>
+              Sort
+            </button>  
+            
+          </div> 
+      
+ 
+           
+        <select ng-model="orderProperty">
+		<option value="b_id" selected>번호</option>
+		<option value="b_title">설명</option>
+		<option value="b_registertime">날짜</option>
+	</select> <!-- 
+	<select ng-model="selectedName" ng-options="x for x in sortOptions">
+	</select> -->
+  
+        </div>
+          <div class="col-md-3"></div>
+           <div class="col-md-3">
+     
+
+             <input type="text" ng-model="search" class="form-control" placeholder="Search"/>
+             </div>
+      
+        </div>
+          
+      </div> 
+      </div> 
+      
+      
+    
+        <div class='option results' ng-repeat="x in names | orderBy:orderProperty | filter:search">
+        <!-- <div class='option results' ng-repeat="plan in filter = (plans | orderBy: orderList: sortingOrder | filter :search)" ng-bind-html="plan | searchfilter:search">
+       -->  
+           <input type="hidden" ng-model="plans.title"value="zzz" id="gkgk">
+          <h2>{{x.b_title}}</h2>
+          
+          <div class="sub-info">
+            
+            <div class='cell'>
+            <div>
+              <i class="fa fa-money"></i>
+              £ {{x.b_id}}
+            </div>
+            <div>
+              <i class="fa fa-map-marker"></i>
+              {{x.b_title }} 
+            </div>
+          
+            <div>  
+              <i class="fa fa-calendar"></i>  {{x.b_registertime}}
+            </div> 
+            
+            <div>
+              <i class="fa fa-clock-o"></i>
+              {{x.b_maincontents}}
+            </div>
+          
+             
+          </div> 
+            
+          <div class='cell'>
+            
+            <img src="{{x.b_mainphoto}}" width="600" height="300">
+         </div>
+
+            
+            <hr>
+          <span>
+            <button class='btn btn-primary' popover="Load this plan"  ng-click="loadPlan(x)">
+
+              <i class="fa fa-circle-o-notch"></i>
+              Load
+            </button>
+   
+          </span>
+            
+          <span>
+            <button class='btn btn-info' popover="Analyse your plan">
+              <i class="fa fa-bar-chart"></i>
+              Results
+            </button> 
+          </span>
+         
+          <span>
+            <div class="btn-group" dropdown is-open="status.isopen">
+              <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                <i class="fa fa-share-alt"></i> Share <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#"><i class="fa fa-facebook"></i>Facebook</a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i>Twitter</a></li>
+                <li><a href="#"><i class="fa fa-envelope"></i>e-mail</a></li>
+              </ul>
+            </div>
+
+          </span>
+         </div>
+          
+    </div>
+
+   </div>
+    
+  </body>
+</html>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="/tripPlan/assets/js/abc.js"></script>
 </div>
 </body>
 </html>

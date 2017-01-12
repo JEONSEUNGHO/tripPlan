@@ -49,7 +49,6 @@ public class MemberInfoValidator implements Validator {
 			}
 			errors.rejectValue("m_pass", "passSecurity");
 		}
-		// // 비밀번호 유효성 검사
 
 		
 	}

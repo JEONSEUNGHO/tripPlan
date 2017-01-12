@@ -6,32 +6,134 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <mapper namespace="member">
-<insert id="regist" parameterType="member.model.MemberInfo">
-	insert into tp_member (m_email, m_pass, m_nickname, m_registerdate, m_sex, m_agerange, m_profile, m_identified)
-  values(#{m_email},#{m_pass},#{m_nickname},sysdate,#{m_sex},#{m_agerange},#{m_profile},#{m_identified})
-</insert>
+	<!-- 회원가입 -->
+	<insert id="regist" parameterType="member.model.MemberInfo">
+		insert into tp_member (num,
+		m_email, m_pass, m_nickname, m_registerdate,
+		m_sex, m_agerange,
+		m_profile, m_identified)
+		values(m_seq.nextval,#{m_email},#{m_pass},#{m_nickname},sysdate,#{m_sex},#{m_agerange},#{m_profile},#{m_identified})
+	</insert>
 
-<select id="duplicheck" parameterType="member.model.MemberInfo" resultType="String">
-	select m_email, m_identified from tp_member where m_email = #{m_email}
-</select>	
+	<select id="duplicheck" parameterType="member.model.MemberInfo"
+		resultType="String">
+		select m_email from tp_member where m_email = #{m_email}
+	</select>
 
-<select id="login" parameterType="member.model.MemberInfo" resultType="String">
-	select m_pass from tp_member where m_email = #{m_email}
-</select>	
+	<select id="login" parameterType="member.model.MemberInfo"
+		resultType="String">
+		select m_pass from tp_member where m_email = #{m_email}
+	</select>
 
-<select id="identified" parameterType="String" resultType="member.model.MemberInfo">
-	select m_email, m_profile, m_identified from tp_member where m_email = #{m_email}
-</select>
+	<!-- 회원가입 하고 간편로그인 시 회원정보 자동 변경 -->
+	<update id="changeMemberInfo" parameterType="member.model.MemberInfo">
+		update tp_member set
+		m_pass = #{m_pass}, m_sex = #{m_sex},
+		m_agerange = #{m_agerange},
+		m_identified = #{m_identified} where m_email =
+		#{m_email}
+	</update>
 
-<update id="verify" parameterType="String">
-	update tp_member set m_identified = 1 where m_email = #{m_email}
-</update>
+	<!-- 회원가입 하고 간편로그인 시 회원정보 자동 변경 -->
+	<select id="getIdentified" parameterType="String" resultType="int">
+		select m_identified from tp_member where m_email = #{m_email}
+	</select>
 
-<update id="updatepw" parameterType="member.model.MemberInfo">
-	update tp_member set m_pass = #{tempPW} where m_email = #{m_email}
-</update>
+	<select id="identified" parameterType="String" resultType="member.model.MemberInfo">
+		select m_email, m_nickname, m_sex, m_agerange, m_profile, m_identified
+		from tp_member where m_email =
+		#{m_email}
+	</select>
 
-<select id="realtimeidchk" parameterType="String" resultType="String">
-	select m_email from tp_member where m_email = #{m_email}
-</select>
+	<update id="verify" parameterType="String">
+		update tp_member set
+		m_identified = 1 where m_email = #{m_email}
+	</update>
+
+	<update id="updatepw" parameterType="member.model.MemberInfo">
+		update tp_member set m_pass
+		= #{tempPW} where m_email = #{m_email}
+	</update>
+
+	<select id="realtimeidchk" parameterType="String" resultType="String">
+		select m_email from tp_member where m_email = #{m_email}
+	</select>
+
+	<!-- 읽지않은 쪽지 -->
+	<select id="realtimeCount" parameterType="String" resultType="int">
+		select count(rm_check) from tp_receivemessage where m_email =
+		#{m_email} and rm_check=0
+	</select>
+
+	<!-- Follow 회원찾기 -->
+	<select id="finduser" parameterType="String" resultType="String">
+		SELECT
+		A.m_nickname ||chr(44)|| a.m_email ||chr(44)|| a.m_profile ||chr(44)||
+		a.num ||chr(44)|| NVL(B.F_ID, -1) AS f_id
+		FROM (
+		SELECT *
+		FROM tp_member
+		WHERE M_EMAIL != #{m_email} and (m_identified = 1 or m_identified = 2)
+		) A
+		LEFT JOIN (
+		SELECT * FROM tp_friend WHERE
+		M_EMAIL = #{m_email}
+		) B
+		ON A.M_EMAIL = F_EMAIL
+	</select>
+
+	<!-- Follow 내follower찾기 -->
+	<select id="findfollow" parameterType="String" resultType="String">
+		select m.m_nickname ||chr(44)|| m.m_email ||chr(44)|| m.m_profile
+		||chr(44)|| m.num ||chr(44)|| f.f_id as m_nickname from tp_member m
+		join tp_friend f on m.m_email = f.f_email where f.m_email = #{m_email} 
+	</select>
+
+	<!-- mypage follow list -->
+	<insert id="addfollow" parameterType="map">
+		insert into tp_friend
+		values(f_seq.nextval, #{f_email}, #{m_email})
+	</insert>
+
+	<!-- mypage follow list -->
+	<delete id="delfollow" parameterType="map">
+		delete from tp_friend where
+		f_email = #{f_email} and m_email = #{m_email}
+	</delete>
+	
+	<!-- 프로필 수정 -->
+	<update id="updateprofile" parameterType="member.model.MemberInfo">
+		update tp_member set
+		m_agerange = #{m_agerange}, m_profile = #{m_profile} where m_email =
+		#{m_email}
+	</update>
+
+	<!-- 비밀번호 변경 시 기존 비밀번호 가져오기 -->
+	<select id="getPass" parameterType="String" resultType="String">
+		select m_pass from tp_member where m_email = #{m_email}
+	</select>
+
+	<!-- 새 비밀번호 변경 -->
+	<update id="updatePass" parameterType="member.model.MemberInfo">
+		update tp_member set m_pass = #{m_pass1} where m_email = #{m_email}
+	</update>
+	
+	<!-- reply Query -->
+	<select id="selectComment" parameterType="integer"
+		resultType="mypage.model.CommentDTO">
+		select * from tp_reply where b_id = #{value}
+	</select>
+
+	<insert id="insertComment" parameterType="mypage.model.CommentDTO">
+		insert into tp_reply
+		value(re_seq.nextval, #{re_contents}, #{re_registdate},
+		#{b_id},
+		#{m_email})
+	</insert>
+
+	<delete id="deleteComment" parameterType="integer">
+		delete from tp_reply
+		where re_id=${value}
+	</delete>
+
 </mapper>

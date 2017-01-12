@@ -21,6 +21,12 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/viewtiles/template/footer.jsp" />
 	</definition>
+	
+	<definition name="board_layout" template="/WEB-INF/viewtiles/template/board_layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/viewtiles/template/after_header.jsp"/>
+		<put-attribute name="navigation" value="//WEB-INF/viewtiles/template/boardbody.jsp"/>
+		<put-attribute name="footer" value="//WEB-INF/viewtiles/template/after_footer.jsp"/>	
+	</definition>
 	<!-- 로그인 전 main -->
 	<definition name="main" extends="layout">
 		<put-attribute name="title" value="triP plan" />
@@ -84,7 +90,7 @@
 	</definition>
 	
 	<!-- 경로 게시판 -->
-	<definition name="pathList" extends="base_layout">
+	<definition name="pathList" extends="board_layout">
 		<put-attribute name="title" value="경로 게시판"/>
 		<put-attribute name="body" value="/WEB-INF/view/board/path.jsp"/>
 	</definition>
@@ -105,6 +111,58 @@
 	<definition name="searchboard" extends="base_layout">
 		<put-attribute name="title" value="검색 결과"/>
 		<put-attribute name="body" value="/WEB-INF/view/board/searchResult.jsp"/>
+	</definition>
+	
+	<!--mainboard클릭 시subboard -->
+	<definition name="zzz" extends="base_layout">
+		<put-attribute name="title" value="결과"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/subboard.jsp"/>
+	</definition>
+	<!-- 결로생성 생성 후 검사 -->
+	<definition name="isCreateBoard" extends="base_layout">
+		<put-attribute name="title" value="경로 생성"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/isCreateBoard.jsp"/>
+	</definition>
+	
+	<!-- 여행계획 -->
+	<definition name="plan" extends="base_layout">
+		<put-attribute name="title" value="여행계획"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/plan.jsp"/>
+	</definition>
+	
+	<!-- 그룹여행 -->
+	<definition name="group" extends="base_layout">
+		<put-attribute name="title" value="그룹여행"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/group.jsp"/>
+	</definition>
+	
+	<!-- 여행후기 -->
+	<definition name="review" extends="base_layout">
+		<put-attribute name="title" value="여행후기"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/review.jsp"/>
+	</definition>
+	
+	<!-- 경로 내용 -->
+	<definition name="pathContents" extends="base_layout">
+		<put-attribute name="title" value="경로"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/pathContents.jsp"/>
+	</definition>
+	
+	<!-- 경로 -->
+	<definition name="path" extends="base_layout">
+		<put-attribute name="title" value="경로"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/test.jsp"/>
+	</definition>
+	<!-- 세션 체크 -->
+	<definition name="isSessionCheck" extends="base_layout">
+		<put-attribute name="title" value="세션체크"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/isSessionCheck.jsp"/>
+	</definition>
+	
+	<!-- 댓글 삽입/삭제 -->
+	<definition name="isreply" extends="base_layout">
+		<put-attribute name="title" value="댓글 삽입/삭제"/>
+		<put-attribute name="body" value="/WEB-INF/view/board/isreply.jsp"/>
 	</definition>
 	
 </tiles-definitions>

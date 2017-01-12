@@ -2,10 +2,8 @@ package member.dao;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.springframework.validation.BindingResult;
 
 import member.model.MemberInfo;
-import member.validator.FindpwValidator;
 
 public class MemberDAO extends SqlSessionDaoSupport {
 
@@ -55,4 +53,6 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		// 가입불가
 		return 1;
 	}
+	
+	
 }

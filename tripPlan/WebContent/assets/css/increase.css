@@ -1,0 +1,50 @@
+/*h2 elements*/
+h2 {
+  text-align: center;
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+  color: #05243A;
+}
+
+/*text area styles*/
+
+
+.input-container {
+  text-align: center;
+}
+
+#input-field {
+  width: 40%;
+  height: 100px;
+}
+
+#create {
+  padding: .5em 1em;
+  font-size: 1em;
+}
+
+/* Styles the Output area */
+
+#card-output {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+article {
+  flex-basis: 20%;
+  font-family: "Book Antiqua", Georgia, serif;
+  color: #05243A;
+  background-color: rgba(169, 184, 219, 0.54);
+  border: 3px solid black;
+  border-radius: 15px;
+  	
+}
+
+#delete {
+  display: block;
+  padding: .5em 1em;
+  font-size: 1em;
+  margin: .5em auto;
+}

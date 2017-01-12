@@ -141,10 +141,10 @@
 				
  					<c:forEach var="list" items="${board}">
  					<li class="result_item">
- 						<li>검색 결과 : #{boardList } 개 입니다.</li>
+ 						<li>검색 결과 : ${boardList } 개 입니다.</li>
 						<a href="#" class="item">
 							<figure>
-								<img class="my-image" src="${list.b_mainphoto }" />
+								<img class="my-image" src="" />
 								<figcaption class="item_description">
 									<p>
 									
@@ -158,7 +158,7 @@
 										<c:if test="${list.b_identified ==2 }">
 										<span class="item_status label label-primary">그룹</span>
 										</c:if>
-										<span class="item_label label label-danger">${list.b_totalspendtime}</span>
+										<%-- <span class="item_label label label-danger">${list.b_totalspendtime}</span> --%>
 										<span class="item_introduce"> ${list.b_title }</span>
 									</p>
 									<p>
